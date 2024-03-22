@@ -5,7 +5,7 @@ const layoutConfig = reactive({
     darkTheme: false,
     inputStyle: 'outlined',
     menuMode: 'static',
-    theme: 'aura-light-green',
+    theme: 'lara-dark-amber',
     scale: 14,
     activeMenuItem: null
 });

@@ -1,28 +1,33 @@
-import {
-    createRouter,
-    createWebHistory
-} from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 import AppLayout from '@/layout/AppLayout.vue';
-
+import WebsiteLayout from '@/layout/WebsiteLayout.vue';
 const router = createRouter({
     history: createWebHistory(),
-    routes: [{
-            path: '/',
+    routes: [
+        {
+            path: '/admin',
             component: AppLayout,
-            children: [{
-                    path: '/admin/dashboard',
+            children: [
+                {
+                    path: 'dashboard',
                     name: 'dashboard',
                     component: () => import('@/views/Dashboard.vue')
                 },
+
                 {
-                    path: '/admin/pos',
-                    name: 'pos',
-                    component: () => import('@/views/POS.vue')
+                    path: 'session',
+                    name: 'session',
+                    component: () => import('@/views/pages/admin/Session.vue')
                 },
                 {
-                    path: '/admin/session',
-                    name: 'session',
-                    component: () => import('@/views/Session.vue')
+                    path: 'orders',
+                    name: 'orders',
+                    component: () => import('@/views/pages/admin/Orders.vue')
+                },
+                {
+                    path: 'counter',
+                    name: 'counter',
+                    component: () => import('@/views/pages/admin/Counter.vue')
                 },
                 {
                     path: '/uikit/formlayout',
@@ -83,7 +88,8 @@ const router = createRouter({
                 {
                     path: '/uikit/menu',
                     component: () => import('@/views/uikit/Menu.vue'),
-                    children: [{
+                    children: [
+                        {
                             path: '/uikit/menu',
                             component: () => import('@/views/uikit/menu/PersonalDemo.vue')
                         },
@@ -132,7 +138,7 @@ const router = createRouter({
                     component: () => import('@/views/utilities/Icons.vue')
                 },
                 {
-                    path: '/pages/timeline',
+                    path: 'pages/timeline',
                     name: 'timeline',
                     component: () => import('@/views/pages/Timeline.vue')
                 },
@@ -154,9 +160,15 @@ const router = createRouter({
             ]
         },
         {
-            path: '/landing',
-            name: 'landing',
-            component: () => import('@/views/pages/Landing.vue')
+            path: '/website',
+            component: WebsiteLayout,
+            children: [
+                {
+                    path: 'landing',
+                    name: 'landing',
+                    component: () => import('@/views/pages/website/Landing.vue')
+                }
+            ]
         },
         {
             path: '/pages/notfound',
