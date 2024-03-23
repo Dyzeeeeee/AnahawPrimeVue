@@ -12,7 +12,7 @@ export const ProductService = {
                 quantity: 24,
                 inventoryStatus: 'INSTOCK',
                 rating: 5
-            },
+            },  
             {
                 id: '1001',
                 code: 'nvklal433',

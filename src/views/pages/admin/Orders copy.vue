@@ -97,17 +97,9 @@ const filterse = ref({
             </InputIcon>
             <InputText placeholder="Search" class="w-15rem" />
           </IconField>
-          <!-- <Button
-            @click="changeViewMode"
-            :icon="viewMode === 'grid' ? 'pi pi-list' : 'pi pi-table'"
-          >
-          </Button> -->
-          <Dropdown
-            v-model="selectedFilter"
-            :options="filters"
-            optionLabel="name"
-            class="w-10rem"
-          />
+          <Button @click="changeViewMode" :icon="viewMode === 'grid' ? 'pi pi-list' : 'pi pi-table'">
+          </Button>
+          <Dropdown v-model="selectedFilter" :options="filters" optionLabel="name" class="w-10rem" />
         </div>
       </template>
       <template #center> </template>
@@ -121,22 +113,10 @@ const filterse = ref({
         </div>
       </template>
     </Toolbar>
-    <div
-      style="height: 65vh"
-      class="border-2 border-dashed surface-border flex flex-wrap gap-3 overflow-y-scroll p-2"
-    >
-      <DataTable
-        filterDisplay="row"
-        :globalFilterFields="['name', 'country.name', 'representative.name', 'status']"
-        v-model:filters="filterse"
-        v-model:expandedRows="expandedRows"
-        :value="products"
-        dataKey="id"
-        @rowExpand="onRowExpand"
-        @rowCollapse="onRowCollapse"
-        class="w-full"
-        tableStyle="min-width: 60rem"
-      >
+    <div style="height: 65vh" class="border-2 border-dashed surface-border flex flex-wrap gap-3 overflow-y-scroll p-2">
+      <DataTable filterDisplay="row" :globalFilterFields="['name', 'country.name', 'representative.name', 'status']"
+        v-model:filters="filterse" v-model:expandedRows="expandedRows" :value="products" dataKey="id"
+        @rowExpand="onRowExpand" @rowCollapse="onRowCollapse" class="w-full" tableStyle="min-width: 60rem">
         <template #header>
           <div class="flex flex-wrap justify-content-end gap-2">
             <Button text icon="pi pi-plus" label="Expand All" @click="expandAll" />
@@ -146,23 +126,14 @@ const filterse = ref({
         <Column expander style="width: 5rem" />
         <Column field="name" header="Name">
           <template #filter="{ filterModel, filterCallback }">
-            <InputText
-              v-model="filterModel.value"
-              type="text"
-              @input="filterCallback()"
-              class="p-column-filter"
-              placeholder="Search by name"
-            />
+            <InputText v-model="filterModel.value" type="text" @input="filterCallback()" class="p-column-filter"
+              placeholder="Search by name" />
           </template>
         </Column>
         <Column header="Image">
           <template #body="slotProps">
-            <img
-              :src="`https://primefaces.org/cdn/primevue/images/product/${slotProps.data.image}`"
-              :alt="slotProps.data.image"
-              class="shadow-4"
-              width="64"
-            />
+            <img :src="`https://primefaces.org/cdn/primevue/images/product/${slotProps.data.image}`"
+              :alt="slotProps.data.image" class="shadow-4" width="64" />
           </template>
         </Column>
         <Column field="price" header="Price">
@@ -178,10 +149,7 @@ const filterse = ref({
         </Column>
         <Column header="Status">
           <template #body="slotProps">
-            <Tag
-              :value="slotProps.data.inventoryStatus"
-              :severity="getSeverity(slotProps.data)"
-            />
+            <Tag :value="slotProps.data.inventoryStatus" :severity="getSeverity(slotProps.data)" />
           </template>
         </Column>
         <template #expansion="slotProps">
@@ -198,10 +166,7 @@ const filterse = ref({
               </Column>
               <Column field="status" header="Status" sortable>
                 <template #body="slotProps">
-                  <Tag
-                    :value="slotProps.data.status.toLowerCase()"
-                    :severity="getOrderSeverity(slotProps.data)"
-                  />
+                  <Tag :value="slotProps.data.status.toLowerCase()" :severity="getOrderSeverity(slotProps.data)" />
                 </template>
               </Column>
               <Column headerStyle="width:4rem">

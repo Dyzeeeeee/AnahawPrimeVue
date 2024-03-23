@@ -25,6 +25,17 @@ const router = createRouter({
                     component: () => import('@/views/pages/admin/Orders.vue')
                 },
                 {
+                    path: 'customers',
+                    name: 'customers',
+                    component: () => import('@/views/pages/admin/Customers.vue')
+                },
+              
+                {
+                    path: 'menu',
+                    name: 'menu',
+                    component: () => import('@/views/pages/admin/Menu.vue')
+                },
+                {
                     path: 'counter',
                     name: 'counter',
                     component: () => import('@/views/pages/admin/Counter.vue')

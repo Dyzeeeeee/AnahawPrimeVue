@@ -1,69 +1,49 @@
 <script setup>
 import { onMounted, reactive, ref, watch } from "vue";
-import { ProductService } from "@/service/ProductService";
+import { OrderService } from "@/service/OrderService";
 import { useToast } from "primevue/usetoast";
-import { FilterMatchMode } from "primevue/api";
-const products = ref();
+const orders = ref();
 const expandedRows = ref([]);
 const toast = useToast();
-
-onMounted(() => {
-  ProductService.getProductsWithOrdersSmall().then((data) => (products.value = data));
-});
-
-const onRowExpand = (event) => {
-  toast.add({
-    severity: "info",
-    summary: "Product Expanded",
-    detail: event.data.name,
-    life: 3000,
-  });
-};
-const onRowCollapse = (event) => {
-  toast.add({
-    severity: "success",
-    summary: "Product Collapsed",
-    detail: event.data.name,
-    life: 3000,
-  });
-};
-const expandAll = () => {
-  expandedRows.value = products.value.reduce((acc, p) => (acc[p.id] = true) && acc, {});
-};
-const collapseAll = () => {
-  expandedRows.value = null;
-};
-const formatCurrency = (value) => {
-  return value.toLocaleString("en-US", { style: "currency", currency: "USD" });
-};
-const getSeverity = (product) => {
-  switch (product.inventoryStatus) {
-    case "INSTOCK":
-      return "success";
-
-    case "LOWSTOCK":
-      return "warning";
-
-    case "OUTOFSTOCK":
-      return "danger";
-
-    default:
-      return null;
+const menu = ref();
+const items = ref([
+  {
+    label: 'Options',
+    items: [
+      {
+        label: 'Print',
+        icon: 'pi pi-print'
+      },
+      {
+        label: 'Download',
+        icon: 'pi pi-download'
+      },
+      {
+        label: 'Archive',
+        icon: 'pi pi-box'
+      }
+    ]
   }
+]);
+const toggle = (event) => {
+  menu.value.toggle(event);
 };
+onMounted(() => {
+  orders.value = OrderService.getOrdersData();
+});
+const selectedOrder = ref();
+
+
 const getOrderSeverity = (order) => {
   switch (order.status) {
-    case "DELIVERED":
+    case "Paid":
       return "success";
 
-    case "CANCELLED":
+    case "Cancelled":
       return "danger";
 
-    case "PENDING":
+    case "Pending":
       return "warning";
-
-    case "RETURNED":
-      return "info";
 
     default:
       return null;
@@ -73,14 +53,6 @@ const getOrderSeverity = (order) => {
 const selectedFilter = ref({ name: "Active" });
 const filters = ref([{ name: "Active" }, { name: "Archived" }, { name: "All" }]);
 
-const filterse = ref({
-  global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-  name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-  "country.name": { value: null, matchMode: FilterMatchMode.STARTS_WITH },
-  representative: { value: null, matchMode: FilterMatchMode.IN },
-  status: { value: null, matchMode: FilterMatchMode.EQUALS },
-  verified: { value: null, matchMode: FilterMatchMode.EQUALS },
-});
 </script>
 
 <template>
@@ -97,121 +69,75 @@ const filterse = ref({
             </InputIcon>
             <InputText placeholder="Search" class="w-15rem" />
           </IconField>
-          <!-- <Button
-            @click="changeViewMode"
-            :icon="viewMode === 'grid' ? 'pi pi-list' : 'pi pi-table'"
-          >
-          </Button> -->
-          <Dropdown
-            v-model="selectedFilter"
-            :options="filters"
-            optionLabel="name"
-            class="w-10rem"
-          />
+
+          <Dropdown v-model="selectedFilter" :options="filters" optionLabel="name" class="w-10rem" />
         </div>
       </template>
       <template #center> </template>
       <template #end>
         <div class="flex gap-2">
+
           <Button class="p-button-help font-bold gap-2" disabled>
             <Icon icon="bx:archive-in" width="1.5rem" height="1.5rem" />
             Archive
           </Button>
-          <!-- <Button class="p-button-info" icon="pi pi-inbox"></Button> -->
+          <Button class="p-button-info font-bold gap-2" icon="pi pi-download" label="Download" disabled>
+          </Button>
+          <Button class="p-button-info font-bold gap-2" icon="pi pi-print" label="Print" disabled>
+          </Button>
         </div>
       </template>
     </Toolbar>
-    <div
-      style="height: 65vh"
-      class="border-2 border-dashed surface-border flex flex-wrap gap-3 overflow-y-scroll p-2"
-    >
-      <DataTable
-        filterDisplay="row"
-        :globalFilterFields="['name', 'country.name', 'representative.name', 'status']"
-        v-model:filters="filterse"
-        v-model:expandedRows="expandedRows"
-        :value="products"
-        dataKey="id"
-        @rowExpand="onRowExpand"
-        @rowCollapse="onRowCollapse"
-        class="w-full"
-        tableStyle="min-width: 60rem"
-      >
-        <template #header>
-          <div class="flex flex-wrap justify-content-end gap-2">
-            <Button text icon="pi pi-plus" label="Expand All" @click="expandAll" />
-            <Button text icon="pi pi-minus" label="Collapse All" @click="collapseAll" />
-          </div>
-        </template>
+    <div style="height: 70vh" class="border-2 border-dashed surface-border flex flex-wrap gap-3 overflow-y-scroll p-2">
+      <DataTable :value="orders" dataKey="id" class="w-full" tableStyle="min-width: 60rem"
+        v-model:expandedRows="expandedRows" selectionMode="multiple" v-model:selection="selectedOrder" stripedRows>
+
+        <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
         <Column expander style="width: 5rem" />
-        <Column field="name" header="Name">
-          <template #filter="{ filterModel, filterCallback }">
-            <InputText
-              v-model="filterModel.value"
-              type="text"
-              @input="filterCallback()"
-              class="p-column-filter"
-              placeholder="Search by name"
-            />
-          </template>
+        <Column field="id" header="id">
         </Column>
-        <Column header="Image">
-          <template #body="slotProps">
-            <img
-              :src="`https://primefaces.org/cdn/primevue/images/product/${slotProps.data.image}`"
-              :alt="slotProps.data.image"
-              class="shadow-4"
-              width="64"
-            />
-          </template>
+        <Column field="customer_id" header="customer_id">
         </Column>
-        <Column field="price" header="Price">
-          <template #body="slotProps">
-            {{ formatCurrency(slotProps.data.price) }}
-          </template>
+        <Column field="cashier_id" header="cashier_id"></Column>
+        <Column field="order_date" header="order_date">
+
         </Column>
-        <Column field="category" header="Category"></Column>
-        <Column field="rating" header="Reviews">
-          <template #body="slotProps">
-            <Rating :modelValue="slotProps.data.rating" readonly :cancel="false" />
-          </template>
+        <Column field="total_order_price" header="total_order_price">
         </Column>
-        <Column header="Status">
+        <Column field="session_id" header="session_id">
+        </Column>
+        <Column field="tendered" header="tendered">
+        </Column>
+        <Column field="change" header="change">
+        </Column>
+        <Column field="status" header="status">
+            <template #body="slotProps">
+              <div class="flex justify-content-center">
+                <Tag :value="slotProps.data.status" :severity="getOrderSeverity(slotProps.data)" />
+              </div>
+            </template>
+        </Column>
+        <Column>
           <template #body="slotProps">
-            <Tag
-              :value="slotProps.data.inventoryStatus"
-              :severity="getSeverity(slotProps.data)"
-            />
+            <Button icon="pi pi-ellipsis-v" text plain rounded @click="toggle" aria-haspopup="true"
+              aria-controls="overlay_menu"></Button>
+            <Menu ref="menu" id="overlay_menu" :model="items" :popup="true" />
+
           </template>
         </Column>
         <template #expansion="slotProps">
-          <div class="p-3">
-            <h5>Orders for {{ slotProps.data.name }}</h5>
-            <DataTable :value="slotProps.data.orders">
+          <div class="px-5 mx-5">
+            <!-- <h5 class="text-400">Orders {{ slotProps.data.id }} Details</h5> -->
+            <DataTable :value="slotProps.data.details" selectionMode="multiple">
               <Column field="id" header="Id" sortable></Column>
-              <Column field="customer" header="Customer" sortable></Column>
-              <Column field="date" header="Date" sortable></Column>
-              <Column field="amount" header="Amount" sortable>
-                <template #body="slotProps">
-                  {{ formatCurrency(slotProps.data.amount) }}
-                </template>
+              <Column field="menu_item_id" header="menu_item_id" sortable></Column>
+              <Column field="quantity" header="quantity" sortable>
               </Column>
-              <Column field="status" header="Status" sortable>
-                <template #body="slotProps">
-                  <Tag
-                    :value="slotProps.data.status.toLowerCase()"
-                    :severity="getOrderSeverity(slotProps.data)"
-                  />
-                </template>
-              </Column>
-              <Column headerStyle="width:4rem">
-                <template #body>
-                  <Button icon="pi pi-search" />
-                </template>
-              </Column>
+              <Column field="subtotal" header="subtotal" sortable></Column>
             </DataTable>
           </div>
         </template>
+
       </DataTable>
     </div>
   </div>

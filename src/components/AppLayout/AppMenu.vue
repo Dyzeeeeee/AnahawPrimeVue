@@ -13,8 +13,8 @@ const model = ref([
     items: [
       { label: "Counter", icon: "pi pi-fw pi-id-card", to: "/admin/counter" },
       { label: "Orders", icon: "pi pi-fw pi-id-card", to: "/admin/orders" },
-      { label: "Menu", icon: "pi pi-fw pi-id-card", to: "/uikit/formlayout" },
-      { label: "Customers", icon: "pi pi-fw pi-id-card", to: "/uikit/formlayout" },
+      { label: "Menu", icon: "pi pi-fw pi-id-card", to: "/admin/Menu" },
+      { label: "Customers", icon: "pi pi-fw pi-id-card", to: "/admin/customers" },
     ],
   },
   {

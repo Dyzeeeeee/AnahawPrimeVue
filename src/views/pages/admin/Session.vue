@@ -51,7 +51,7 @@ const requireConfirmation = (event) => {
     <div class="flex">
       <div
         style="height: 80vh; width: 500px"
-        class="flex-auto surface-border flex flex-wrap gap-3 p-2 align-content-start justify-content-around"
+        class="flex-auto border-2 border-dashed  surface-border flex flex-wrap gap-3 p-2 align-content-start justify-content-around mr-2"
       >
         <div class="col-12 flex p-0">
           <Toolbar class="w-full" style="border: none">
@@ -112,13 +112,13 @@ const requireConfirmation = (event) => {
         </div>
         <template v-if="viewMode === 'grid'">
           <div
-            style="height: 59vh; width: 500px"
-            class="flex-auto border-2 border-dashed surface-border flex flex-wrap gap-3 p-2 overflow-y-scroll align-content-start justify-content-around"
+            style="height: 60vh; width: 500px"
+            class="flex-auto surface-border flex flex-wrap gap-3 p-2 overflow-y-scroll align-content-start justify-content-around"
           >
             <!-- Display sessions in grid view -->
             <Card
-              v-for="session in products"
-              :key="session.id"
+              v-for="product in products"
+              :key="product.id"
               style="
                 width: 30%;
                 max-height: 20rem;
@@ -137,11 +137,11 @@ const requireConfirmation = (event) => {
                     style="height: 150px; border-radius: 100%"
                   />
                 </div>
-                <div class="text-center text-xl">{{ session.name }}</div>
+                <div class="text-center text-xl">{{ product.name }}</div>
               </template>
               <template #subtitle>
                 <div class="text-center">
-                  {{ session.price }}<br />Available
+                  {{ product.price }}<br />Available
                 </div></template
               >
             </Card>
