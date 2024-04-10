@@ -1,21 +1,55 @@
 <script setup>
-import { SessionService } from "@/service/SessionService";
+import SessionService from "@/service/SessionService";
 import { onMounted, reactive, ref, watch } from "vue";
+import { useToast } from "primevue/usetoast";
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
+const store = useStore();
+const router = useRouter();
+
+const toast = useToast();
 const viewMode = ref("grid");
 const selectedSession = ref();
+const cashier_id = store.state.account.user_id;
 const newSessionVisible = ref(false);
 const noteDetails = ref(false);
 const sessions = ref();
 const selectedCity = ref({ name: "Active" });
 const cities = ref([{ name: "Active" }, { name: "Archived" }, { name: "All" }]);
-onMounted(() => {
-  SessionService.getSessionsSmall().then((data) => (sessions.value = data.slice(0, 5)));
-  console.log(sessions.value);
+
+onMounted(async () => {
+  try {
+    sessions.value = await SessionService.getAllSessions();
+  } catch (error) {
+    console.error('Error fetching sessions:', error);
+    toast.add({ severity: 'error', summary: 'Error', detail: 'Failed to fetch sessions' });
+  }
+});
+const newSession = ref({
+  opening_cash: '',
+  note: '',
+  cashier_id: cashier_id
 });
 
+const goToSession = (sessionId) => {
+  router.push({ name: 'session', params: { id: sessionId } });
+};
 const changeViewMode = () => {
   viewMode.value = viewMode.value === "grid" ? "list" : "grid";
+};
+const addSession = async () => {
+  try {
+    await SessionService.addSession(newSession.value);
+    toast.add({ severity: 'success', summary: 'Success', detail: 'Customer added successfully', life: '3000' });
+    // Fetch updated menu items
+    sessions.value = await SessionService.getAllSessions();
+    newSessionVisible.value = false;
+    // newCustomerVisible.value = false;
+  } catch (error) {
+    console.error('Error adding menu item:', error);
+    toast.add({ severity: 'error', summary: 'Error', detail: 'Select an item to Archive', life: '3000' });
+  }
 };
 </script>
 
@@ -56,6 +90,7 @@ const changeViewMode = () => {
         <!-- Display sessions in grid view -->
         <Card v-for="session in sessions" :key="session.id"
           style="width: 23%; max-height: 15rem; min-width: 17rem; overflow: hidden" class="shadow-6 p-0 m-0">
+
           <template #title>
             <div class="flex justify-content-between p-0 m-0">
               <div>
@@ -68,31 +103,42 @@ const changeViewMode = () => {
           </template>
           <template #subtitle>
             <div class="p-0 m-0">
-              <span class="font-medium text-600 font-bold">Cashier: {{ session.cashier_id }}</span>
+              <span class="font-medium text-600 font-bold">Cashier: {{ session.firstname }} {{ session.lastname
+                }}</span>
               <div class="surface-100 p-1 my-2">
                 <span class="text-900 font-medium text-sm">{{ session.start_time }}</span>
               </div>
 
               <div class="overflow-hidden font-medium text-secondary text-400 font-italic mb-2" style="
-                  height: 40px;
-                  line-height: 20px;
-                  display: -webkit-box;
-                  -webkit-line-clamp: 2;
-                  -webkit-box-orient: vertical;
-                  cursor: pointer;
-                " @click="noteDetails = true">
-                Paano kung mahaba yung note na nilagay edi maga-overflow yung card hays
+    height: 40px;
+    line-height: 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    cursor: pointer;
+" @click="noteDetails = true">
+                {{ session.note ? session.note : 'No notes' }}
               </div>
+
             </div>
+            <Dialog v-model:visible="noteDetails" modal header="Note" :style="{ width: '25rem' }">
+              <span class=""> {{ session.note ? session.note : 'No notes' }}
+              </span>
+              <div class="flex justify-content-end gap-2">
+                <Button class="" icon="pi pi-pencil" />
+              </div>
+
+
+            </Dialog>
             <div class="flex gap-3 p-0 m-0">
               <Button label="Close" severity="danger" outlined class="w-full" />
-              <Button label="Continue" class="w-full" />
+              <Button label="Continue" class="w-full" @click="goToSession(session.id)" />
             </div>
           </template>
         </Card>
       </template>
       <template v-else>
-        <DataView :value="sessions">
+        ash <DataView :value="sessions" select="multiplefvh">
           <template #list="slotProps">
             <div class="grid grid-nogutter">
               <div v-for="(item, index) in slotProps.items" :key="index" class="col-12">
@@ -109,8 +155,8 @@ const changeViewMode = () => {
                       </div>
                       <div class="surface-100 p-1">
                         <span class="text-900 font-medium text-sm">{{
-            item.start_time
-          }}</span>
+                          item.start_time
+                        }}</span>
                       </div>
                     </div>
                     <div class="flex flex-column md:align-items-end gap-5">
@@ -140,8 +186,8 @@ const changeViewMode = () => {
           <i class="pi pi-money-bill"></i>
         </InputGroupAddon>
         <FloatLabel>
-          <InputText id="opening_cash" />
-          <label for="opening_cash">Opening Cash</label>
+          <InputText v-model="newSession.opening_cash" />
+          <label>Opening Cash</label>
         </FloatLabel>
       </InputGroup>
     </div>
@@ -151,18 +197,17 @@ const changeViewMode = () => {
           <i class="pi pi-envelope"></i>
         </InputGroupAddon>
         <FloatLabel>
-          <Textarea id="note" rows="1" cols="30" autoResize />
-          <label for="note">Note</label>
+          <InputText v-model="newSession.note" />
+          <label>Note</label>
         </FloatLabel>
       </InputGroup>
     </div>
     <div class="flex justify-content-end gap-2">
       <Button type="button" label="Cancel" severity="secondary" @click="newSessionVisible = false"></Button>
-      <Button type="button" label="Open" @click="newSessionVisible = false"></Button>
+      <Button type="button" label="Open" @click="addSession"></Button>
     </div>
   </Dialog>
 
-  <Dialog v-model:visible="noteDetails" modal header="Note" :style="{ width: '25rem' }">
-    <span class="">Paano kung mahaba yung note na nilagay edi maga-overflow yung card hays</span>
-  </Dialog>
+
+  <Toast />
 </template>

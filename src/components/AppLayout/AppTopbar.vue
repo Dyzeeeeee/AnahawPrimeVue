@@ -68,9 +68,8 @@ const isOutsideClicked = (event) => {
 <template>
   <div class="layout-topbar flex justify-content-center">
     <div class="w-10rem">
-      <router-link to="/" class="layout-topbar-logo">
-        <img :src="logoUrl" alt="logo" />
-        <span>SAKAI</span>
+      <router-link to="/website/landing" class="layout-topbar-logo">
+        <img src="@/assets/images/logo.png" alt="logo" />
       </router-link>
     </div>
 
@@ -104,6 +103,12 @@ const isOutsideClicked = (event) => {
       <button @click="onSettingsClick()" class="p-link layout-topbar-button">
         <i class="pi pi-cog"></i>
         <span>Settings</span>
+      </button>
+      <button
+        class="p-link layout-menu-button layout-topbar-button"
+        @click="onMenuToggle()"
+      >
+        <i class="pi pi-bars"></i>
       </button>
     </div>
   </div>

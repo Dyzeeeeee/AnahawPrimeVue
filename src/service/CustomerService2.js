@@ -1,24 +1,24 @@
 import ApiService from './ApiService';
 
 const SessionService = {
-    async getAllSessions() {
+    async getAllCustomers() {
         try {
-            const response = await ApiService.get('getAllSessions');
+            const response = await ApiService.get('getAllCustomers');
             return response.data;
         } catch (error) {
             console.error('Error fetching menu items:', error);
             throw error;
         }
     },
-    async addSession(newSession) {
+    async addCustomer(newCustomer) {
         try {
-            const response = await ApiService.post('addSession', newSession);
+            const response = await ApiService.post('addCustomer', newCustomer);
             return response.data;
         } catch (error) {
             console.error('Error adding menu item:', error);
             throw error;
         }
-    }
+    },
 };
 
 export default SessionService;

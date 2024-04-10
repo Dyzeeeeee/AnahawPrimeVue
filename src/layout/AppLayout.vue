@@ -1,10 +1,8 @@
 <script setup>
 import { computed, watch, ref } from "vue";
 import AppTopbar from "@/components/AppLayout/AppTopbar.vue";
-// import AppFooter from "@/components/AppLayout/AppFooter.vue";
 import AppSidebar from "@/components/AppLayout/AppSidebar.vue";
 import Helper from "@/components/WebsiteLayout/Helper.vue";
-// import AppConfig from "@/components/AppLayout/AppConfig.vue";
 import { useLayout } from "@/layout/composables/layout";
 
 const { layoutConfig, layoutState, isSidebarActive } = useLayout();
@@ -30,9 +28,10 @@ const containerClass = computed(() => {
       layoutConfig.menuMode.value === "static",
     "layout-overlay-active": layoutState.overlayMenuActive.value,
     "layout-mobile-active": layoutState.staticMenuMobileActive.value,
-    "p-ripple-disabled": layoutConfig.ripple.value === false,
+    "p-ripple-disabled": layoutConfig.ripple.value === true,
   };
 });
+
 const bindOutsideClickListener = () => {
   if (!outsideClickListener.value) {
     outsideClickListener.value = (event) => {
@@ -45,12 +44,14 @@ const bindOutsideClickListener = () => {
     document.addEventListener("click", outsideClickListener.value);
   }
 };
+
 const unbindOutsideClickListener = () => {
   if (outsideClickListener.value) {
     document.removeEventListener("click", outsideClickListener);
     outsideClickListener.value = null;
   }
 };
+
 const isOutsideClicked = (event) => {
   const sidebarEl = document.querySelector(".layout-sidebar");
   const topbarEl = document.querySelector(".layout-menu-button");
@@ -67,6 +68,7 @@ const isOutsideClicked = (event) => {
 <template>
   <div class="layout-wrapper" :class="containerClass">
     <app-topbar></app-topbar>
+
     <div class="layout-sidebar">
       <app-sidebar></app-sidebar>
     </div>
@@ -76,12 +78,11 @@ const isOutsideClicked = (event) => {
       </div>
       <app-footer></app-footer>
     </div>
-    <!-- <app-config></app-config> -->
-
     <Helper />
     <div class="layout-mask"></div>
   </div>
   <Toast />
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+// Add your custom styles here</style>

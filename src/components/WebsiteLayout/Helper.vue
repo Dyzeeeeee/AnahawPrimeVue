@@ -8,6 +8,8 @@ const { layoutConfig } = useLayout();
 const $primevue = usePrimeVue();
 const visible = ref(false);
 const store = useStore();
+const toDoList = ref(false);
+const active = ref(0);
 
 const onHelperClick = () => {
   visible.value = !visible.value;
@@ -65,36 +67,41 @@ onMounted(() => {
     <Icon icon="icon-park-solid:more-four" height="2rem" />
   </Button>
 
-  <Sidebar
-    v-model:visible="visible"
-    position="right"
-    class="layout-config-sidebar w-26rem"
-    pt:closeButton="ml-auto"
-  >
-    <section
-      class="py-4 flex align-items-center justify-content-between border-bottom-1 surface-border"
-    >
-      <Button
-        label="Get Directions to Resort"
-        type="button"
-        class="w-full mt-2"
-        icon="pi pi-map"
-        @click="redirectToGoogleMaps"
-      ></Button>
+  <Sidebar v-model:visible="visible" position="right" class="layout-config-sidebar w-26rem" pt:closeButton="ml-auto">
+    <section class="py-4 flex align-items-center justify-content-between border-bottom-1 surface-border">
+      <Button label="Get Directions to Resort" type="button" class="w-full mt-2" icon="pi pi-map"
+        @click="redirectToGoogleMaps" severity="info"></Button>
     </section>
-    <section
-      class="py-4 flex align-items-center justify-content-end border-bottom-1 surface-border"
-    >
-      <ToggleButton
-        v-model="checked"
-        onLabel="Dark "
-        offLabel="Light"
-        offIcon="pi pi-sun"
-        onIcon="pi pi-moon"
-        class="w-full "
-        aria-label="Do you confirm"
-        @update:modelValue="onDarkModeChange"
-      />
+    <section class="py-4 flex align-items-center justify-content-end border-bottom-1 surface-border">
+      <ToggleButton v-model="checked" onLabel="Dark " offLabel="Light" offIcon="pi pi-sun" onIcon="pi pi-moon"
+        class="w-full " aria-label="Do you confirm" @update:modelValue="onDarkModeChange" />
+    </section>
+
+    <section class="py-4 flex align-items-center justify-content-between border-bottom-1 surface-border">
+      <Button label="To Do List" type="button" class="w-full mt-2" icon="pi pi-list" @click="toDoList = true" severity="help"></Button>
     </section>
   </Sidebar>
+
+  <Dialog v-model:visible="toDoList" modal header="To Do List" :style="{ width: '35rem' }">
+    <div class="flex mb-2 gap-2 justify-content-end">
+      <Button @click="active = 0" rounded label="1" class="w-2rem h-2rem p-0" :outlined="active !== 0" />
+      <Button @click="active = 1" rounded label="2" class="w-2rem h-2rem p-0" :outlined="active !== 1" />
+      <Button @click="active = 2" rounded label="3" class="w-2rem h-2rem p-0" :outlined="active !== 2" />
+    </div>
+
+    <TabView v-model:activeIndex="active">
+      <TabPanel header="Menu">
+      <ul>
+        <li>Search</li>
+        <li>Edit</li>
+        <li>Delete</li>
+      </ul>
+      </TabPanel>
+      <TabPanel header="Counter">
+      </TabPanel>
+      <TabPanel header="Customers">
+      </TabPanel>
+    </TabView>
+  </Dialog>
+
 </template>

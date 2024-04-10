@@ -1,45 +1,15 @@
 <script setup>
 import { onMounted, computed, ref, watch } from "vue";
-import CustomerService2 from "@/service/CustomerService2";
+import CustomerService from "@/service/CustomerService";
 import { useToast } from "primevue/usetoast";
-
+const customerService = new CustomerService();
 const customers = ref();
 // const expandedRows = ref([]);
 const toast = useToast();
-const newCustomerVisible = ref(false);
-const newCustomer = ref({
-  firstname: '',
-  lastname: '',
-  phone: '',
-  email: ''
-});
 const viewMode = ref('list');
 const changeViewMode = () => {
   viewMode.value = viewMode.value === "grid" ? "list" : "grid";
 };
-
-const addCustomer = async () => {
-  try {
-    await CustomerService2.addCustomer(newCustomer.value);
-    toast.add({ severity: 'success', summary: 'Success', detail: 'Customer added successfully', life: '3000' });
-    // Fetch updated menu items
-    customers.value = await CustomerService2.getAllCustomers();
-
-    newCustomerVisible.value = false;
-  } catch (error) {
-    console.error('Error adding menu item:', error);
-    toast.add({ severity: 'error', summary: 'Error', detail: 'Select an item to Archive', life: '3000' });
-  }
-};
-
-onMounted(async () => {
-  try {
-    customers.value = await CustomerService2.getAllCustomers();
-  } catch (error) {
-    console.error('Error fetching sessions:', error);
-    toast.add({ severity: 'error', summary: 'Error', detail: 'Failed to fetch sessions' });
-  }
-});
 const menu = ref();
 const items = ref([
   {
@@ -55,7 +25,7 @@ const items = ref([
         icon: 'pi pi-box'
       },
       {
-        label: 'Orders',
+        label: 'Activities',
         icon: 'pi pi-history'
       }
     ]
@@ -63,11 +33,30 @@ const items = ref([
 ]);
 const toggle = (event) => {
   menu.value.toggle(event);
-  console.log(selectedCustomer.value); // Log selected menu items to the console
 };
-const selectedCustomer = ref();
+onMounted(() => {
+  customers.value = customerService.getCustomersMedium();
+});
+const selectedMenuItem = ref();
 
 
+const getCustomerSeverity = (customer) => {
+  switch (customer.status) {
+    case "new":
+      return "success";
+    case "renewal":
+      return "secondary";
+    case "qualified":
+      return "info";
+    case "unqualified":
+      return "danger";
+    case "proposal":
+      return "warning";
+
+    default:
+      return null;
+  }
+};
 const archiveButtonText = computed(() => {
   return selectedFilter.value.name === "Archived" ? "Unarchive" : "Archive";
 });
@@ -104,8 +93,7 @@ const filters = ref([{ name: "Active" }, { name: "Archived" }, { name: "All" }])
             <Icon icon="bx:archive-in" width="1.5rem" height="1.5rem" />
             {{ archiveButtonText }}
           </Button>
-          <Button class="p-button-primary font-bold gap-2" icon="pi pi-plus" label="New Customer"
-            @click="newCustomerVisible = true">
+          <Button class="p-button-primary font-bold gap-2" icon="pi pi-plus" label="New Customer">
           </Button>
         </div>
       </template>
@@ -114,15 +102,27 @@ const filters = ref([{ name: "Active" }, { name: "Archived" }, { name: "All" }])
       <div style="height: 65vh"
         class="border-2 border-dashed surface-border flex flex-wrap gap-3 overflow-y-scroll p-2">
         <DataTable :value="customers" dataKey="id" class="w-full" tableStyle="min-width: 60rem" selectionMode="multiple"
-          v-model:selection="selectedCustomer" stripedRows>
+          v-model:selection="selectedMenuItem" stripedRows>
 
           <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
-          <Column field="name" header="Name">
+          <!-- <Column expander style="width: 5rem" /> -->
+          <Column field="id" header="id">
           </Column>
-          <Column field="email" header="Email Address"></Column>
-          <Column field="phone" header="Phone Number">
+
+          <Column field="name" header="name">
           </Column>
-          <Column header="Total Orders">
+          <Column field="company" header="company"></Column>
+          <Column field="date" header="date">
+
+          </Column>
+          <Column field="status" header="status" sortable>
+            <template #body="slotProps">
+              <div class="flex justify-content-center">
+                <Tag :value="slotProps.data.status" :severity="getCustomerSeverity(slotProps.data)" />
+              </div>
+            </template>
+          </Column>
+          <Column field="activity" header="activity">
           </Column>
 
           <Column>
@@ -158,34 +158,4 @@ const filters = ref([{ name: "Active" }, { name: "Archived" }, { name: "All" }])
     </template>
 
   </div>
-
-  <Dialog v-model:visible="newCustomerVisible" modal header="New Menu Item" :style="{ width: '35rem' }">
-    <div class="flex align-items-center gap-3 mb-3 mt-5">
-      <FloatLabel>
-        <InputText v-model="newCustomer.firstname" class="w-full flex-1" />
-        <label for="name">Firstname </label>
-      </FloatLabel>
-      <FloatLabel>
-        <InputText v-model="newCustomer.lastname" class="w-full flex-1" />
-        <label for="name">Lastname </label>
-      </FloatLabel>
-    </div>
-    <div class="flexr-row align-items-center gap-3 mb-3 mt-4">
-      <FloatLabel>
-        <InputText v-model="newCustomer.email" rows="2" style="width: 100%;" />
-        <label>Email Address</label>
-      </FloatLabel>
-    </div>
-    <div class="flexr-row align-items-center gap-3 mb-3 mt-4">
-      <FloatLabel>
-        <InputText v-model="newCustomer.phone" rows="2" style="width: 100%;" />
-        <label>Phone Number</label>
-      </FloatLabel>
-    </div>
-    <div class="flex justify-content-end gap-2">
-      <Button type="button" label="Cancel" severity="secondary" @click="newCustomerVisible = false"></Button>
-      <Button type="button" label="Add" @click="addCustomer"></Button>
-    </div>
-  </Dialog>
-
 </template>

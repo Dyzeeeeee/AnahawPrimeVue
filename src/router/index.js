@@ -15,12 +15,14 @@ const router = createRouter({
                 },
 
                 {
-                    path: 'session',
+                    path: 'session/:id', // Define a dynamic segment ':id'
                     name: 'session',
-                    component: () => import('@/views/pages/admin/Session.vue')
+                    component: () => import('@/views/pages/admin/Session.vue'),
+                    props: true // Enable passing route params as props
                 },
+                
                 {
-                    path: 'orders',
+                    path: 'orders', 
                     name: 'orders',
                     component: () => import('@/views/pages/admin/Orders.vue')
                 },
@@ -29,7 +31,7 @@ const router = createRouter({
                     name: 'customers',
                     component: () => import('@/views/pages/admin/Customers.vue')
                 },
-              
+
                 {
                     path: 'menu',
                     name: 'menu',
@@ -41,14 +43,44 @@ const router = createRouter({
                     component: () => import('@/views/pages/admin/Counter.vue')
                 },
                 {
-                    path: '/uikit/formlayout',
-                    name: 'formlayout',
-                    component: () => import('@/views/uikit/FormLayout.vue')
+                    path: 'suppliers',
+                    name: 'suppliers',
+                    component: () => import('@/views/pages/admin/Suppliers.vue')
                 },
                 {
-                    path: '/uikit/input',
-                    name: 'input',
-                    component: () => import('@/views/uikit/Input.vue')
+                    path: 'food-stocks',
+                    name: 'food-stocks',
+                    component: () => import('@/views/pages/admin/FoodStocks.vue')
+                },
+                {
+                    path: 'resort-items',
+                    name: 'resort-items',
+                    component: () => import('@/views/pages/admin/ResortItems.vue')
+                },
+                {
+                    path: 'rooms',
+                    name: 'rooms',
+                    component: () => import('@/views/pages/admin/Rooms.vue')
+                },
+                {
+                    path: 'guests',
+                    name: 'guests',
+                    component: () => import('@/views/pages/admin/Guests.vue')
+                },
+                {
+                    path: 'reservations',
+                    name: 'reservations',
+                    component: () => import('@/views/pages/admin/Reservations.vue')
+                },
+                {
+                    path: 'accounts',
+                    name: 'accounts',
+                    component: () => import('@/views/pages/admin/Accounts.vue')
+                },
+                {
+                    path: 'employee ',
+                    name: 'employee ',
+                    component: () => import('@/views/pages/admin/employee   .vue')
                 },
                 {
                     path: '/uikit/floatlabel',
