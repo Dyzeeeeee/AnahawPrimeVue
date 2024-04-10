@@ -1,0 +1,116 @@
+CRITICAL - 2024-04-04 04:21:33 --> ErrorException: Allowed memory size of 536870912 bytes exhausted (tried to allocate 20480 bytes)
+in SYSTEMPATH\HTTP\Exceptions\HTTPException.php on line 155.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-04-04 04:21:37 --> ErrorException: Allowed memory size of 536870912 bytes exhausted (tried to allocate 20480 bytes)
+in SYSTEMPATH\HTTP\Exceptions\HTTPException.php on line 155.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-04-04 04:21:39 --> ErrorException: Allowed memory size of 536870912 bytes exhausted (tried to allocate 20480 bytes)
+in SYSTEMPATH\HTTP\Exceptions\HTTPException.php on line 155.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-04-04 04:21:46 --> ErrorException: Allowed memory size of 536870912 bytes exhausted (tried to allocate 20480 bytes)
+in SYSTEMPATH\HTTP\Exceptions\HTTPException.php on line 155.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-04-04 04:39:10 --> CodeIgniter\Exceptions\FrameworkException: The framework needs the following extension(s) installed and loaded: intl.
+in SYSTEMPATH\CodeIgniter.php on line 252.
+ 1 SYSTEMPATH\CodeIgniter.php(252): CodeIgniter\Exceptions\FrameworkException::forMissingExtension()
+ 2 SYSTEMPATH\CodeIgniter.php(214): CodeIgniter\CodeIgniter->resolvePlatformExtensions()
+ 3 ROOTPATH\spark(88): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-04-04 04:39:10 --> ErrorException: Uncaught Error: Class "Locale" not found in C:\laragon\www\Capstone\AnahawBE\system\I18n\TimeTrait.php:74
+Stack trace:
+#0 C:\laragon\www\Capstone\AnahawBE\system\I18n\TimeTrait.php(115): CodeIgniter\I18n\Time->__construct()
+#1 C:\laragon\www\Capstone\AnahawBE\system\HTTP\ResponseTrait.php(468): CodeIgniter\I18n\Time::now()
+#2 C:\laragon\www\Capstone\AnahawBE\system\HTTP\ResponseTrait.php(446): CodeIgniter\HTTP\Response->sendHeaders()
+#3 C:\laragon\www\Capstone\AnahawBE\system\Debug\ExceptionHandler.php(81): CodeIgniter\HTTP\Response->send()
+#4 C:\laragon\www\Capstone\AnahawBE\system\Debug\Exceptions.php(156): CodeIgniter\Debug\ExceptionHandler->handle()
+#5 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#6 {main}
+  thrown
+【Previous Exception】
+CodeIgniter\Exceptions\FrameworkException
+The framework needs the following extension(s) installed and loaded: intl.
+#0 C:\laragon\www\Capstone\AnahawBE\system\CodeIgniter.php(252): CodeIgniter\Exceptions\FrameworkException::forMissingExtension()
+#1 C:\laragon\www\Capstone\AnahawBE\system\CodeIgniter.php(214): CodeIgniter\CodeIgniter->resolvePlatformExtensions()
+#2 C:\laragon\www\Capstone\AnahawBE\spark(88): CodeIgniter\CodeIgniter->initialize()
+#3 {main}
+in SYSTEMPATH\I18n\TimeTrait.php on line 74.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-04-04 06:25:30 --> Error: Object of class stdClass could not be converted to string
+in SYSTEMPATH\Database\Query.php on line 333.
+ 1 SYSTEMPATH\Database\Query.php(333): strtr('INSERT INTO `menu` (`name`, `description`, `price`, `category`) VALUES (:name:, :description:, :price:, :category:)', [...])
+ 2 SYSTEMPATH\Database\Query.php(308): CodeIgniter\Database\Query->matchNamedBinds('INSERT INTO `menu` (`name`, `description`, `price`, `category`) VALUES (:name:, :description:, :price:, :category:)', [...])
+ 3 SYSTEMPATH\Database\Query.php(159): CodeIgniter\Database\Query->compileBinds()
+ 4 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\Query->getQuery()
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `menu` (`name`, `description`, `price`, `category`) VALUES (:name:, :description:, :price:, :category:)', [...], false)
+ 6 SYSTEMPATH\Model.php(326): CodeIgniter\Database\BaseBuilder->insert()
+ 7 SYSTEMPATH\BaseModel.php(802): CodeIgniter\Model->doInsert([...])
+ 8 SYSTEMPATH\Model.php(744): CodeIgniter\BaseModel->insert([...], false)
+ 9 SYSTEMPATH\BaseModel.php(713): CodeIgniter\Model->insert([...], false)
+10 APPPATH\Controllers\MenuController.php(36): CodeIgniter\BaseModel->save([...])
+11 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\MenuController->addMenuItem()
+12 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MenuController))
+13 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-04 06:29:02 --> Error: Object of class stdClass could not be converted to string
+in SYSTEMPATH\Database\Query.php on line 333.
+ 1 SYSTEMPATH\Database\Query.php(333): strtr('INSERT INTO `menu` (`name`, `description`, `price`, `category`) VALUES (:name:, :description:, :price:, :category:)', [...])
+ 2 SYSTEMPATH\Database\Query.php(308): CodeIgniter\Database\Query->matchNamedBinds('INSERT INTO `menu` (`name`, `description`, `price`, `category`) VALUES (:name:, :description:, :price:, :category:)', [...])
+ 3 SYSTEMPATH\Database\Query.php(159): CodeIgniter\Database\Query->compileBinds()
+ 4 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\Query->getQuery()
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `menu` (`name`, `description`, `price`, `category`) VALUES (:name:, :description:, :price:, :category:)', [...], false)
+ 6 SYSTEMPATH\Model.php(326): CodeIgniter\Database\BaseBuilder->insert()
+ 7 SYSTEMPATH\BaseModel.php(802): CodeIgniter\Model->doInsert([...])
+ 8 SYSTEMPATH\Model.php(744): CodeIgniter\BaseModel->insert([...], false)
+ 9 SYSTEMPATH\BaseModel.php(713): CodeIgniter\Model->insert([...], false)
+10 APPPATH\Controllers\MenuController.php(36): CodeIgniter\BaseModel->save([...])
+11 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\MenuController->addMenuItem()
+12 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MenuController))
+13 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-04 06:43:06 --> TypeError: App\Controllers\MenuController::archiveMenuItem(): Argument #1 ($menuItemId) must be of type array, string given, called in C:\laragon\www\Capstone\AnahawBE\system\CodeIgniter.php on line 941
+in APPPATH\Controllers\MenuController.php on line 40.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\MenuController->archiveMenuItem('1')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MenuController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-04 06:43:13 --> TypeError: App\Controllers\MenuController::archiveMenuItem(): Argument #1 ($menuItemId) must be of type array, string given, called in C:\laragon\www\Capstone\AnahawBE\system\CodeIgniter.php on line 941
+in APPPATH\Controllers\MenuController.php on line 40.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\MenuController->archiveMenuItem('1')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MenuController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-04 06:43:27 --> TypeError: App\Controllers\MenuController::archiveMenuItem(): Argument #1 ($menuItemId) must be of type array, string given, called in C:\laragon\www\Capstone\AnahawBE\system\CodeIgniter.php on line 941
+in APPPATH\Controllers\MenuController.php on line 40.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\MenuController->archiveMenuItem('1')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MenuController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-04 06:50:51 --> TypeError: App\Controllers\MenuController::archiveMenuItem(): Argument #1 ($menuItemId) must be of type array, string given, called in C:\laragon\www\Capstone\AnahawBE\system\CodeIgniter.php on line 941
+in APPPATH\Controllers\MenuController.php on line 40.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\MenuController->archiveMenuItem('1')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MenuController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-04 06:50:58 --> TypeError: App\Controllers\MenuController::archiveMenuItem(): Argument #1 ($menuItemId) must be of type array, string given, called in C:\laragon\www\Capstone\AnahawBE\system\CodeIgniter.php on line 941
+in APPPATH\Controllers\MenuController.php on line 40.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\MenuController->archiveMenuItem('1')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MenuController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-04 06:52:56 --> TypeError: App\Controllers\MenuController::archiveMenuItem(): Argument #1 ($menuItemId) must be of type array, string given, called in C:\laragon\www\Capstone\AnahawBE\system\CodeIgniter.php on line 941
+in APPPATH\Controllers\MenuController.php on line 40.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\MenuController->archiveMenuItem('1')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MenuController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-04 06:53:35 --> TypeError: App\Controllers\MenuController::archiveMenuItem(): Argument #1 ($menuItemId) must be of type array, string given, called in C:\laragon\www\Capstone\AnahawBE\system\CodeIgniter.php on line 941
+in APPPATH\Controllers\MenuController.php on line 40.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\MenuController->archiveMenuItem('1')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MenuController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-04 06:55:41 --> TypeError: App\Controllers\MenuController::archiveMenuItem(): Argument #1 ($menuItemId) must be of type array, string given, called in C:\laragon\www\Capstone\AnahawBE\system\CodeIgniter.php on line 941
+in APPPATH\Controllers\MenuController.php on line 40.
+ 1 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\MenuController->archiveMenuItem('1')
+ 2 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\MenuController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()

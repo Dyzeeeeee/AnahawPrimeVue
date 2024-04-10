@@ -1,0 +1,186 @@
+CRITICAL - 2024-04-06 09:12:45 --> CodeIgniter\Exceptions\FrameworkException: The framework needs the following extension(s) installed and loaded: intl.
+in SYSTEMPATH\CodeIgniter.php on line 252.
+ 1 SYSTEMPATH\CodeIgniter.php(252): CodeIgniter\Exceptions\FrameworkException::forMissingExtension()
+ 2 SYSTEMPATH\CodeIgniter.php(214): CodeIgniter\CodeIgniter->resolvePlatformExtensions()
+ 3 ROOTPATH\spark(88): CodeIgniter\CodeIgniter->initialize()
+CRITICAL - 2024-04-06 09:12:45 --> ErrorException: Uncaught Error: Class "Locale" not found in C:\laragon\www\Capstone\AnahawBE\system\I18n\TimeTrait.php:74
+Stack trace:
+#0 C:\laragon\www\Capstone\AnahawBE\system\I18n\TimeTrait.php(115): CodeIgniter\I18n\Time->__construct()
+#1 C:\laragon\www\Capstone\AnahawBE\system\HTTP\ResponseTrait.php(468): CodeIgniter\I18n\Time::now()
+#2 C:\laragon\www\Capstone\AnahawBE\system\HTTP\ResponseTrait.php(446): CodeIgniter\HTTP\Response->sendHeaders()
+#3 C:\laragon\www\Capstone\AnahawBE\system\Debug\ExceptionHandler.php(81): CodeIgniter\HTTP\Response->send()
+#4 C:\laragon\www\Capstone\AnahawBE\system\Debug\Exceptions.php(156): CodeIgniter\Debug\ExceptionHandler->handle()
+#5 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler()
+#6 {main}
+  thrown
+【Previous Exception】
+CodeIgniter\Exceptions\FrameworkException
+The framework needs the following extension(s) installed and loaded: intl.
+#0 C:\laragon\www\Capstone\AnahawBE\system\CodeIgniter.php(252): CodeIgniter\Exceptions\FrameworkException::forMissingExtension()
+#1 C:\laragon\www\Capstone\AnahawBE\system\CodeIgniter.php(214): CodeIgniter\CodeIgniter->resolvePlatformExtensions()
+#2 C:\laragon\www\Capstone\AnahawBE\spark(88): CodeIgniter\CodeIgniter->initialize()
+#3 {main}
+in SYSTEMPATH\I18n\TimeTrait.php on line 74.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2024-04-06 09:17:32 --> mysqli_sql_exception: Unknown table 'aivr.sessions' in C:\laragon\www\Capstone\AnahawBE\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\laragon\www\Capstone\AnahawBE\system\Database\MySQLi\Connection.php(306): mysqli->query('DROP TABLE `ses...', 0)
+#1 C:\laragon\www\Capstone\AnahawBE\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('DROP TABLE `ses...')
+#2 C:\laragon\www\Capstone\AnahawBE\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('DROP TABLE `ses...')
+#3 C:\laragon\www\Capstone\AnahawBE\system\Database\Forge.php(648): CodeIgniter\Database\BaseConnection->query('DROP TABLE `ses...')
+#4 C:\laragon\www\Capstone\AnahawBE\app\Database\Migrations\2024-04-06-091321_CreateSessionTable.php(48): CodeIgniter\Database\Forge->dropTable('sessions')
+#5 C:\laragon\www\Capstone\AnahawBE\system\Database\MigrationRunner.php(865): App\Database\Migrations\CreateSessionTable->down()
+#6 C:\laragon\www\Capstone\AnahawBE\system\Database\MigrationRunner.php(288): CodeIgniter\Database\MigrationRunner->migrate('down', Object(stdClass))
+#7 C:\laragon\www\Capstone\AnahawBE\system\Commands\Database\MigrateRollback.php(86): CodeIgniter\Database\MigrationRunner->regress(1)
+#8 C:\laragon\www\Capstone\AnahawBE\system\CLI\Commands.php(65): CodeIgniter\Commands\Database\MigrateRollback->run(Array)
+#9 C:\laragon\www\Capstone\AnahawBE\system\CLI\Console.php(46): CodeIgniter\CLI\Commands->run('migrate:rollbac...', Array)
+#10 C:\laragon\www\Capstone\AnahawBE\spark(102): CodeIgniter\CLI\Console->run()
+#11 {main}
+ERROR - 2024-04-06 12:49:44 --> mysqli_sql_exception: Invalid default value for 'role' in C:\laragon\www\Capstone\AnahawBE\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\laragon\www\Capstone\AnahawBE\system\Database\MySQLi\Connection.php(306): mysqli->query('CREATE TABLE `a...', 0)
+#1 C:\laragon\www\Capstone\AnahawBE\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('CREATE TABLE `a...')
+#2 C:\laragon\www\Capstone\AnahawBE\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE `a...')
+#3 C:\laragon\www\Capstone\AnahawBE\system\Database\Forge.php(555): CodeIgniter\Database\BaseConnection->query('CREATE TABLE `a...')
+#4 C:\laragon\www\Capstone\AnahawBE\app\Database\Migrations\2024-04-06-124837_CreateAccountTable.php(42): CodeIgniter\Database\Forge->createTable('accounts')
+#5 C:\laragon\www\Capstone\AnahawBE\system\Database\MigrationRunner.php(865): App\Database\Migrations\CreateAccountTable->up()
+#6 C:\laragon\www\Capstone\AnahawBE\system\Database\MigrationRunner.php(181): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+#7 C:\laragon\www\Capstone\AnahawBE\system\Commands\Database\Migrate.php(84): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#8 C:\laragon\www\Capstone\AnahawBE\system\CLI\Commands.php(65): CodeIgniter\Commands\Database\Migrate->run(Array)
+#9 C:\laragon\www\Capstone\AnahawBE\system\CLI\Console.php(46): CodeIgniter\CLI\Commands->run('migrate', Array)
+#10 C:\laragon\www\Capstone\AnahawBE\spark(102): CodeIgniter\CLI\Console->run()
+#11 {main}
+ERROR - 2024-04-06 12:50:01 --> mysqli_sql_exception: Invalid default value for 'role' in C:\laragon\www\Capstone\AnahawBE\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\laragon\www\Capstone\AnahawBE\system\Database\MySQLi\Connection.php(306): mysqli->query('CREATE TABLE `a...', 0)
+#1 C:\laragon\www\Capstone\AnahawBE\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('CREATE TABLE `a...')
+#2 C:\laragon\www\Capstone\AnahawBE\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE `a...')
+#3 C:\laragon\www\Capstone\AnahawBE\system\Database\Forge.php(555): CodeIgniter\Database\BaseConnection->query('CREATE TABLE `a...')
+#4 C:\laragon\www\Capstone\AnahawBE\app\Database\Migrations\2024-04-06-124837_CreateAccountTable.php(42): CodeIgniter\Database\Forge->createTable('accounts')
+#5 C:\laragon\www\Capstone\AnahawBE\system\Database\MigrationRunner.php(865): App\Database\Migrations\CreateAccountTable->up()
+#6 C:\laragon\www\Capstone\AnahawBE\system\Database\MigrationRunner.php(181): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+#7 C:\laragon\www\Capstone\AnahawBE\system\Commands\Database\Migrate.php(84): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#8 C:\laragon\www\Capstone\AnahawBE\system\CLI\Commands.php(65): CodeIgniter\Commands\Database\Migrate->run(Array)
+#9 C:\laragon\www\Capstone\AnahawBE\system\CLI\Console.php(46): CodeIgniter\CLI\Commands->run('migrate', Array)
+#10 C:\laragon\www\Capstone\AnahawBE\spark(102): CodeIgniter\CLI\Console->run()
+#11 {main}
+ERROR - 2024-04-06 12:52:36 --> mysqli_sql_exception: Invalid default value for 'created_at' in C:\laragon\www\Capstone\AnahawBE\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\laragon\www\Capstone\AnahawBE\system\Database\MySQLi\Connection.php(306): mysqli->query('CREATE TABLE `a...', 0)
+#1 C:\laragon\www\Capstone\AnahawBE\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('CREATE TABLE `a...')
+#2 C:\laragon\www\Capstone\AnahawBE\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE `a...')
+#3 C:\laragon\www\Capstone\AnahawBE\system\Database\Forge.php(555): CodeIgniter\Database\BaseConnection->query('CREATE TABLE `a...')
+#4 C:\laragon\www\Capstone\AnahawBE\app\Database\Migrations\2024-04-06-124837_CreateAccountTable.php(51): CodeIgniter\Database\Forge->createTable('accounts')
+#5 C:\laragon\www\Capstone\AnahawBE\system\Database\MigrationRunner.php(865): App\Database\Migrations\CreateAccountTable->up()
+#6 C:\laragon\www\Capstone\AnahawBE\system\Database\MigrationRunner.php(181): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+#7 C:\laragon\www\Capstone\AnahawBE\system\Commands\Database\Migrate.php(84): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#8 C:\laragon\www\Capstone\AnahawBE\system\CLI\Commands.php(65): CodeIgniter\Commands\Database\Migrate->run(Array)
+#9 C:\laragon\www\Capstone\AnahawBE\system\CLI\Console.php(46): CodeIgniter\CLI\Commands->run('migrate', Array)
+#10 C:\laragon\www\Capstone\AnahawBE\spark(102): CodeIgniter\CLI\Console->run()
+#11 {main}
+ERROR - 2024-04-06 13:10:14 --> mysqli_sql_exception: Duplicate entry 'jdmalaluan1@gmail.con' for key 'accounts.email' in C:\laragon\www\Capstone\AnahawBE\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\laragon\www\Capstone\AnahawBE\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `ac...', 0)
+#1 C:\laragon\www\Capstone\AnahawBE\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ac...')
+#2 C:\laragon\www\Capstone\AnahawBE\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ac...')
+#3 C:\laragon\www\Capstone\AnahawBE\system\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ac...', Array, false)
+#4 C:\laragon\www\Capstone\AnahawBE\system\Model.php(326): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\Capstone\AnahawBE\system\BaseModel.php(802): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\Capstone\AnahawBE\system\Model.php(744): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\laragon\www\Capstone\AnahawBE\app\Controllers\AccountController.php(31): CodeIgniter\Model->insert(Array)
+#8 C:\laragon\www\Capstone\AnahawBE\system\CodeIgniter.php(941): App\Controllers\AccountController->createAccount()
+#9 C:\laragon\www\Capstone\AnahawBE\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccountController))
+#10 C:\laragon\www\Capstone\AnahawBE\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\Capstone\AnahawBE\public\index.php(89): CodeIgniter\CodeIgniter->run()
+#12 {main}
+CRITICAL - 2024-04-06 13:10:14 --> CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry 'jdmalaluan1@gmail.con' for key 'accounts.email'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `accounts` (`firstname`, `lastname`, `email`, `password`) VALUES (:firstname:, :lastname:, :email:, :password:)', [...], false)
+ 2 SYSTEMPATH\Model.php(326): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(802): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(744): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\AccountController.php(31): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AccountController->createAccount()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccountController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-06 13:10:14 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry 'jdmalaluan1@gmail.con' for key 'accounts.email'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `accounts` (`firstname`, `lastname`, `email`, `password`) VALUES (\'Jan Dyze\', \'Malaluan\', \'jdmalaluan1@gmail.con\', \'$2y$10$ALDOuxE5LGZPCarAkyshBuJAwoiDKfPJvDVk58kqbwirK4sic0DpS\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `accounts` (`firstname`, `lastname`, `email`, `password`) VALUES (\'Jan Dyze\', \'Malaluan\', \'jdmalaluan1@gmail.con\', \'$2y$10$ALDOuxE5LGZPCarAkyshBuJAwoiDKfPJvDVk58kqbwirK4sic0DpS\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `accounts` (`firstname`, `lastname`, `email`, `password`) VALUES (:firstname:, :lastname:, :email:, :password:)', [...], false)
+ 4 SYSTEMPATH\Model.php(326): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(802): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(744): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\AccountController.php(31): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AccountController->createAccount()
+ 9 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccountController))
+10 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-06 13:10:14 --> [Caused by] mysqli_sql_exception: Duplicate entry 'jdmalaluan1@gmail.con' for key 'accounts.email'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `accounts` (`firstname`, `lastname`, `email`, `password`) VALUES (\'Jan Dyze\', \'Malaluan\', \'jdmalaluan1@gmail.con\', \'$2y$10$ALDOuxE5LGZPCarAkyshBuJAwoiDKfPJvDVk58kqbwirK4sic0DpS\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `accounts` (`firstname`, `lastname`, `email`, `password`) VALUES (\'Jan Dyze\', \'Malaluan\', \'jdmalaluan1@gmail.con\', \'$2y$10$ALDOuxE5LGZPCarAkyshBuJAwoiDKfPJvDVk58kqbwirK4sic0DpS\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `accounts` (`firstname`, `lastname`, `email`, `password`) VALUES (\'Jan Dyze\', \'Malaluan\', \'jdmalaluan1@gmail.con\', \'$2y$10$ALDOuxE5LGZPCarAkyshBuJAwoiDKfPJvDVk58kqbwirK4sic0DpS\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `accounts` (`firstname`, `lastname`, `email`, `password`) VALUES (:firstname:, :lastname:, :email:, :password:)', [...], false)
+ 5 SYSTEMPATH\Model.php(326): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(802): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(744): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\AccountController.php(31): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AccountController->createAccount()
+10 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccountController))
+11 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-04-06 13:27:48 --> mysqli_sql_exception: Duplicate entry '' for key 'accounts.email' in C:\laragon\www\Capstone\AnahawBE\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\laragon\www\Capstone\AnahawBE\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `ac...', 0)
+#1 C:\laragon\www\Capstone\AnahawBE\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ac...')
+#2 C:\laragon\www\Capstone\AnahawBE\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ac...')
+#3 C:\laragon\www\Capstone\AnahawBE\system\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ac...', Array, false)
+#4 C:\laragon\www\Capstone\AnahawBE\system\Model.php(326): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\Capstone\AnahawBE\system\BaseModel.php(802): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\Capstone\AnahawBE\system\Model.php(744): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\laragon\www\Capstone\AnahawBE\app\Controllers\AccountController.php(31): CodeIgniter\Model->insert(Array)
+#8 C:\laragon\www\Capstone\AnahawBE\system\CodeIgniter.php(941): App\Controllers\AccountController->createAccount()
+#9 C:\laragon\www\Capstone\AnahawBE\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccountController))
+#10 C:\laragon\www\Capstone\AnahawBE\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\Capstone\AnahawBE\public\index.php(89): CodeIgniter\CodeIgniter->run()
+#12 {main}
+CRITICAL - 2024-04-06 13:27:48 --> CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry '' for key 'accounts.email'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `accounts` (`firstname`, `lastname`, `email`, `password`) VALUES (:firstname:, :lastname:, :email:, :password:)', [...], false)
+ 2 SYSTEMPATH\Model.php(326): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(802): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(744): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\AccountController.php(31): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AccountController->createAccount()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccountController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-06 13:27:48 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry '' for key 'accounts.email'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `accounts` (`firstname`, `lastname`, `email`, `password`) VALUES (\'\', \'\', \'\', \'$2y$10$7KTDRFi4Q08IXSKNWZywfO8bzTFMaFTT544mo6ShW9WEzetPxiIU2\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `accounts` (`firstname`, `lastname`, `email`, `password`) VALUES (\'\', \'\', \'\', \'$2y$10$7KTDRFi4Q08IXSKNWZywfO8bzTFMaFTT544mo6ShW9WEzetPxiIU2\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `accounts` (`firstname`, `lastname`, `email`, `password`) VALUES (:firstname:, :lastname:, :email:, :password:)', [...], false)
+ 4 SYSTEMPATH\Model.php(326): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(802): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(744): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\AccountController.php(31): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AccountController->createAccount()
+ 9 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccountController))
+10 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-06 13:27:48 --> [Caused by] mysqli_sql_exception: Duplicate entry '' for key 'accounts.email'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `accounts` (`firstname`, `lastname`, `email`, `password`) VALUES (\'\', \'\', \'\', \'$2y$10$7KTDRFi4Q08IXSKNWZywfO8bzTFMaFTT544mo6ShW9WEzetPxiIU2\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `accounts` (`firstname`, `lastname`, `email`, `password`) VALUES (\'\', \'\', \'\', \'$2y$10$7KTDRFi4Q08IXSKNWZywfO8bzTFMaFTT544mo6ShW9WEzetPxiIU2\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `accounts` (`firstname`, `lastname`, `email`, `password`) VALUES (\'\', \'\', \'\', \'$2y$10$7KTDRFi4Q08IXSKNWZywfO8bzTFMaFTT544mo6ShW9WEzetPxiIU2\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `accounts` (`firstname`, `lastname`, `email`, `password`) VALUES (:firstname:, :lastname:, :email:, :password:)', [...], false)
+ 5 SYSTEMPATH\Model.php(326): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(802): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(744): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\AccountController.php(31): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AccountController->createAccount()
+10 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccountController))
+11 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()

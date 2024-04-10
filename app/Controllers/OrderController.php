@@ -1,0 +1,156 @@
+<?php
+
+namespace App\Controllers;
+
+use CodeIgniter\RESTful\ResourceController;
+use CodeIgniter\API\ResponseTrait;
+use App\Models\OrderModel;
+use App\Models\CustomerModel;
+
+class OrderController extends ResourceController
+{
+    use ResponseTrait;
+
+    public function getAllOrders()
+    {
+
+        $order = new OrderModel();
+        $data = $order->select('orders.*, IFNULL(customer_id.name, "N/A") as customer_name')
+            ->join('customers', 'customers.id = orders.customer_id', 'left')
+            ->findAll();
+
+        return $this->respond($data, 200);
+    }
+
+
+    public function createNewOrder()
+    {
+        $json = $this->request->getJSON();
+
+        $data = [
+            'session_id' => $json->session_id,
+        ];
+
+        $order = new OrderModel();
+        $orderId = $order->insert($data); // Use insert instead of save
+
+        if ($orderId) {
+            $response = [
+                'success' => true,
+                'message' => 'Order created successfully',
+                'order_id' => $orderId
+            ];
+            return $this->respond($response, 200);
+        } else {
+            $response = [
+                'success' => false,
+                'message' => 'Failed to create order'
+            ];
+            return $this->respond($response, 500); // Use a suitable HTTP status code for failure
+        }
+    }
+
+    public function addCustomerToOrder($orderId)
+    {
+        $json = $this->request->getJSON();
+
+        $data = [
+            'customer_id' => $json->customer_id,
+        ];
+
+        $order = new OrderModel();
+        $updated = $order->update($orderId, $data);
+
+        if ($updated) {
+            $response = [
+                'success' => true,
+                'message' => 'Customer added to order successfully'
+            ];
+            return $this->respond($response, 200);
+        } else {
+            $response = [
+                'success' => false,
+                'message' => 'Failed to add customer to order'
+            ];
+            return $this->respond($response, 500); // Use a suitable HTTP status code for failure
+        }
+    }
+
+    public function changeService($orderId)
+    {
+        $json = $this->request->getJSON();
+
+        $data = [
+            'service' => $json->service,
+        ];
+
+        $order = new OrderModel();
+        $updated = $order->update($orderId, $data);
+
+        if ($updated) {
+            $response = [
+                'success' => true,
+                'message' => 'service changed successfully'
+            ];
+            return $this->respond($response, 200);
+        } else {
+            $response = [
+                'success' => false,
+                'message' => 'Failed to add customer to order'
+            ];
+            return $this->respond($response, 500); // Use a suitable HTTP status code for failure
+        }
+    }
+
+
+    public function getOrderDetails($orderId)
+    {
+        $order = new OrderModel();
+        $orderDetails = $order->select('orders.*, IFNULL(CONCAT(customers.firstname, " ", customers.lastname), "N/A") as customer_name')
+            ->join('customers', 'customers.id = orders.customer_id', 'left')
+            ->find($orderId);
+
+        if ($orderDetails) {
+
+            $response = [
+                'order_id' => $orderDetails['id'],
+                'session_id' => $orderDetails['session_id'],
+                'customer_id' => $orderDetails['customer_id'],
+                'customer_name' => $orderDetails['customer_name'],
+                'total_price' => $orderDetails['total_price'],
+            ];
+
+            return $this->respond($response, 200);
+        } else {
+            $response = [
+                'success' => false,
+                'message' => 'Order not found'
+            ];
+            return $this->fail($response, 404);
+        }
+    }
+    public function getAllSessionOrders($sessionId)
+    {
+        $order = new OrderModel();
+        $orders = $order->select('orders.*, IFNULL(CONCAT(customers.firstname, " ", customers.lastname), "N/A") as customer_name')
+            ->join('customers', 'customers.id = orders.customer_id', 'left')
+            ->where('session_id', $sessionId)
+            ->findAll();
+
+        if ($orders) {
+            $response = [
+                'success' => true,
+                'orders' => $orders
+            ];
+            return $this->respond($response, 200);
+        } else {
+            $response = [
+                'success' => false,
+                'message' => 'No orders found for the session'
+            ];
+            return $this->respond($response, 404);
+        }
+    }
+
+
+}
