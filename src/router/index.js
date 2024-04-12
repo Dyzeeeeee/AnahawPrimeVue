@@ -219,6 +219,11 @@ const router = createRouter({
             name: 'login',
             component: () => import('@/views/pages/auth/Login.vue')
         },
+        {
+            path: '/privacy-policy',
+            name: 'privacy-policy',
+            component: () => import('@/views/pages/Privacy.vue')
+        },
         // {
         //     path: '/auth/access',
         //     name: 'accessDenied',

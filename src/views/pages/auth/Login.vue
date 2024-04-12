@@ -644,7 +644,7 @@ const loginWithFacebook = () => {
             <div class="justify-content-center flex text-sm p-fluid">
               <span
                 >By clicking Sign Up, you agree to our
-                <router-link to="#">Terms and Privacy Policy</router-link>. You may
+                <router-link to="/privacy-policy">Terms and Privacy Policy</router-link>. You may
                 receive SMS Notifications from us and can opt out any time.</span
               >
             </div>
