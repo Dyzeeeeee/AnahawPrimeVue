@@ -230,13 +230,13 @@ const loginWithGoogle = () => {
     .signIn()
     .then((googleUser) => {
       const profile = googleUser.getBasicProfile();
-      console.log("ID: ", profile.getId()); // Don't send this directly to your server!
-      const userData = {
-        user_id: profile.getId(),
-        name: profile.getName(),
-        email: profile.getEmail(),
-        imageUrl: profile.getImageUrl(),
-      };
+      console.log("name: ", profile.getName()); 
+      // const userData = {
+      //   user_id: profile.getId(),
+      //   name: profile.getName(),
+      //   email: profile.getEmail(),
+      //   imageUrl: profile.getImageUrl(),
+      // };
       // store.commit("setUser", userData);
       // router.push("/admin/counter");
       // Optionally, save the Google profile data or create an account

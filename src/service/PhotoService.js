@@ -2,7 +2,7 @@ export const PhotoService = {
     getData() {
         return [
             {
-                itemImageSrc: '/src/assets/images/resort-1.jpg',
+                itemImageSrc: './src/assets/images/resort-1.jpg',
                 alt: 'Description for Image 11',
                 title: 'Title 1'
             },
