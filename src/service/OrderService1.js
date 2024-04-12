@@ -72,8 +72,16 @@ const OrderService1 = {
             console.error('Error fetching order details:', error);
             throw error;
         }
-    }, 
-    
+    },
+    async addCustomerPayment(orderId, customerPaymentData) {
+        try {
+            const response = await ApiService.put(`addCustomerPayment/${orderId}`, customerPaymentData);
+            return response.data;
+        } catch (error) {
+            console.error('Error adding customer to order:', error);
+            throw error;
+        }
+    }
 };
 
 export default OrderService1;
