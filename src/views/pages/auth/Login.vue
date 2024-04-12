@@ -13,9 +13,6 @@ const store = useStore();
 
 const toast = useToast();
 
-onMounted(() => {
-  PhotoService.getImages().then((data) => (images.value = data));
-});
 const email = ref("");
 const password = ref("");
 const checked = ref(false);
@@ -115,7 +112,9 @@ const responsiveOptions = ref([
 
 const active = ref(0);
 
-onMounted(() => {
+onMounted(async () => {
+  PhotoService.getImages().then((data) => (images.value = data));
+  await loadGoogleApi();
   window.fbAsyncInit = function () {
     FB.init({
       appId: "790378076376898",
@@ -171,7 +170,7 @@ const loginWithFacebook = () => {
             console.log("Good to see you, " + response.name + ".");
             // Store all user information in a variable
             const userData = {
-              id: response.id,
+              user_id: response.id,
               name: response.name,
               first_name: response.first_name,
               last_name: response.last_name,
@@ -182,10 +181,22 @@ const loginWithFacebook = () => {
             };
             console.log("User data:", userData);
 
-            // Perform other actions with userData as needed
-            // For example, store the user data in Vuex store or redirect the user to another page
-            // store.commit("setUser", userData);
+            // Store the user data in Vuex store
+            store.commit("setUser", userData);
+
+            // Redirect the user to another page
             router.push("/admin/counter");
+            newAccount.value = {
+              firstname: response.first_name,
+              lastname: response.last_name,
+              phone: "None provided",
+              email: response.email,
+              password: "default",
+              role: "customer",
+            };
+            // Assuming newAccount.value is already defined and filled with the necessary data
+            // AccountService.createAccount(newAccount.value);
+            signUpAccount();
           }
         );
       } else {
@@ -194,6 +205,51 @@ const loginWithFacebook = () => {
     },
     { scope: "email" }
   );
+};
+
+function loadGoogleApi() {
+  const script = document.createElement("script");
+  script.src = "https://apis.google.com/js/api:client.js";
+  script.onload = () => initGoogleSignIn();
+  document.head.appendChild(script);
+}
+
+// Initialize Google Sign-in
+function initGoogleSignIn() {
+  gapi.load("auth2", function () {
+    gapi.auth2.init({
+      client_id:
+        "215113898368-i535eo8dovjh4pdud4etlol95ss99hq0.apps.googleusercontent.com", // Replace with your Client ID
+    });
+  });
+}
+
+const loginWithGoogle = () => {
+  const auth2 = gapi.auth2.getAuthInstance();
+  auth2
+    .signIn()
+    .then((googleUser) => {
+      const profile = googleUser.getBasicProfile();
+      console.log("ID: ", profile.getId()); // Don't send this directly to your server!
+      const userData = {
+        user_id: profile.getId(),
+        name: profile.getName(),
+        email: profile.getEmail(),
+        imageUrl: profile.getImageUrl(),
+      };
+      // store.commit("setUser", userData);
+      // router.push("/admin/counter");
+      // Optionally, save the Google profile data or create an account
+    })
+    .catch((error) => {
+      console.error("Error logging in with Google: ", error);
+      toast.add({
+        severity: "error",
+        summary: "Google Login Fail",
+        detail: "Failed to log in with Google",
+        life: 3000,
+      });
+    });
 };
 </script>
 
@@ -305,12 +361,13 @@ const loginWithFacebook = () => {
         </div>
         <div class="justify-content-center flex">
           <Button
-            outlined
             label="Log in with Google"
+            outlined
             class="w-full p-3 text-xl"
             icon="pi pi-google"
             iconPos="left"
-            severity="danger "
+            severity="danger"
+            @click="loginWithGoogle"
           />
         </div>
       </div>
@@ -644,8 +701,8 @@ const loginWithFacebook = () => {
             <div class="justify-content-center flex text-sm p-fluid">
               <span
                 >By clicking Sign Up, you agree to our
-                <router-link to="/privacy-policy">Terms and Privacy Policy</router-link>. You may
-                receive SMS Notifications from us and can opt out any time.</span
+                <router-link to="/privacy-policy">Terms and Privacy Policy</router-link>.
+                You may receive SMS Notifications from us and can opt out any time.</span
               >
             </div>
           </div>
