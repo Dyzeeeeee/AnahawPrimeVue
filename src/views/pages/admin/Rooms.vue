@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, reactive, ref, watch } from "vue";
-import { MenuService } from "@/service/MenuService";
+// import { MenuService } from "@/service/MenuService";
 import { useToast } from "primevue/usetoast";
 const menuItems = ref();
 // const expandedRows = ref([]);
@@ -34,7 +34,7 @@ const toggle = (event) => {
   menu.value.toggle(event);
 };
 onMounted(() => {
-  menuItems.value = MenuService.getMenuData();
+  // menuItems.value = MenuService.getMenuData();
 });
 const selectedMenuItem = ref();
 

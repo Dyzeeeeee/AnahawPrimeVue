@@ -1,7 +1,7 @@
 <script setup>
 import { FilterMatchMode, FilterOperator } from 'primevue/api';
 import CustomerService from '@/service/CustomerService';
-import ProductService from '@/service/ProductService';
+// import ProductService from '@/service/ProductService';
 import { ref, onBeforeMount } from 'vue';
 
 const customer1 = ref(null);
@@ -28,7 +28,7 @@ const representatives = ref([
 ]);
 
 const customerService = new CustomerService();
-const productService = new ProductService();
+// const productService = new ProductService();
 
 const getBadgeSeverity = (inventoryStatus) => {
     switch (inventoryStatus.toLowerCase()) {
@@ -62,7 +62,7 @@ const getSeverity = (status) => {
 };
 
 onBeforeMount(() => {
-    productService.getProductsWithOrdersSmall().then((data) => (products.value = data));
+    // productService.getProductsWithOrdersSmall().then((data) => (products.value = data));
     customerService.getCustomersLarge().then((data) => {
         customer1.value = data;
         loading1.value = false;

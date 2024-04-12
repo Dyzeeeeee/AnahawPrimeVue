@@ -78,11 +78,6 @@ const router = createRouter({
                     component: () => import('@/views/pages/admin/Accounts.vue')
                 },
                 {
-                    path: 'employee ',
-                    name: 'employee ',
-                    component: () => import('@/views/pages/admin/employee   .vue')
-                },
-                {
                     path: '/uikit/floatlabel',
                     name: 'floatlabel',
                     component: () => import('@/views/uikit/FloatLabel.vue')
