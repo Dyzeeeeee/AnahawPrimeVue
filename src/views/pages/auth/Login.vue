@@ -13,6 +13,9 @@ const store = useStore();
 
 const toast = useToast();
 
+onMounted(() => {
+  PhotoService.getImages().then((data) => (images.value = data));
+});
 const email = ref("");
 const password = ref("");
 const checked = ref(false);
@@ -112,9 +115,7 @@ const responsiveOptions = ref([
 
 const active = ref(0);
 
-onMounted(async () => {
-  PhotoService.getImages().then((data) => (images.value = data));
-  await loadGoogleApi();
+onMounted(() => {
   window.fbAsyncInit = function () {
     FB.init({
       appId: "790378076376898",
@@ -206,51 +207,6 @@ const loginWithFacebook = () => {
     { scope: "email" }
   );
 };
-
-function loadGoogleApi() {
-  const script = document.createElement("script");
-  script.src = "https://apis.google.com/js/api:client.js";
-  script.onload = () => initGoogleSignIn();
-  document.head.appendChild(script);
-}
-
-// Initialize Google Sign-in
-function initGoogleSignIn() {
-  gapi.load("auth2", function () {
-    gapi.auth2.init({
-      client_id:
-        "215113898368-i535eo8dovjh4pdud4etlol95ss99hq0.apps.googleusercontent.com", // Replace with your Client ID
-    });
-  });
-}
-
-const loginWithGoogle = () => {
-  const auth2 = gapi.auth2.getAuthInstance();
-  auth2
-    .signIn()
-    .then((googleUser) => {
-      const profile = googleUser.getBasicProfile();
-      console.log("name: ", profile.getName()); 
-      // const userData = {
-      //   user_id: profile.getId(),
-      //   name: profile.getName(),
-      //   email: profile.getEmail(),
-      //   imageUrl: profile.getImageUrl(),
-      // };
-      // store.commit("setUser", userData);
-      // router.push("/admin/counter");
-      // Optionally, save the Google profile data or create an account
-    })
-    .catch((error) => {
-      console.error("Error logging in with Google: ", error);
-      toast.add({
-        severity: "error",
-        summary: "Google Login Fail",
-        detail: "Failed to log in with Google",
-        life: 3000,
-      });
-    });
-};
 </script>
 
 <template>
@@ -272,7 +228,7 @@ const loginWithGoogle = () => {
         <template #item="slotProps">
           <div style="position: relative">
             <img
-              :src="slotProps.item.itemImageSrc"
+              :src="`src/assets/images/${slotProps.item.itemImageSrc}`"
               :alt="slotProps.item.alt"
               style="width: 100%; display: block; border-radius: 53px; max-height: 500px"
             />
@@ -361,13 +317,12 @@ const loginWithGoogle = () => {
         </div>
         <div class="justify-content-center flex">
           <Button
-            label="Log in with Google"
             outlined
+            label="Log in with Google"
             class="w-full p-3 text-xl"
             icon="pi pi-google"
             iconPos="left"
-            severity="danger"
-            @click="loginWithGoogle"
+            severity="danger "
           />
         </div>
       </div>
