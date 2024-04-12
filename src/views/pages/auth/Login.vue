@@ -228,7 +228,7 @@ const loginWithFacebook = () => {
         <template #item="slotProps">
           <div style="position: relative">
             <img
-              :src="`assets/${slotProps.item.itemImageSrc}`"
+              :src="`/assets/${slotProps.item.itemImageSrc}`"
               :alt="slotProps.item.alt"
               style="width: 100%; display: block; border-radius: 53px; max-height: 500px"
             />
