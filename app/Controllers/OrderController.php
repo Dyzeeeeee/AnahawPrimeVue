@@ -12,16 +12,42 @@ class OrderController extends ResourceController
 {
     use ResponseTrait;
 
+
     public function getAllOrders()
     {
-
         $order = new OrderModel();
-        $data = $order->select('orders.*, IFNULL(customer_id.name, "N/A") as customer_name')
+        $orders = $order->select('orders.*, IFNULL(CONCAT(customers.firstname, " ", customers.lastname), "N/A") as customer_name')
             ->join('customers', 'customers.id = orders.customer_id', 'left')
+            // ->where('session_id', $sessionId)
+            ->orderBy('id', 'DESC')
             ->findAll();
 
-        return $this->respond($data, 200);
+        $orderDetailsModel = new OrderDetailsModel();
+
+        // Add order details to each order
+        foreach ($orders as &$order) {
+            $order['details'] = $orderDetailsModel
+                ->select('order_details.*, menu.name as menu_item_name')
+                ->join('menu', 'menu.id = order_details.menu_item_id', 'left')
+                ->where('order_id', $order['id'])
+                ->findAll();
+        }
+
+        if ($orders) {
+            $response = [
+                'success' => true,
+                'orders' => $orders
+            ];
+            return $this->respond($response, 200);
+        } else {
+            $response = [
+                'success' => false,
+                'message' => 'No orders found for the session'
+            ];
+            return $this->respond($response, 404);
+        }
     }
+
 
 
     public function createNewOrder()

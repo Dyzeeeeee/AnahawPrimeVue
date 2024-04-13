@@ -46,3 +46,6 @@ $routes->get('getOrderItems/(:segment)', 'OrderDetailsController::getOrderItems/
 
 $routes->get('facebook/login', 'FacebookAuth::login');
 $routes->get('facebook/callback', 'FacebookAuth::callback');
+
+$routes->get('getAllFoodStocks', 'FoodStockController::getAllFoodStocks');
+
