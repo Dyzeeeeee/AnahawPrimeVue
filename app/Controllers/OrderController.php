@@ -16,11 +16,14 @@ class OrderController extends ResourceController
     public function getAllOrders()
     {
         $order = new OrderModel();
-        $orders = $order->select('orders.*, IFNULL(CONCAT(customers.firstname, " ", customers.lastname), "N/A") as customer_name')
+        $orders = $order->select('orders.*, IFNULL(CONCAT(customers.firstname, " ", customers.lastname), "N/A") as customer_name, IFNULL(CONCAT(accounts.firstname, " ", accounts.lastname), "N/A") as cashier_name')
             ->join('customers', 'customers.id = orders.customer_id', 'left')
+            ->join('sessions', 'sessions.id = orders.session_id', 'left')
+            ->join('accounts', 'accounts.id = sessions.cashier_id', 'left') // Joining the accounts table
             // ->where('session_id', $sessionId)
             ->orderBy('id', 'DESC')
             ->findAll();
+
 
         $orderDetailsModel = new OrderDetailsModel();
 
