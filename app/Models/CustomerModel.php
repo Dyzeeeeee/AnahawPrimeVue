@@ -12,7 +12,7 @@ class CustomerModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['firstname', 'lastname', 'email', 'phone', 'created_at', 'updated_at'];
+    protected $allowedFields    = ['firstname', 'lastname', 'email', 'phone', 'created_at', 'updated_at', 'archived_at'];
 
     protected bool $allowEmptyInserts = false;
 

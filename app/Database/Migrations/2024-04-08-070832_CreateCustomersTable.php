@@ -41,6 +41,10 @@ class CreateCustomersTable extends Migration
                 'default' => date('Y-m-d H:i:s'),
                 'on_update' => date('Y-m-d H:i:s'),
             ],
+            'archived_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->createTable('customers');
