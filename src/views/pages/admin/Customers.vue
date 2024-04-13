@@ -3,7 +3,7 @@ import { onMounted, computed, ref, watch } from "vue";
 import CustomerService2 from "@/service/CustomerService2";
 import { useToast } from "primevue/usetoast";
 
-const customers = ref();
+const customers = ref([]);
 // const expandedRows = ref([]);
 const toast = useToast();
 const newCustomerVisible = ref(false);
@@ -68,12 +68,83 @@ const toggle = (event) => {
 const selectedCustomer = ref();
 
 
-const archiveButtonText = computed(() => {
-  return selectedFilter.value.name === "Archived" ? "Unarchive" : "Archive";
-});
 
 const selectedFilter = ref({ name: "Active" });
 const filters = ref([{ name: "Active" }, { name: "Archived" }, { name: "All" }]);
+
+
+const isArchiveButtonDisabled = computed(() => {
+  return selectedFilter.value.name === "All";
+});
+
+const filteredCustomers = computed(() => {
+  switch (selectedFilter.value.name) {
+    case "Active":
+      return customers.value.filter((item) => !item.archived_at);
+    case "Archived":
+      return customers.value.filter((item) => item.archived_at);
+    case "All":
+    default:
+      return customers.value;
+  }
+});
+
+const archiveButtonLabel = computed(() => {
+  return selectedFilter.value.name === "Archived" ? "Unarchive" : "Archive";
+});
+
+const archiveButtonClickHandler = computed(() => {
+  return selectedFilter.value.name === "Archived" ? unarchiveSelected : archiveSelected;
+});
+
+const archiveSelected = async () => {
+  try {
+    for (const selectedItem of selectedCustomer.value) {
+      await CustomerService2.archiveCustomer(selectedItem.id);  // This should set `archived_at`
+      selectedItem.archived_at = new Date();  // Assume immediate effect for UI, remove if backend handles it
+    }
+    toast.add({
+      severity: "success",
+      summary: "Success",
+      detail: "Customers archived successfully",
+      life: "3000",
+    });
+    customers.value = await CustomerService2.getAllCustomers();  // Refresh from backend
+  } catch (error) {
+    console.error("Error archiving customers:", error);
+    toast.add({
+      severity: "warn",
+      summary: "Error",
+      detail: "Failed to archive customers",
+      life: "3000",
+    });
+  }
+};
+
+const unarchiveSelected = async () => {
+  try {
+    for (const selectedItem of selectedCustomer.value) {
+      await CustomerService2.unarchiveCustomer(selectedItem.id);  // This should clear `archived_at`
+      selectedItem.archived_at = null;  // Assume immediate effect for UI, remove if backend handles it
+    }
+    toast.add({
+      severity: "success",
+      summary: "Success",
+      detail: "Customers unarchived successfully",
+      life: "3000",
+    });
+    customers.value = await CustomerService2.getAllCustomers();  // Refresh from backend
+  } catch (error) {
+    console.error("Error unarchiving customers:", error);
+    toast.add({
+      severity: "warn",
+      summary: "Error",
+      detail: "Failed to unarchive customers",
+      life: "3000",
+    });
+  }
+};
+
 
 </script>
 
@@ -109,9 +180,10 @@ const filters = ref([{ name: "Active" }, { name: "Archived" }, { name: "All" }])
       <template #end>
         <div class="flex gap-2">
 
-          <Button class="p-button-help font-bold gap-2" disabled>
+          <Button class="p-button-help font-bold gap-2" @click="archiveButtonClickHandler"
+            :disabled="isArchiveButtonDisabled">
             <Icon icon="bx:archive-in" width="1.5rem" height="1.5rem" />
-            {{ archiveButtonText }}
+            {{ archiveButtonLabel }}
           </Button>
           <Button class="p-button-primary font-bold gap-2" icon="pi pi-plus" label="New Customer"
             @click="newCustomerVisible = true">
@@ -122,7 +194,7 @@ const filters = ref([{ name: "Active" }, { name: "Archived" }, { name: "All" }])
     <template v-if="viewMode === 'list'">
       <div style="height: 65vh"
         class="border-2 border-dashed surface-border flex flex-wrap gap-3 overflow-y-scroll p-2">
-        <DataTable :value="customers" dataKey="id" class="w-full" tableStyle="min-width: 60rem" selectionMode="multiple"
+        <DataTable :value="filteredCustomers" dataKey="id" class="w-full" tableStyle="min-width: 60rem" selectionMode="multiple"
           v-model:selection="selectedCustomer" stripedRows>
 
           <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>

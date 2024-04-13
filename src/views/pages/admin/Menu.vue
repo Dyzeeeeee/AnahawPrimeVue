@@ -231,7 +231,6 @@ onMounted(async () => {
             :options="filters"
             optionLabel="name"
             class="w-10rem"
-            placeholder="Category"
           />
         </div>
       </template>
