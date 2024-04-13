@@ -7,6 +7,6 @@ import Menu1 from "@/components/WebsitePage/Menu.vue";
 <template>
   <Hero />
   <RoomOffers />
-  <!-- <Menu1 /> -->
+  <Menu1 />
 </template>
 <style scoped></style>

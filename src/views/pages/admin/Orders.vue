@@ -127,6 +127,8 @@ const filters = ref([{ name: "Active" }, { name: "Archived" }, { name: "All" }])
         </Column>
         <Column field="customer_name" header="Customer">
         </Column>
+        <Column field="cashier_name" header="Cashier">
+        </Column>
         <!-- <Column field="cashier_id" header="Cashier"></Column> -->
         <Column field="order_date" header="Order Date">
 
@@ -165,11 +167,10 @@ const filters = ref([{ name: "Active" }, { name: "Archived" }, { name: "All" }])
           <div class="px-5 mx-5">
             <!-- <h5 class="text-400">Orders {{ slotProps.data.id }} Details</h5> -->
             <DataTable :value="slotProps.data.details" selectionMode="multiple">
-              <Column field="id" header="Id" sortable></Column>
-              <Column field="menu_item_id" header="menu_item_id" sortable></Column>
-              <Column field="quantity" header="quantity" sortable>
+              <Column field="menu_item_name" header="menu_item_id" sortable></Column>
+              <Column field="quantity" header="Quantity" sortable>
               </Column>
-              <Column field="subtotal" header="subtotal" sortable></Column>
+              <Column field="subtotal" header="Subtotal" sortable></Column>
             </DataTable>
           </div>
         </template>
