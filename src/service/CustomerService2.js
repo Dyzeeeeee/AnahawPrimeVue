@@ -19,6 +19,24 @@ const SessionService = {
             throw error;
         }
     },
+    async archiveCustomer(customerId) {
+        try {
+            const response = await ApiService.put(`archiveCustomer/${customerId}`);
+            return response.data;
+        } catch (error) {
+            console.error('Error archiving menu item:', error);
+            throw error;
+        }
+    },
+    async unarchiveCustomer(customerId) {
+        try {
+            const response = await ApiService.put(`unarchiveCustomer/${customerId}`);
+            return response.data;
+        } catch (error) {
+            console.error('Error archiving menu item:', error);
+            throw error;
+        }
+    }
 };
 
 export default SessionService;
