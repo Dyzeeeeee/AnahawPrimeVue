@@ -36,6 +36,7 @@ $routes->get('getAllOrders', 'OrderController::getAllOrders');
 $routes->post('createNewOrder', 'OrderController::createNewOrder');
 $routes->put('addCustomerToOrder/(:num)', 'OrderController::addCustomerToOrder/$1');
 $routes->put('changeService/(:num)', 'OrderController::changeService/$1');
+$routes->put('addCustomerPayment/(:num)', 'OrderController::addCustomerPayment/$1');
 $routes->get('getOrderDetails/(:segment)', 'OrderController::getOrderDetails/$1');
 $routes->get('getAllSessionOrders/(:segment)', 'OrderController::getAllSessionOrders/$1');
 
@@ -43,3 +44,5 @@ $routes->post('addMenuItemToOrder', 'OrderDetailsController::addMenuItemToOrder'
 $routes->get('getOrderItems/(:segment)', 'OrderDetailsController::getOrderItems/$1');
 
 
+$routes->get('facebook/login', 'FacebookAuth::login');
+$routes->get('facebook/callback', 'FacebookAuth::callback');
