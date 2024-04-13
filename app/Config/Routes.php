@@ -25,6 +25,8 @@ $routes->post('addSession', 'SessionController::addSession');
 
 $routes->get('getAllCustomers', 'CustomerController::getAllCustomers');
 $routes->post('addCustomer', 'CustomerController::addCustomer');
+$routes->put('archiveCustomer/(:num)', 'CustomerController::archiveCustomer/$1');
+$routes->put('unarchiveCustomer/(:num)', 'CustomerController::unarchiveCustomer/$1');
 
 
 $routes->post('createAccount', 'AccountController::createAccount');
