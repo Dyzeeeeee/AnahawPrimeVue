@@ -11,6 +11,8 @@ const store = useStore();
 const restoToDoList = ref(false);
 const resortToDoList = ref(false);
 const invToDoList = ref(false);
+const loginToDoList = ref(false);
+const websiteToDoList = ref(false);
 const active = ref(0);
 
 const onHelperClick = () => {
@@ -106,6 +108,22 @@ onMounted(() => {
       class="py-4 align-items-center justify-content-between border-bottom-1 surface-border"
     >
       <Button
+        label="Log in To Do List"
+        type="button"
+        class="w-full mt-2"
+        icon="pi pi-list"
+        @click="loginToDoList = true"
+        severity="help"
+      ></Button>
+      <Button
+        label="Website To Do List"
+        type="button"
+        class="w-full mt-2"
+        icon="pi pi-list"
+        @click="websiteToDoList = true"
+        severity="help"
+      ></Button>
+      <Button
         label="Restaurant To Do List"
         type="button"
         class="w-full mt-2"
@@ -131,6 +149,66 @@ onMounted(() => {
       ></Button>
     </section>
   </Sidebar>
+
+  <Dialog
+    v-model:visible="websiteToDoList"
+    modal
+    header="Website To Do List"
+    :style="{ width: '35rem' }"
+  >
+    <div class="flex mb-2 gap-2 justify-content-end">
+      <Button
+        @click="active = 0"
+        rounded
+        label="1"
+        class="w-2rem h-2rem p-0"
+        :outlined="active !== 0"
+      />
+    </div>
+
+    <TabView v-model:activeIndex="active">
+      <TabPanel header="Login">
+        <ul>
+          <li>Yung pics ay mano manohin instead na service tas real pics</li>
+          <li>clickable Logo to redirect to website</li>
+          <li>Register disable button yung steppers</li>
+          <li>Register yung num ay strict num dapat</li>
+          <li>Register yung email ay valid dapat kaso ang hirap</li>
+          <li>Terms and Privacy Policy</li>
+        </ul>
+      </TabPanel>
+    </TabView>
+  </Dialog>
+
+  <Dialog
+    v-model:visible="loginToDoList"
+    modal
+    header="Log in To Do List"
+    :style="{ width: '35rem' }"
+  >
+    <div class="flex mb-2 gap-2 justify-content-end">
+      <Button
+        @click="active = 0"
+        rounded
+        label="1"
+        class="w-2rem h-2rem p-0"
+        :outlined="active !== 0"
+      />
+    </div>
+
+    <TabView v-model:activeIndex="active">
+      <TabPanel header="Login">
+        <ul>
+          <li>Yung pics ay mano manohin instead na service tas real pics</li>
+          <li>clickable Logo to redirect to website</li>
+          <li>Register disable button yung steppers</li>
+          <li>Register yung num ay strict num dapat</li>
+          <li>Register yung email ay valid dapat kaso ang hirap</li>
+          <li>Terms and Privacy Policy</li>
+        </ul>
+      </TabPanel>
+    </TabView>
+  </Dialog>
 
   <Dialog
     v-model:visible="restoToDoList"
@@ -327,7 +405,7 @@ onMounted(() => {
   <Dialog
     v-model:visible="invToDoList"
     modal
-    header="Resort To Do List"
+    header="Inventory To Do List"
     :style="{ width: '35rem' }"
   >
     <div class="flex mb-2 gap-2 justify-content-end">

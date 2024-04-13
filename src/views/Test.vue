@@ -1,47 +1,42 @@
-<template>
-  <div class="facebook-login">
-    <button @click="loginWithFacebook">Login with Facebook</button>
-  </div>
-</template>
+<script setup>
+import { googleSdkLoaded } from "vue3-google-login";
 
-<script>
-import axios from "axios";
+const login = () => {
+  googleSdkLoaded((google) => {
+    const tokenClient = google.accounts.oauth2.initTokenClient({
+      client_id:
+        "215113898368-i535eo8dovjh4pdud4etlol95ss99hq0.apps.googleusercontent.com",
+      scope: "email profile openid",
+      callback: (response) => {
+        if (response.error !== undefined) {
+          console.error("Failed to get the token", response);
+          return;
+        }
+        console.log("Access Token:", response.access_token);
+        // Optionally, get user information using the access token
+        fetchUserInfo(response.access_token);
+      },
+    });
+    tokenClient.requestAccessToken();
+  });
+};
 
-export default {
-
-  methods: {
-    loginWithFacebook() {
-      // Use Axios to send a request to your server
-      axios
-        .get("http://capstone.test/AnahawBE/public/facebook/login")
-        .then((response) => {
-          // Assuming the server responds with the URL and user name
-          if (response.data && response.data.url) {
-            window.location.href = response.data.url;
-            console.log("User name:", response.data.name);
-          }
-        })
-        .catch((error) => {
-          console.error("Error during Facebook login:", error);
-          alert("Failed to initiate Facebook login.");
-        });
-    },
-  },
+const fetchUserInfo = (accessToken) => {
+  fetch("https://www.googleapis.com/oauth2/v2/userinfo", {
+    headers: new Headers({
+      Authorization: `Bearer ${accessToken}`,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("User Info:", data.name);
+    })
+    .catch((error) => {
+      console.error("Error fetching user information:", error);
+    });
 };
 </script>
 
-<style scoped>
-.facebook-login button {
-  background-color: #4267b2;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.facebook-login button:hover {
-  background-color: #365899;
-}
-</style>
+<template>
+  <Button @click="login">Login Using Google</Button>
+</template>

@@ -8,6 +8,107 @@ import { PhotoService } from "@/service/PhotoService";
 import AccountService from "@/service/AccountService";
 import { useToast } from "primevue/usetoast";
 import { useRouter } from "vue-router";
+import { decodeCredential } from "vue3-google-login";
+import { googleSdkLoaded } from "vue3-google-login";
+
+const user = ref(null);
+
+const loginWithGoogle = () => {
+  googleSdkLoaded((google) => {
+    const tokenClient = google.accounts.oauth2.initTokenClient({
+      client_id:
+        "215113898368-i535eo8dovjh4pdud4etlol95ss99hq0.apps.googleusercontent.com",
+      scope: "email profile openid",
+      callback: (response) => {
+        if (response.error !== undefined) {
+          console.error("Failed to get the token", response);
+          return;
+        }
+        console.log("Access Token:", response.access_token);
+        // Optionally, get user information using the access token
+        fetchUserInfo(response.access_token);
+      },
+    });
+    tokenClient.requestAccessToken();
+  });
+};
+
+const fetchUserInfo = (accessToken) => {
+  fetch("https://www.googleapis.com/oauth2/v2/userinfo", {
+    headers: new Headers({
+      Authorization: `Bearer ${accessToken}`,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("User Info:", data);
+      store.commit("setUser", data);
+      router.push("/admin/counter");
+      newAccount.value = {
+        firstname: data.given_name,
+        lastname: data.family_name,
+        phone: "None provided",
+        email: data.email,
+        password: "default",
+        role: "customer",
+      };
+      email.value = data.email;
+      password.value = "default";
+      signUpAccount()
+        .then(() => {
+          // SignUp was successful, no action needed
+          login();
+        })
+        .catch((error) => {
+          // Handle SignUp error
+          console.error("SignUp failed:", error);
+        })
+        .finally(() => {
+          // Log the user in regardless of signUpAccount result
+          login();
+        });
+    })
+    .catch((error) => {
+      console.error("Error fetching user information:", error);
+    });
+};
+
+// const callback = (response) => {
+//   const userData = decodeCredential(response.credential);
+//   console.log("Handle the userData", userData);
+
+//   store.commit("setUser", userData);
+
+//   // Redirect the user to another page
+//   // console.log("fname", userData.family_name);
+//   router.push("/admin/counter");
+//   newAccount.value = {
+//     firstname: userData.given_name,
+//     lastname: userData.family_name,
+//     phone: "None provided",
+//     email: userData.email,
+//     password: "default",
+//     role: "customer",
+//   };
+//   email.value = userData.email;
+//   password.value = "default";
+//   signUpAccount()
+//     .then(() => {
+//       // SignUp was successful, no action needed
+//       login();
+//     })
+//     .catch((error) => {
+//       // Handle SignUp error
+//       console.error("SignUp failed:", error);
+//     })
+//     .finally(() => {
+//       // Log the user in regardless of signUpAccount result
+//       login();
+//     });
+
+//   console.log(userData.picture);
+// };
+
 const router = useRouter();
 const store = useStore();
 
@@ -228,7 +329,7 @@ const loginWithFacebook = () => {
         <template #item="slotProps">
           <div style="position: relative">
             <img
-              :src="`/assets/${slotProps.item.itemImageSrc}`"
+              :src="slotProps.item.itemImageSrc"
               :alt="slotProps.item.alt"
               style="width: 100%; display: block; border-radius: 53px; max-height: 500px"
             />
@@ -315,14 +416,16 @@ const loginWithFacebook = () => {
             @click="loginWithFacebook"
           />
         </div>
-        <div class="justify-content-center flex">
+        <div class="justify-content-center flex w-full">
+          <!-- <GoogleLogin :callback="callback" style="width: 100%" /> -->
           <Button
-            outlined
             label="Log in with Google"
+            outlined
             class="w-full p-3 text-xl"
             icon="pi pi-google"
+            severity="danger"
             iconPos="left"
-            severity="danger "
+            @click="loginWithGoogle"
           />
         </div>
       </div>
@@ -683,6 +786,11 @@ const loginWithFacebook = () => {
 </template>
 
 <style scoped>
+.google-login-button {
+  max-width: 100%; /* Ensures the button does not exceed the container width */
+  width: 100%;
+}
+
 .pi-eye {
   transform: scale(1.6);
   margin-right: 1rem;

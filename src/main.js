@@ -1,5 +1,8 @@
 import { createApp } from 'vue';
 import App from './App.vue';
+import vue3GoogleLogin from 'vue3-google-login'
+
+
 import router from './router';
 import { Icon } from '@iconify/vue';
 import store from './store';
@@ -227,5 +230,7 @@ app.component('TreeSelect', TreeSelect);
 app.component('TreeTable', TreeTable);
 app.component('TriStateCheckbox', TriStateCheckbox);
 app.component('VirtualScroller', VirtualScroller);
-
+app.use(vue3GoogleLogin, {
+    clientId: '215113898368-i535eo8dovjh4pdud4etlol95ss99hq0.apps.googleusercontent.com'
+  })
 app.mount('#app');
