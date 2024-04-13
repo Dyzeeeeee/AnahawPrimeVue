@@ -38,14 +38,7 @@ const filteredMenuItems = computed(() => {
   }
 });
 
-const archiveButtonLabel = computed(() => {
-  return selectedFilter.value.name === "Archived" ? "Unarchive" : "Archive";
-});
-
-const archiveButtonClickHandler = computed(() => {
-  return selectedFilter.value.name === "Archived" ? unarchiveSelected : archiveSelected;
-});
-
+  
 const viewMode = ref("list");
 const changeViewMode = () => {
   viewMode.value = viewMode.value === "grid" ? "list" : "grid";
@@ -221,66 +214,38 @@ onMounted(async () => {
             </InputIcon>
             <InputText placeholder="Search" class="w-15rem" />
           </IconField>
-          <Button
-            @click="changeViewMode"
-            :icon="viewMode === 'grid' ? 'pi pi-table' : 'pi pi-list'"
-          >
+          <Button @click="changeViewMode" :icon="viewMode === 'grid' ? 'pi pi-table' : 'pi pi-list'">
           </Button>
-          <Dropdown
-            v-model="selectedFilter"
-            :options="filters"
-            optionLabel="name"
-            class="w-10rem"
-            placeholder="Category"
-          />
+          <Dropdown v-model="selectedFilter" :options="filters" optionLabel="name" class="w-10rem"
+            placeholder="Category" />
         </div>
       </template>
       <template #center> </template>
       <template #end>
         <div class="flex gap-2">
-          <Button
-            class="p-button-help font-bold gap-2"
-            @click="archiveButtonClickHandler"
-            :disabled="isArchiveButtonDisabled"
-          >
+          <Button class="p-button-help font-bold gap-2" @click="archiveButtonClickHandler"
+            :disabled="isArchiveButtonDisabled">
             <Icon icon="bx:archive-in" width="1.5rem" height="1.5rem" />
             {{ archiveButtonLabel }}
           </Button>
 
-          <Button
-            class="p-button-primary font-bold gap-2"
-            icon="pi pi-plus"
-            label="New Menu Item"
-            @click="newMenuVisible = true"
-          >
+          <Button class="p-button-primary font-bold gap-2" icon="pi pi-plus" label="New Menu Item"
+            @click="newMenuVisible = true">
           </Button>
         </div>
       </template>
     </Toolbar>
     <template v-if="viewMode === 'list'">
-      <div
-        style="height: 65vh"
-        class="border-2 border-dashed surface-border flex flex-wrap gap-3 overflow-y-scroll p-2"
-      >
-        <DataTable
-          :value="filteredMenuItems"
-          dataKey="id"
-          class="w-full"
-          tableStyle="min-width: 60rem"
-          selectionMode="multiple"
-          v-model:selection="selectedMenuItem"
-          stripedRows
-        >
+      <div style="height: 65vh"
+        class="border-2 border-dashed surface-border flex flex-wrap gap-3 overflow-y-scroll p-2">
+        <DataTable :value="filteredMenuItems" dataKey="id" class="w-full" tableStyle="min-width: 60rem"
+          selectionMode="multiple" v-model:selection="selectedMenuItem" stripedRows>
           <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
           <!-- <Column expander style="width: 5rem" /> -->
-          <Column field="id" header="id"> </Column>
+          <!-- <Column field="id" header="id"> </Column> -->
           <Column header="Image">
             <template #body="slotProps">
-              <img
-                src="@/assets/images/sisig.jpg"
-                :alt="slotProps.data.image"
-                class="w-6rem border-round"
-              />
+              <img src="@/assets/images/sisig.jpg" :alt="slotProps.data.image" class="w-6rem border-round" />
             </template>
           </Column>
           <Column field="name" header="Name"> </Column>
@@ -290,15 +255,8 @@ onMounted(async () => {
 
           <Column>
             <template #body="slotProps">
-              <Button
-                icon="pi pi-ellipsis-v"
-                text
-                plain
-                rounded
-                @click="toggle"
-                aria-haspopup="true"
-                aria-controls="overlay_menu"
-              ></Button>
+              <Button icon="pi pi-ellipsis-v" text plain rounded @click="toggle" aria-haspopup="true"
+                aria-controls="overlay_menu"></Button>
               <Menu ref="menu" id="overlay_menu" :model="items" :popup="true" />
             </template>
           </Column>
@@ -317,25 +275,16 @@ onMounted(async () => {
       </div>
     </template>
     <template v-if="viewMode === 'grid'">
-      <div
-        style="height: 65vh"
-        class="border-2 border-dashed surface-border flex flex-wrap gap-3 overflow-y-scroll p-2"
-      >
-        <div
-          class="text-center align-items-center flex-1 flex justify-content-center text-6xl font-bold"
-        >
+      <div style="height: 65vh"
+        class="border-2 border-dashed surface-border flex flex-wrap gap-3 overflow-y-scroll p-2">
+        <div class="text-center align-items-center flex-1 flex justify-content-center text-6xl font-bold">
           Katamad saka na 'to hahaha 😘
         </div>
       </div>
     </template>
   </div>
 
-  <Dialog
-    v-model:visible="newMenuVisible"
-    modal
-    header="New Menu Item"
-    :style="{ width: '40rem' }"
-  >
+  <Dialog v-model:visible="newMenuVisible" modal header="New Menu Item" :style="{ width: '40rem' }">
     <div class="flex-row align-items-center gap-3 mb-3 mt-4 w-full">
       <FloatLabel>
         <InputText v-model="newMenuItem.name" class="w-full" />
@@ -355,34 +304,19 @@ onMounted(async () => {
       </FloatLabel>
       <InputGroup>
         <FloatLabel class="w-full">
-          <Dropdown
-            v-model="selectedCategory"
-            :options="categories"
-            optionLabel="name"
-            class="w-full"
-          />
+          <Dropdown v-model="selectedCategory" :options="categories" optionLabel="name" class="w-full" />
           <label for="dd-city">Category</label>
         </FloatLabel>
         <Button size="sm" icon="pi pi-plus" @click="newCategoryVisible = true"></Button>
       </InputGroup>
     </div>
     <div class="flex justify-content-end gap-2">
-      <Button
-        type="button"
-        label="Cancel"
-        severity="secondary"
-        @click="newMenuVisible = false"
-      ></Button>
+      <Button type="button" label="Cancel" severity="secondary" @click="newMenuVisible = false"></Button>
       <Button type="button" label="Add" @click="addMenuItem"></Button>
     </div>
   </Dialog>
 
-  <Dialog
-    v-model:visible="newCategoryVisible"
-    modal
-    header="New Category"
-    :style="{ width: '30rem' }"
-  >
+  <Dialog v-model:visible="newCategoryVisible" modal header="New Category" :style="{ width: '30rem' }">
     <div class="flex-row align-items-center gap-3 mb-3 mt-4 w-full">
       <FloatLabel>
         <InputText v-model="newCategory.name" class="w-full" />
@@ -390,12 +324,7 @@ onMounted(async () => {
       </FloatLabel>
     </div>
     <div class="flex justify-content-end gap-2">
-      <Button
-        type="button"
-        label="Cancel"
-        severity="secondary"
-        @click="newCategoryVisible = false"
-      ></Button>
+      <Button type="button" label="Cancel" severity="secondary" @click="newCategoryVisible = false"></Button>
       <Button type="button" label="Add" @click="addCategory"></Button>
     </div>
   </Dialog>

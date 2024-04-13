@@ -316,77 +316,41 @@ const loginWithFacebook = () => {
     class="surface-ground flex align-items-center justify-content-evenly min-h-screen min-w-screen overflow-hidden"
   >
     <div class="flex flex-column align-items-center justify-content-end">
-      <!-- <div class="w-full surface-card p-4" style="border-radius: 53px; border-top-right-radius: 53px;"> -->
-      <Galleria
-        :value="images"
-        :responsiveOptions="responsiveOptions"
-        :numVisible="5"
-        :circular="true"
-        containerStyle="max-width: 640px;  border-radius: 53px; "
-        :showThumbnails="false"
-        :autoPlay="true"
-      >
-        <template #item="slotProps">
-          <div style="position: relative">
-            <img
-              :src="slotProps.item.itemImageSrc"
-              :alt="slotProps.item.alt"
-              style="width: 100%; display: block; border-radius: 53px; max-height: 500px"
-            />
-            <div
-              class="px-8 pb-4"
-              style="position: absolute; bottom: 0; left: 0; right: 0; color: white"
-            >
-              <h2 style="background-color: black">{{ slotProps.item.title }}</h2>
-              <p style="background-color: grey">{{ slotProps.item.alt }}</p>
+      <div class="galleria-container" v-if="responsiveOptions">
+
+        <!-- <div class="w-full surface-card p-4" style="border-radius: 53px; border-top-right-radius: 53px;"> -->
+        <Galleria :value="images" :responsiveOptions="responsiveOptions" :numVisible="5" :circular="true"
+          containerStyle="max-width: 640px;  border-radius: 53px; " :showThumbnails="false" :autoPlay="true">
+          <template #item="slotProps">
+            <div style="position: relative">
+              <img :src="slotProps.item.itemImageSrc" :alt="slotProps.item.alt"
+                style="width: 100%; display: block; border-radius: 53px; max-height: 500px" />
+              <div class="px-8 pb-4" style="position: absolute; bottom: 0; left: 0; right: 0; color: white">
+                <h2 style="background-color: black">{{ slotProps.item.title }}</h2>
+                <p style="background-color: grey">{{ slotProps.item.alt }}</p>
+              </div>
             </div>
-          </div>
-        </template>
+          </template>
 
-        <template #thumbnail="slotProps">
-          <img
-            :src="slotProps.item.thumbnailImageSrc"
-            :alt="slotProps.item.alt"
-            style="display: block"
-          />
-        </template>
-      </Galleria>
-
+          <template #thumbnail="slotProps">
+            <img :src="slotProps.item.thumbnailImageSrc" :alt="slotProps.item.alt" style="display: block" />
+          </template>
+        </Galleria>
+      </div>
       <!-- </div> -->
     </div>
 
     <div class="flex flex-column align-items-center">
-      <div
-        class="w-full surface-card pt-5 pb-5 px-5 sm:px-8"
-        style="border-top-left-radius: 53px; border-top-right-radius: 53px"
-      >
+      <div class="w-full surface-card pt-5 pb-5 px-5 sm:px-8"
+        style="border-top-left-radius: 53px; border-top-right-radius: 53px">
         <div class="pb-4 justify-content-center flex">
-          <img
-            src="@/assets/images/logo.png"
-            alt="Anahaw logo"
-            class=""
-            style="height: 70px"
-          />
+          <img src="@/assets/images/logo.png" alt="Anahaw logo" class="" style="height: 70px" />
         </div>
         <div>
-          <InputText
-            id="email1"
-            type="text"
-            placeholder="Email or phone"
-            class="w-full mb-4"
-            style="padding: 1rem"
-            v-model="email"
-          />
-          <Password
-            :feedback="false"
-            id="password1"
-            v-model="password"
-            placeholder="Password"
-            :toggleMask="true"
-            class="w-full mb-3"
-            inputClass="w-full"
-            :inputStyle="{ padding: '1rem' }"
-          >
+          <InputText id="email1" type="text" placeholder="Email or phone" class="w-full mb-4" style="padding: 1rem"
+            v-model="email" />
+          <Password :feedback="false" id="password1" v-model="password" placeholder="Password" :toggleMask="true"
+            class="w-full mb-3" inputClass="w-full" :inputStyle="{ padding: '1rem' }">
           </Password>
 
           <div class="flex align-items-center justify-content-between mb-5 gap-5">
@@ -394,11 +358,9 @@ const loginWithFacebook = () => {
               <Checkbox v-model="checked" id="rememberme1" binary class="mr-2"></Checkbox>
               <label for="rememberme1">Remember me</label>
             </div>
-            <a
-              class="font-medium no-underline ml-2 text-right cursor-pointer"
-              style="color: var(--primary-color)"
-              >Forgot password?</a
-            >
+            <a class="font-medium no-underline ml-2 text-right cursor-pointer"
+              style="color: var(--primary-color)">Forgot
+              password?</a>
           </div>
           <Button label="Log in" class="w-full p-3 text-xl" @click="login"></Button>
         </div>
@@ -406,378 +368,206 @@ const loginWithFacebook = () => {
           <b>OR</b>
         </Divider>
         <div class="justify-content-center flex mb-3">
-          <Button
-            label="Log in with Facebook"
-            outlined
-            class="w-full p-3 text-xl"
-            icon="pi pi-facebook"
-            severity="info"
-            iconPos="left"
-            @click="loginWithFacebook"
-          />
+          <Button label="Log in with Facebook" outlined class="w-full p-3 text-xl" icon="pi pi-facebook" severity="info"
+            iconPos="left" @click="loginWithFacebook" />
         </div>
         <div class="justify-content-center flex w-full">
           <!-- <GoogleLogin :callback="callback" style="width: 100%" /> -->
-          <Button
-            label="Log in with Google"
-            outlined
-            class="w-full p-3 text-xl"
-            icon="pi pi-google"
-            severity="danger"
-            iconPos="left"
-            @click="loginWithGoogle"
-          />
+          <Button label="Log in with Google" outlined class="w-full p-3 text-xl" icon="pi pi-google" severity="danger"
+            iconPos="left" @click="loginWithGoogle" />
         </div>
       </div>
-      <div
-        class="w-full surface-card py-4 px-4 sm:px-8 mt-3"
-        style="border-bottom-left-radius: 53px; border-bottom-right-radius: 53px"
-      >
+      <div class="w-full surface-card py-4 px-4 sm:px-8 mt-3"
+        style="border-bottom-left-radius: 53px; border-bottom-right-radius: 53px">
         <div class="justify-content-center align-items-center flex text-lg">
           Don't have an account yet?
           <Button link class="text-primary p-0 pl-2" @click="signUpVisible = true">
-            Sign up</Button
-          >
+            Sign up</Button>
         </div>
       </div>
     </div>
   </div>
 
-  <Dialog
-    v-model:visible="signUpVisible"
-    modal
-    header="Create your account"
-    :style="{ width: '40rem' }"
-    :pt="{
-      root: 'border-none',
-      mask: {
-        style: 'backdrop-filter: blur(10px)',
-      },
-    }"
-  >
+  <Dialog v-model:visible="signUpVisible"  modal header="Create your account" :style="{ width: '40rem' }" :pt="{
+        root: 'border-none',
+        mask: {
+          style: 'backdrop-filter: blur(10px)',
+        },
+      }">
     <Stepper v-model:activeStep="active">
       <StepperPanel>
         <template #header="{ index, clickCallback }">
-          <button
-            class="bg-transparent border-none inline-flex flex-column gap-2"
-            @click="clickCallback"
-          >
-            <span
-              :class="[
-                'border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center',
-                {
-                  'bg-primary border-primary': index <= active,
-                  'surface-border': index > active,
-                },
-              ]"
-            >
+          <button class="bg-transparent border-none inline-flex flex-column gap-2" @click="clickCallback">
+            <span :class="[
+        'border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center',
+        {
+          'bg-primary border-primary': index <= active,
+          'surface-border': index > active,
+        },
+      ]">
               <i class="pi pi-user" />
             </span>
           </button>
         </template>
         <template #content="{ nextCallback }">
-          <div
-            class="flex flex-column gap-2 mx-auto"
-            style="min-height: 16rem; max-width: 100%"
-          >
+          <div class="flex flex-column gap-2 mx-auto" style="min-height: 16rem; max-width: 100%">
             <div class="text-center mt-0 text-xl font-semibold mb-3">
               What is your name?
             </div>
             <div class="flex gap-2">
               <div class="field p-fluid flex-1">
-                <InputText
-                  id="input"
-                  v-model="newAccount.firstname"
-                  type="text"
-                  placeholder="First Name"
-                />
+                <InputText id="input" v-model="newAccount.firstname" type="text" placeholder="First Name" />
               </div>
               <div class="field p-fluid flex-1">
-                <InputText
-                  id="input"
-                  v-model="newAccount.lastname"
-                  type="text"
-                  placeholder="Last Name"
-                />
+                <InputText id="input" v-model="newAccount.lastname" type="text" placeholder="Last Name" />
               </div>
             </div>
           </div>
           <div class="flex pt-4 justify-content-end">
-            <Button
-              label="Next"
-              icon="pi pi-arrow-right"
-              iconPos="right"
-              :disabled="isNextDisabled"
-              @click="nextCallback"
-            />
+            <Button label="Next" icon="pi pi-arrow-right" iconPos="right" :disabled="isNextDisabled"
+              @click="nextCallback" />
           </div>
         </template>
       </StepperPanel>
       <StepperPanel>
         <template #header="{ index, clickCallback }">
-          <button
-            class="bg-transparent border-none inline-flex flex-column gap-2"
-            @click="clickCallback"
-          >
-            <span
-              :class="[
-                'border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center',
-                {
-                  'bg-primary border-primary': index <= active,
-                  'surface-border': index > active,
-                },
-              ]"
-            >
+          <button class="bg-transparent border-none inline-flex flex-column gap-2" @click="clickCallback">
+            <span :class="[
+        'border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center',
+        {
+          'bg-primary border-primary': index <= active,
+          'surface-border': index > active,
+        },
+      ]">
               <i class="pi pi-envelope" />
             </span>
           </button>
         </template>
         <template #content="{ prevCallback, nextCallback }">
-          <div
-            class="flex flex-column gap-2 mx-auto"
-            style="min-height: 16rem; max-width: 100%"
-          >
+          <div class="flex flex-column gap-2 mx-auto" style="min-height: 16rem; max-width: 100%">
             <div class="text-center mt-0 text-xl font-semibold mb-3">
               Enter your email address
             </div>
             <div class="flex gap-2">
               <div class="field p-fluid flex-1">
-                <InputText
-                  id="input"
-                  v-model="newAccount.firstname"
-                  type="text"
-                  placeholder="First Name"
-                  disabled
-                />
+                <InputText id="input" v-model="newAccount.firstname" type="text" placeholder="First Name" disabled />
               </div>
               <div class="field p-fluid flex-1">
-                <InputText
-                  id="input"
-                  v-model="newAccount.lastname"
-                  type="text"
-                  placeholder="Last Name"
-                  disabled
-                />
+                <InputText id="input" v-model="newAccount.lastname" type="text" placeholder="Last Name" disabled />
               </div>
             </div>
             <div class="flex gap-2">
               <div class="field p-fluid flex-1">
-                <InputText
-                  id="input"
-                  v-model="newAccount.email"
-                  type="text"
-                  placeholder="Email"
-                />
+                <InputText id="input" v-model="newAccount.email" type="text" placeholder="Email" />
               </div>
             </div>
           </div>
           <div class="flex pt-4 justify-content-between">
-            <Button
-              label="Back"
-              severity="secondary"
-              icon="pi pi-arrow-left"
-              @click="prevCallback"
-            />
-            <Button
-              label="Next"
-              icon="pi pi-arrow-right"
-              iconPos="right"
-              :disabled="isNextDisabled"
-              @click="nextCallback"
-            />
+            <Button label="Back" severity="secondary" icon="pi pi-arrow-left" @click="prevCallback" />
+            <Button label="Next" icon="pi pi-arrow-right" iconPos="right" :disabled="isNextDisabled"
+              @click="nextCallback" />
           </div>
         </template>
       </StepperPanel>
       <StepperPanel>
         <template #header="{ index, clickCallback }">
-          <button
-            class="bg-transparent border-none inline-flex flex-column gap-2"
-            @click="clickCallback"
-          >
-            <span
-              :class="[
-                'border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center',
-                {
-                  'bg-primary border-primary': index <= active,
-                  'surface-border': index > active,
-                },
-              ]"
-            >
+          <button class="bg-transparent border-none inline-flex flex-column gap-2" @click="clickCallback">
+            <span :class="[
+        'border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center',
+        {
+          'bg-primary border-primary': index <= active,
+          'surface-border': index > active,
+        },
+      ]">
               <i class="pi pi-phone" />
             </span>
           </button>
         </template>
         <template #content="{ prevCallback, nextCallback }">
-          <div
-            class="flex flex-column gap-2 mx-auto"
-            style="min-height: 16rem; max-width: 100%"
-          >
+          <div class="flex flex-column gap-2 mx-auto" style="min-height: 16rem; max-width: 100%">
             <div class="text-center mt-0 text-xl font-semibold mb-3">
               Enter your phone number
             </div>
             <div class="flex gap-2">
               <div class="field p-fluid flex-1">
-                <InputText
-                  id="input"
-                  v-model="newAccount.firstname"
-                  type="text"
-                  placeholder="First Name"
-                  disabled
-                />
+                <InputText id="input" v-model="newAccount.firstname" type="text" placeholder="First Name" disabled />
               </div>
               <div class="field p-fluid flex-1">
-                <InputText
-                  id="input"
-                  v-model="newAccount.lastname"
-                  type="text"
-                  placeholder="Last Name"
-                  disabled
-                />
+                <InputText id="input" v-model="newAccount.lastname" type="text" placeholder="Last Name" disabled />
               </div>
             </div>
             <div class="flex gap-2">
               <div class="field p-fluid flex-1">
-                <InputText
-                  id="input"
-                  v-model="newAccount.email"
-                  type="text"
-                  placeholder="Email"
-                  disabled
-                />
+                <InputText id="input" v-model="newAccount.email" type="text" placeholder="Email" disabled />
               </div>
             </div>
             <div class="flex gap-2">
               <div class="field p-fluid flex-1">
-                <InputText
-                  id="input"
-                  v-model="newAccount.phone"
-                  type="text"
-                  placeholder="Phone number"
-                />
+                <InputText id="input" v-model="newAccount.phone" type="text" placeholder="Phone number" />
               </div>
             </div>
           </div>
           <div class="flex pt-4 justify-content-between">
-            <Button
-              label="Back"
-              severity="secondary"
-              icon="pi pi-arrow-left"
-              @click="prevCallback"
-            />
-            <Button
-              label="Next"
-              icon="pi pi-arrow-right"
-              iconPos="right"
-              :disabled="isNextDisabled"
-              @click="nextCallback"
-            />
+            <Button label="Back" severity="secondary" icon="pi pi-arrow-left" @click="prevCallback" />
+            <Button label="Next" icon="pi pi-arrow-right" iconPos="right" :disabled="isNextDisabled"
+              @click="nextCallback" />
           </div>
         </template>
       </StepperPanel>
       <StepperPanel>
         <template #header="{ index, clickCallback }">
-          <button
-            class="bg-transparent border-none inline-flex flex-column gap-2"
-            @click="clickCallback"
-          >
-            <span
-              :class="[
-                'border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center',
-                {
-                  'bg-primary border-primary': index <= active,
-                  'surface-border': index > active,
-                },
-              ]"
-            >
+          <button class="bg-transparent border-none inline-flex flex-column gap-2" @click="clickCallback">
+            <span :class="[
+        'border-round border-2 w-3rem h-3rem inline-flex align-items-center justify-content-center',
+        {
+          'bg-primary border-primary': index <= active,
+          'surface-border': index > active,
+        },
+      ]">
               <i class="pi pi-lock" />
             </span>
           </button>
         </template>
         <template #content="{ prevCallback, nextCallback }">
-          <div
-            class="flex flex-column gap-2 mx-auto"
-            style="min-height: 16rem; max-width: 100%"
-          >
+          <div class="flex flex-column gap-2 mx-auto" style="min-height: 16rem; max-width: 100%">
             <div class="text-center mt-0 text-xl font-semibold mb-3">
               Protect your account
             </div>
             <div class="flex gap-2">
               <div class="field p-fluid flex-1">
-                <InputText
-                  id="input"
-                  v-model="newAccount.firstname"
-                  type="text"
-                  placeholder="First Name"
-                  disabled
-                />
+                <InputText id="input" v-model="newAccount.firstname" type="text" placeholder="First Name" disabled />
               </div>
               <div class="field p-fluid flex-1">
-                <InputText
-                  id="input"
-                  v-model="newAccount.lastname"
-                  type="text"
-                  placeholder="Last Name"
-                  disabled
-                />
+                <InputText id="input" v-model="newAccount.lastname" type="text" placeholder="Last Name" disabled />
               </div>
             </div>
             <div class="flex gap-2">
               <div class="field p-fluid flex-1">
-                <InputText
-                  id="input"
-                  v-model="newAccount.email"
-                  type="text"
-                  placeholder="Email"
-                  disabled
-                />
+                <InputText id="input" v-model="newAccount.email" type="text" placeholder="Email" disabled />
               </div>
             </div>
             <div class="flex gap-2">
               <div class="field p-fluid flex-1">
-                <InputText
-                  id="input"
-                  v-model="newAccount.phone"
-                  type="text"
-                  placeholder="Phone number"
-                  disabled
-                />
+                <InputText id="input" v-model="newAccount.phone" type="text" placeholder="Phone number" disabled />
               </div>
             </div>
             <div class="flex gap-2">
               <div class="field p-fluid flex-1">
-                <Password
-                  id="password1"
-                  v-model="newAccount.password"
-                  placeholder="Password"
-                  :toggleMask="true"
-                  class="w-full"
-                  inputClass="w-full"
-                >
+                <Password id="password1" v-model="newAccount.password" placeholder="Password" :toggleMask="true"
+                  class="w-full" inputClass="w-full">
                 </Password>
               </div>
             </div>
             <div class="justify-content-center flex text-sm p-fluid">
-              <span
-                >By clicking Sign Up, you agree to our
+              <span>By clicking Sign Up, you agree to our
                 <router-link to="/privacy-policy">Terms and Privacy Policy</router-link>.
-                You may receive SMS Notifications from us and can opt out any time.</span
-              >
+                You may receive SMS Notifications from us and can opt out any time.</span>
             </div>
           </div>
           <div class="flex pt-4 justify-content-between">
-            <Button
-              label="Back"
-              severity="secondary"
-              icon="pi pi-arrow-left"
-              @click="prevCallback"
-            />
-            <Button
-              label="Sign Up"
-              icon="pi pi-check"
-              iconPos="right"
-              @click="signUpAccount"
-              :disabled="isNextDisabled"
-            />
+            <Button label="Back" severity="secondary" icon="pi pi-arrow-left" @click="prevCallback" />
+            <Button label="Sign Up" icon="pi pi-check" iconPos="right" @click="signUpAccount"
+              :disabled="isNextDisabled" />
           </div>
         </template>
       </StepperPanel>
@@ -787,7 +577,8 @@ const loginWithFacebook = () => {
 
 <style scoped>
 .google-login-button {
-  max-width: 100%; /* Ensures the button does not exceed the container width */
+  max-width: 100%;
+  /* Ensures the button does not exceed the container width */
   width: 100%;
 }
 
@@ -799,5 +590,32 @@ const loginWithFacebook = () => {
 .pi-eye-slash {
   transform: scale(1.6);
   margin-right: 1rem;
+}
+
+@media (max-width: 767px) {
+  .galleria-container {
+    display: none;
+    /* Hides the Galleria component on small screens */
+  }
+
+  .surface-ground {
+    flex-direction: column;
+  }
+
+  .surface-card {
+    border-radius: 0 !important;
+    border-top-left-radius: 53px !important;
+    border-top-right-radius: 53px !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    background-color: transparent !important;
+  }
+
+  .surface-card:last-child {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-left-radius: 53px !important;
+    border-bottom-right-radius: 53px !important;
+  }
 }
 </style>
