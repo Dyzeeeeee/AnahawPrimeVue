@@ -275,5 +275,5 @@ const addSession = async () => {
     </div>
   </Dialog>
 
-  <Toast />
+  
 </template>

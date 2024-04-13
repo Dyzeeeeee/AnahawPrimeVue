@@ -1080,5 +1080,5 @@ const requireConfirmation3 = (event) => {
     </template>
   </Dialog>
 
-  <Toast />
+
 </template>
