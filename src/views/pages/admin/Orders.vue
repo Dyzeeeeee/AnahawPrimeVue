@@ -1,8 +1,24 @@
 <script setup>
 import { onMounted, reactive, ref, watch } from "vue";
 import { OrderService } from "@/service/OrderService";
+import OrderService1 from "@/service/OrderService1";
+
 import { useToast } from "primevue/usetoast";
-const orders = ref();
+
+const getSeverity = (status) => {
+  switch (status) {
+    case "pending":
+      return "warning";
+
+    case "completed":
+      return "success";
+
+    case "cancelled":
+      return "danger";
+  }
+};
+
+const orders = ref([]);
 const expandedRows = ref([]);
 const toast = useToast();
 const menu = ref();
@@ -25,12 +41,25 @@ const items = ref([
     ]
   }
 ]);
+
 const toggle = (event) => {
   menu.value.toggle(event);
 };
-onMounted(() => {
-  orders.value = OrderService.getOrdersData();
+
+onMounted(async () => {
+  try {
+    orders.value = await OrderService1.getAllOrders();
+    console.log(orders.value)
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    toast.add({
+      severity: "error",
+      summary: "Error",
+      detail: "Failed to fetch orders",
+    });
+  }
 });
+
 const selectedOrder = ref();
 
 
@@ -56,7 +85,7 @@ const filters = ref([{ name: "Active" }, { name: "Archived" }, { name: "All" }])
 </script>
 
 <template>
-  
+
 
   <div class="surface-card p-4 shadow-2 border-round main-view">
     <Toolbar style="border: none">
@@ -94,27 +123,34 @@ const filters = ref([{ name: "Active" }, { name: "Archived" }, { name: "All" }])
 
         <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
         <Column expander style="width: 4rem" />
-        <Column field="id" header="id">
+        <Column field="id" header="ID">
         </Column>
-        <Column field="customer_id" header="Cashier">
+        <Column field="customer_name" header="Customer">
         </Column>
-        <Column field="cashier_id" header="Cashier"></Column>
+        <!-- <Column field="cashier_id" header="Cashier"></Column> -->
         <Column field="order_date" header="Order Date">
 
         </Column>
-        <Column field="total_order_price" header="Total">
+        <Column field="total_price" header="Total">
         </Column>
         <Column field="session_id" header="Session">
         </Column>
         <Column field="tendered" header="Tendered">
-        </Column>
-        <Column field="change" header="Change">
-        </Column>
-        <Column field="status" header="Status">
           <template #body="slotProps">
-            <div class="flex justify-content-center">
-              <Tag :value="slotProps.data.status" :severity="getOrderSeverity(slotProps.data)" />
-            </div>
+            {{ slotProps.data.tendered !== null ? slotProps.data.tendered : 'None yet' }}
+          </template>
+        </Column>
+        <Column field="change1" header="Change">
+          <template #body="slotProps">
+            {{ slotProps.data.change1 !== null ? Math.abs(slotProps.data.change1).toFixed(2) : 'None yet' }}
+          </template>
+        </Column>
+
+
+
+        <Column field="status" header="Status" style="width: 2rem">
+          <template #body="slotProps">
+            <Tag :value="slotProps.data.status" :severity="getSeverity(slotProps.data.status)" />
           </template>
         </Column>
         <Column>

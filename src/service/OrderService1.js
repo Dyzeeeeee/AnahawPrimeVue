@@ -3,8 +3,8 @@ import ApiService from './ApiService';
 const OrderService1 = {
     async getAllOrders() {
         try {
-            const response = await ApiService.get('getAllMenuItems');
-            return response.data;
+            const response = await ApiService.get('getAllOrders');
+            return response.data.orders;
         } catch (error) {
             console.error('Error fetching menu items:', error);
             throw error;
