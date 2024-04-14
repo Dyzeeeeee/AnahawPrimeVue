@@ -14,13 +14,27 @@ class MenuController extends ResourceController
 
     public function getAllMenuItems()
     {
+        helper('url');  // Load URL helper for base_url() function
         $menu = new MenuModel();
         $data = $menu->select('menu.*, IFNULL(categories.name, "None") as category_name')
             ->join('categories', 'categories.id = menu.category_id', 'left')
             ->findAll();
 
+        // Define the base URL for the images
+        $baseUrl = base_url('uploads/');  // Ensure this matches the directory structure in public
+
+        // Append the full URL to each image filename
+        foreach ($data as &$item) {
+            if (!empty($item['image'])) {
+                $item['image'] = $baseUrl . $item['image'];
+            } else {
+                $item['image'] = null;  // Or a default image URL if you prefer
+            }
+        }
+
         return $this->respond($data, 200);
     }
+
 
 
 
@@ -33,16 +47,52 @@ class MenuController extends ResourceController
             'name' => $json->name,
             'description' => $json->description,
             'price' => $json->price,
-            'category_id' => $json->category_id,
+            'category_id' => $json->category_id
         ];
 
-        // Check if the 'image' field exists in the uploaded files
+        if (!empty($json->image)) {
+            // Decode the image
+            $imageData = $json->image;
+            list($type, $imageData) = explode(';', $imageData);
+            list(, $imageData) = explode(',', $imageData);
+            $imageData = base64_decode($imageData);
 
-        $menu = new menuModel();
-        $response = $menu->save($data);
-        return $this->respond($response, 200);
+            // Determine file extension based on the MIME type
+            $mimeType = explode(':', $type)[1];
+            switch ($mimeType) {
+                case 'image/jpeg':
+                    $fileExt = 'jpg';
+                    break;
+                case 'image/png':
+                    $fileExt = 'png';
+                    break;
+                case 'image/gif':
+                    $fileExt = 'gif';
+                    break;
+                case 'image/avif':
+                    $fileExt = 'avif';
+                    break;
+                default:
+                    // Handle unknown or unsupported types
+                    return $this->failValidationError('Unsupported image type.');
+            }
 
+            // Create a filename and save the file
+            $filename = uniqid() . '.' . $fileExt;
+            file_put_contents(FCPATH  . 'uploads/' . $filename, $imageData);
+            $data['image'] = $filename;  // Store just the filename in the database
+        }
+
+        $menuModel = new MenuModel();
+        if ($menuModel->insert($data)) {
+            return $this->respondCreated($data, 'Menu item added successfully.');
+        } else {
+            return $this->failServerError('Failed to add menu item');
+        }
     }
+
+
+
     public function archiveMenuItem($menuItemId)
     {
         $menu = new MenuModel();
@@ -91,6 +141,4 @@ class MenuController extends ResourceController
             return $this->failServerError('Failed to archive menu item');
         }
     }
-
-
 }

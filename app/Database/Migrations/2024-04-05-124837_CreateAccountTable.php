@@ -50,6 +50,11 @@ class CreateAccountTable extends Migration
                 'default' => date('Y-m-d H:i:s'),
                 'on_update' => date('Y-m-d H:i:s'),
             ],
+            'picture' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => true,
+            ],
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->createTable('accounts');

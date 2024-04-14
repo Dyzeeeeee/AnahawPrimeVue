@@ -32,6 +32,7 @@ $routes->put('unarchiveCustomer/(:num)', 'CustomerController::unarchiveCustomer/
 $routes->post('createAccount', 'AccountController::createAccount');
 $routes->post('login', 'AccountController::login');
 $routes->post('logout', 'AccountController::logout');
+$routes->get('getAccountData', 'AccountController::getAccountData');
 
 
 $routes->get('getAllOrders', 'OrderController::getAllOrders');

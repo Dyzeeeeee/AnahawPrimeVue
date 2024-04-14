@@ -27,6 +27,7 @@ class AccountController extends ResourceController
             'lastname' => $requestData->lastname,
             'email' => $requestData->email,
             'phone' => $requestData->phone,
+            'picture' => $requestData->picture,
             'password' => password_hash($requestData->password, PASSWORD_DEFAULT), // Hash the password
         ];
 
@@ -81,6 +82,7 @@ class AccountController extends ResourceController
                 'user_id' => $user['id'],
                 'email' => $user['email'],
                 'phone' => $user['phone'],
+                'picture' => $user['picture'],
                 'name' => $user['firstname'] . ' ' . $user['lastname'],
                 'isLoggedIn' => true
             ]);
@@ -109,5 +111,25 @@ class AccountController extends ResourceController
         return $session->get(); // Returns an array of session data
     }
 
+    public function getAccountData()
+    {
+        $session = session();
+        $userId = $session->get('user_id'); // Assuming 'user_id' is stored in the session upon login
 
+        if (!$userId) {
+            return $this->failUnauthorized('No user logged in');
+        }
+
+        $accountModel = new AccountModel();
+        $userData = $accountModel->find($userId);
+
+        if (!$userData) {
+            return $this->failNotFound('User not found');
+        }
+
+        // Optionally, you can remove sensitive data before returning the result
+        unset($userData['password']);
+
+        return $this->respond($userData);
+    }
 }

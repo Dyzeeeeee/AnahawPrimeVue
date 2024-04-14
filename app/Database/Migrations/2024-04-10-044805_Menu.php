@@ -35,7 +35,7 @@ class Menu extends Migration
             'category_id' => [
                 'type' => 'INT',
                 'unsigned' => true,
-                'null'=> true,
+                'null' => true,
             ],
             'orders' => [
                 'type' => 'INT',
@@ -47,6 +47,8 @@ class Menu extends Migration
                 'type' => 'DATETIME',
                 'null' => true,
             ],
+        
+
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->addForeignKey('category_id', 'categories', 'id', 'CASCADE', 'SET NULL');
