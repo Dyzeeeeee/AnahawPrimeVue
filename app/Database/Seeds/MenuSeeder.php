@@ -18,6 +18,7 @@ class MenuSeeder extends Seeder
                 'orders' => 5,
                 'archived_at' => null
             ],
+            // colddrinks
             [
                 'name' => 'Strawberry Shake',
                 'description' => '',
@@ -144,7 +145,125 @@ class MenuSeeder extends Seeder
                 'orders' => 0,
                 'archived_at' => null
             ],
-            
+            // Alcoholic Drinks
+            [
+                'name' => 'Carlo Rossi wine',
+                'description' => '',
+                'image' => 'Carlorossi wine.jpg',
+                'price' => 600.00,
+                'category_id' => 2, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'San Mig Flavored',
+                'description' => '',
+                'image' => 'san-miguel-flavored-beer.jpg',
+                'price' => 70.00,
+                'category_id' => 2, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'San Mig Light',
+                'description' => '',
+                'image' => 'san mig light.png',
+                'price' => 70.00,
+                'category_id' => 2, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'San Mig Pale Pilsen',
+                'description' => '',
+                'image' => 'san mig pale pilsen.png',
+                'price' => 70.00,
+                'category_id' => 2, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Red Horse',
+                'description' => '330ml',
+                'image' => 'red-horse-bottle-330ml_2.jpg',
+                'price' => 70.00,
+                'category_id' => 2, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Emperador Light',
+                'description' => '750ml',
+                'image' => 'emperador light 750.jpg',
+                'price' => 250.00,
+                'category_id' => 2, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'GSM Blue',
+                'description' => '700ml',
+                'image' => 'GSM blue 700.jfif',
+                'price' => 250.00,
+                'category_id' => 2, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Red Wine',
+                'description' => '',
+                'image' => 'Red wine.jpg',
+                'price' => 500.00,
+                'category_id' => 2, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'El Hombre Tequila',
+                'description' => '',
+                'image' => 'el hombre.jpg',
+                'price' => 600.00,
+                'category_id' => 2, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Alfonso',
+                'description' => '1 liter',
+                'image' => 'Alfonso 1 liter.jpg',
+                'price' => 650.00,
+                'category_id' => 2, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Fundador',
+                'description' => '1 liter',
+                'image' => 'Fundador.avif',
+                'price' => 900.00,
+                'category_id' => 2, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Jose Cuervo',
+                'description' => '1 liter',
+                'image' => 'jose cuervo.jpeg',
+                'price' => 2,500.00,
+                'category_id' => 2, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Black Label',
+                'description' => '1 liter',
+                'image' => 'Black label.jpg',
+                'price' => 2,800.00,
+                'category_id' => 2, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            // Sizzling plates
             [
                 'name' => 'Sizzling Mushroom',
                 'description' => 'With Tofu',
