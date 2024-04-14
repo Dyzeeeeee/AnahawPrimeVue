@@ -152,6 +152,7 @@ class OrderController extends ResourceController
                 'customer_email' => $orderDetails['customer_email'], // Added customer email
                 'total_price' => $orderDetails['total_price'],
                 'service' => $orderDetails['service'],
+                'order_date' => $orderDetails['order_date'],
                 'change1' => $orderDetails['change1'],
                 'tendered' => $orderDetails['tendered'],
                 'cashier_name' => $orderDetails['cashier_name'],

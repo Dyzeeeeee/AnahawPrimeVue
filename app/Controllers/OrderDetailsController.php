@@ -5,6 +5,8 @@ namespace App\Controllers;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 use App\Models\OrderModel;
+use App\Models\FoodStockModel;
+use App\Models\RecipeModel;
 use App\Models\OrderDetailsModel;
 
 class OrderDetailsController extends ResourceController
@@ -14,53 +16,84 @@ class OrderDetailsController extends ResourceController
     public function addMenuItemToOrder()
     {
         $json = $this->request->getJSON();
-
-        $orderDetailsData = [
-            'quantity' => $json->quantity,
-            'menu_item_id' => $json->menu_item_id,
-            'order_id' => $json->order_id,
-            'subtotal' => $json->subtotal,
-        ];
-
         $orderDetails = new OrderDetailsModel();
+        $foodStockModel = new FoodStockModel();
+        $recipeModel = new RecipeModel();
+
+        // Fetch existing details to compare changes
+        $existingOrderDetails = $orderDetails
+            ->where('menu_item_id', $json->menu_item_id)
+            ->where('order_id', $json->order_id)
+            ->first();
 
         if ($json->quantity === 0) {
             // Delete the record if the quantity is 0
-            $existingOrderDetails = $orderDetails
-                ->where('menu_item_id', $json->menu_item_id)
-                ->where('order_id', $json->order_id)
-                ->delete();
-        } else {
-            // Check if a record with the same menu_item_id and order_id already exists
-            $existingOrderDetails = $orderDetails
-                ->where('menu_item_id', $json->menu_item_id)
-                ->where('order_id', $json->order_id)
-                ->first();
-
             if ($existingOrderDetails) {
-                // Update the existing record
-                $orderDetails->update($existingOrderDetails['id'], $orderDetailsData);
+                $this->replenishStocks($existingOrderDetails['menu_item_id'], $existingOrderDetails['quantity']);
+                $orderDetails->delete($existingOrderDetails['id']);
+            }
+        } else {
+            // Adjust the stock based on the difference in quantity
+            $difference = $existingOrderDetails ? $json->quantity - $existingOrderDetails['quantity'] : $json->quantity;
+            if ($difference < 0) {
+                $this->replenishStocks($json->menu_item_id, abs($difference));
+            } elseif ($difference > 0) {
+                $this->consumeStocks($json->menu_item_id, $difference);
+            }
+
+            // Update or insert order details
+            if ($existingOrderDetails) {
+                $orderDetails->update($existingOrderDetails['id'], $json);
             } else {
-                // Insert a new record
-                $orderDetails->insert($orderDetailsData);
+                $orderDetails->insert($json);
             }
         }
 
-        // Update the total_price in the OrderModel
-        $orderModel = new OrderModel();
-        $totalPrice = $orderDetails
-            ->selectSum('subtotal')
-            ->where('order_id', $json->order_id)
-            ->first()['subtotal'];
+        // Update order's total price
+        $this->updateOrderTotal($json->order_id);
 
-        $orderModel->update($json->order_id, ['total_price' => $totalPrice]);
-
-        $response = [
-            'success' => true,
-            'message' => 'Order detail updated/added/deleted successfully'
-        ];
-        return $this->respond($response, 200);
+        return $this->respond(['success' => true, 'message' => 'Order detail updated/added/deleted successfully'], 200);
     }
+
+    private function replenishStocks($menuItemId, $quantity)
+    {
+        $foodStockModel = new FoodStockModel();
+        $recipeModel = new RecipeModel();
+        $recipes = $recipeModel->where('menu_id', $menuItemId)->findAll();
+
+        foreach ($recipes as $recipe) {
+            $foodStock = $foodStockModel->find($recipe['foodstock_id']);
+            if ($foodStock) {
+                $newQuantity = $foodStock['quantity'] + ($recipe['quantity'] * $quantity);
+                $foodStockModel->update($recipe['foodstock_id'], ['quantity' => $newQuantity]);
+            }
+        }
+    }
+
+    private function consumeStocks($menuItemId, $quantity)
+    {
+        $foodStockModel = new FoodStockModel();
+        $recipeModel = new RecipeModel();
+        $recipes = $recipeModel->where('menu_id', $menuItemId)->findAll();
+
+        foreach ($recipes as $recipe) {
+            $foodStock = $foodStockModel->find($recipe['foodstock_id']);
+            if ($foodStock) {
+                $newQuantity = $foodStock['quantity'] - ($recipe['quantity'] * $quantity);
+                $foodStockModel->update($recipe['foodstock_id'], ['quantity' => $newQuantity]);
+            }
+        }
+    }
+
+    private function updateOrderTotal($orderId)
+    {
+        $orderDetailsModel = new OrderDetailsModel();
+        $orderModel = new OrderModel();
+        $totalPrice = $orderDetailsModel->selectSum('subtotal')->where('order_id', $orderId)->first()['subtotal'];
+        $orderModel->update($orderId, ['total_price' => $totalPrice]);
+    }
+
+
 
 
 
@@ -95,12 +128,4 @@ class OrderDetailsController extends ResourceController
             return $this->respond([], 200);
         }
     }
-
-
-
-
-
-
-
-
 }

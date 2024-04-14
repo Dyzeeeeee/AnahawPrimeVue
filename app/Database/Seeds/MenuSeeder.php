@@ -9,15 +9,7 @@ class MenuSeeder extends Seeder
     public function run()
     {
         $data = [
-            [
-                'name' => 'Classic Burger',
-                'description' => 'A juicy beef burger with lettuce, tomato, and cheese.',
-                'image' => 'classic_burger.jpg',
-                'price' => 8.99,
-                'category_id' => 1, // Assuming there is a category with ID 1
-                'orders' => 5,
-                'archived_at' => null
-            ],
+
             // colddrinks
             [
                 'name' => 'Strawberry Shake',
@@ -249,7 +241,7 @@ class MenuSeeder extends Seeder
                 'name' => 'Jose Cuervo',
                 'description' => '1 liter',
                 'image' => 'jose cuervo.jpeg',
-                'price' => 2,500.00,
+                'price' => 2500.00,
                 'category_id' => 2, // Assuming there is a category with ID 1
                 'orders' => 0,
                 'archived_at' => null
@@ -258,7 +250,7 @@ class MenuSeeder extends Seeder
                 'name' => 'Black Label',
                 'description' => '1 liter',
                 'image' => 'Black label.jpg',
-                'price' => 2,800.00,
+                'price' => 2800.00,
                 'category_id' => 2, // Assuming there is a category with ID 1
                 'orders' => 0,
                 'archived_at' => null
@@ -466,7 +458,7 @@ class MenuSeeder extends Seeder
                 'orders' => 0,
                 'archived_at' => null
             ],
-            
+
             // Seafoods
             [
                 'name' => 'Sinigang na ulo ng Salmon',
@@ -625,6 +617,7 @@ class MenuSeeder extends Seeder
                 'orders' => 0,
                 'archived_at' => null
             ],
+
             [
                 'name' => 'Sizzling Beef Bulalo',
                 'description' => '',
