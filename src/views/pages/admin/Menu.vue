@@ -7,6 +7,9 @@ import { useToast } from "primevue/usetoast";
 const categories = ref([]);
 const toast = useToast();
 
+const searchQuery = ref("");
+
+
 const selectedCategory = ref(null);
 const newMenuVisible = ref(false);
 const newMenuItem = ref({
@@ -41,14 +44,20 @@ const isArchiveButtonDisabled = computed(() => {
 });
 
 const filteredMenuItems = computed(() => {
+  let filteredItems = menuItems.value;
+  if (searchQuery.value) {
+    filteredItems = filteredItems.filter(item =>
+      item.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+    );
+  }
   switch (selectedFilter.value.name) {
     case "Active":
-      return menuItems.value.filter((item) => !item.archived_at);
+      return filteredItems.filter(item => !item.archived_at);
     case "Archived":
-      return menuItems.value.filter((item) => item.archived_at);
+      return filteredItems.filter(item => item.archived_at);
     case "All":
     default:
-      return menuItems.value;
+      return filteredItems;
   }
 });
 
@@ -206,6 +215,8 @@ const filters = ref([{ name: "Active" }, { name: "Archived" }, { name: "All" }])
 
 const menuItems = ref([]);
 
+
+
 onMounted(async () => {
   try {
     menuItems.value = await MenuService.getAllMenuItems();
@@ -233,7 +244,7 @@ onMounted(async () => {
             <InputIcon>
               <i class="pi pi-search" />
             </InputIcon>
-            <InputText placeholder="Search" class="w-15rem" />
+            <InputText placeholder="Search" v-model="searchQuery" class="w-15rem" />
           </IconField>
           <Button @click="changeViewMode" :icon="viewMode === 'grid' ? 'pi pi-table' : 'pi pi-list'">
           </Button>
