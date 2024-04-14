@@ -381,6 +381,53 @@ class MenuSeeder extends Seeder
                 'orders' => 0,
                 'archived_at' => null
             ],
+
+            // Hot Drinks
+            [
+                'name' => 'Brewed Coffee',
+                'description' => '',
+                'image' => 'Brewed coffee.jpg',
+                'price' => 60.00,
+                'category_id' => 4, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Coffee',
+                'description' => '',
+                'image' => 'Coffee.jfif',
+                'price' => 25.00,
+                'category_id' => 4, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Lipton Tea',
+                'description' => '',
+                'image' => 'Lipton-Tea-During-Pregnancy-1-910x1024.jpg',
+                'price' => 25.00,
+                'category_id' => 4, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Milo',
+                'description' => '',
+                'image' => 'Milo drink.jfif',
+                'price' => 25.00,
+                'category_id' => 4, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Hot Calamansi Juice',
+                'description' => '',
+                'image' => 'calamansi juice.jpg',
+                'price' => 70.00,
+                'category_id' => 4, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
             // Sizzling plates
             [
                 'name' => 'Sizzling Mushroom',
