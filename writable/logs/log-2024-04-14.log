@@ -1,0 +1,67 @@
+ERROR - 2024-04-14 09:07:08 --> mysqli_sql_exception: Duplicate entry 'mercadopatrickkristoffer@gmail.com' for key 'customers.email' in C:\laragon\www\Capstone\AnahawBE\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\laragon\www\Capstone\AnahawBE\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `cu...', 0)
+#1 C:\laragon\www\Capstone\AnahawBE\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `cu...')
+#2 C:\laragon\www\Capstone\AnahawBE\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `cu...')
+#3 C:\laragon\www\Capstone\AnahawBE\system\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `cu...', Array, false)
+#4 C:\laragon\www\Capstone\AnahawBE\system\Model.php(326): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\laragon\www\Capstone\AnahawBE\system\BaseModel.php(802): CodeIgniter\Model->doInsert(Array)
+#6 C:\laragon\www\Capstone\AnahawBE\system\Model.php(744): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\laragon\www\Capstone\AnahawBE\app\Controllers\AccountController.php(43): CodeIgniter\Model->insert(Array)
+#8 C:\laragon\www\Capstone\AnahawBE\system\CodeIgniter.php(941): App\Controllers\AccountController->createAccount()
+#9 C:\laragon\www\Capstone\AnahawBE\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccountController))
+#10 C:\laragon\www\Capstone\AnahawBE\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\laragon\www\Capstone\AnahawBE\public\index.php(89): CodeIgniter\CodeIgniter->run()
+#12 {main}
+CRITICAL - 2024-04-14 09:07:08 --> CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry 'mercadopatrickkristoffer@gmail.com' for key 'customers.email'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `customers` (`firstname`, `lastname`, `email`, `phone`) VALUES (:firstname:, :lastname:, :email:, :phone:)', [...], false)
+ 2 SYSTEMPATH\Model.php(326): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(802): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(744): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\AccountController.php(43): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AccountController->createAccount()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccountController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-14 09:07:08 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry 'mercadopatrickkristoffer@gmail.com' for key 'customers.email'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `customers` (`firstname`, `lastname`, `email`, `phone`) VALUES (\'Patrick Kristoffer C.\', \'Mercado\', \'mercadopatrickkristoffer@gmail.com\', \'None provided\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `customers` (`firstname`, `lastname`, `email`, `phone`) VALUES (\'Patrick Kristoffer C.\', \'Mercado\', \'mercadopatrickkristoffer@gmail.com\', \'None provided\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `customers` (`firstname`, `lastname`, `email`, `phone`) VALUES (:firstname:, :lastname:, :email:, :phone:)', [...], false)
+ 4 SYSTEMPATH\Model.php(326): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(802): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(744): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\AccountController.php(43): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AccountController->createAccount()
+ 9 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccountController))
+10 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-14 09:07:08 --> [Caused by] mysqli_sql_exception: Duplicate entry 'mercadopatrickkristoffer@gmail.com' for key 'customers.email'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `customers` (`firstname`, `lastname`, `email`, `phone`) VALUES (\'Patrick Kristoffer C.\', \'Mercado\', \'mercadopatrickkristoffer@gmail.com\', \'None provided\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `customers` (`firstname`, `lastname`, `email`, `phone`) VALUES (\'Patrick Kristoffer C.\', \'Mercado\', \'mercadopatrickkristoffer@gmail.com\', \'None provided\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `customers` (`firstname`, `lastname`, `email`, `phone`) VALUES (\'Patrick Kristoffer C.\', \'Mercado\', \'mercadopatrickkristoffer@gmail.com\', \'None provided\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `customers` (`firstname`, `lastname`, `email`, `phone`) VALUES (:firstname:, :lastname:, :email:, :phone:)', [...], false)
+ 5 SYSTEMPATH\Model.php(326): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(802): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(744): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\AccountController.php(43): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AccountController->createAccount()
+10 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccountController))
+11 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-14 09:07:08 --> ErrorException: Undefined array key "picture"
+in APPPATH\Controllers\AccountController.php on line 85.
+ 1 APPPATH\Controllers\AccountController.php(85): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "picture"', 'C:\\laragon\\www\\Capstone\\AnahawBE\\app\\Controllers\\AccountController.php', 85)
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AccountController->login()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccountController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-14 09:07:08 --> ErrorException: Undefined array key "picture"
+in APPPATH\Controllers\AccountController.php on line 85.
+ 1 APPPATH\Controllers\AccountController.php(85): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "picture"', 'C:\\laragon\\www\\Capstone\\AnahawBE\\app\\Controllers\\AccountController.php', 85)
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AccountController->login()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccountController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
