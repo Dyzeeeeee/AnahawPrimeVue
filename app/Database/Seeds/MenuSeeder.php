@@ -19,6 +19,133 @@ class MenuSeeder extends Seeder
                 'archived_at' => null
             ],
             [
+                'name' => 'Strawberry Shake',
+                'description' => '',
+                'image' => 'strawberry shake.jpg',
+                'price' => 180.00,
+                'category_id' => 1, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Sagot Gulaman',
+                'description' => '',
+                'image' => 'sagot gulaman.jpg',
+                'price' => 70.00,
+                'category_id' => 1, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Shirley Temple',
+                'description' => '',
+                'image' => 'shirley temple.jfif',
+                'price' => 85.00,
+                'category_id' => 1, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Kalamansi Slush',
+                'description' => '',
+                'image' => 'kalamansi slush.jfif',
+                'price' => 115.00,
+                'category_id' => 1, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Iced Coffee Float',
+                'description' => '',
+                'image' => 'Ice coffee float.jfif',
+                'price' => 125.00,
+                'category_id' => 1, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Fresh Fruit Shake',
+                'description' => '',
+                'image' => 'fresh fruit shake.jpg',
+                'price' => 155.00,
+                'category_id' => 1, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Juice in Can',
+                'description' => 'Pineapple/4seasons/Mango',
+                'image' => 'juice in can.jpg',
+                'price' => 70.00,
+                'category_id' => 1, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Softdrinks',
+                'description' => '08oz',
+                'image' => 'soft drinks 8oz.jfif',
+                'price' => 18.00,
+                'category_id' => 1, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Softdrinks',
+                'description' => '1.5liter',
+                'image' => 'soft drinks 1.5.jpg',
+                'price' => 130.00,
+                'category_id' => 1, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Bottled Water',
+                'description' => '500ml',
+                'image' => 'bottled water 500.png',
+                'price' => 22.00,
+                'category_id' => 1, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Bottled Water',
+                'description' => '330ml',
+                'image' => 'bottled water 300.jpg',
+                'price' => 15.00,
+                'category_id' => 1, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Mango Queen',
+                'description' => '',
+                'image' => 'mango queen.jpg',
+                'price' => 160.00,
+                'category_id' => 1, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Cucumber Lemonade',
+                'description' => '',
+                'image' => 'Cucumber-Lemonade-5.jpg',
+                'price' => 200.00,
+                'category_id' => 1, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Iced Tea House Blend',
+                'description' => '',
+                'image' => 'iced tea house blend.jfif',
+                'price' => 200.00,
+                'category_id' => 1, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            
+            [
                 'name' => 'Sizzling Mushroom',
                 'description' => 'With Tofu',
                 'image' => 'Sizzling mushroom only.jfif',
