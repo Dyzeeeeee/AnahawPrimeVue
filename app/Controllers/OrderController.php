@@ -136,8 +136,10 @@ class OrderController extends ResourceController
     public function getOrderDetails($orderId)
     {
         $order = new OrderModel();
-        $orderDetails = $order->select('orders.*, IFNULL(CONCAT(customers.firstname, " ", customers.lastname), "N/A") as customer_name, customers.phone as customer_phone, customers.email as customer_email')
+        $orderDetails = $order->select('orders.*, IFNULL(CONCAT(customers.firstname, " ", customers.lastname), "N/A") as customer_name, customers.phone as customer_phone, customers.email as customer_email, IFNULL(CONCAT(accounts.firstname, " ", accounts.lastname), "N/A") as cashier_name')
             ->join('customers', 'customers.id = orders.customer_id', 'left')
+            ->join('sessions', 'sessions.id = orders.session_id', 'left')
+            ->join('accounts', 'accounts.id = sessions.cashier_id', 'left')
             ->find($orderId);
 
         if ($orderDetails) {
@@ -150,6 +152,9 @@ class OrderController extends ResourceController
                 'customer_email' => $orderDetails['customer_email'], // Added customer email
                 'total_price' => $orderDetails['total_price'],
                 'service' => $orderDetails['service'],
+                'change1' => $orderDetails['change1'],
+                'tendered' => $orderDetails['tendered'],
+                'cashier_name' => $orderDetails['cashier_name'],
             ];
 
             return $this->respond($response, 200);
