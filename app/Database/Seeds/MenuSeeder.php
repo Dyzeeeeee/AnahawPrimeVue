@@ -428,6 +428,137 @@ class MenuSeeder extends Seeder
                 'orders' => 0,
                 'archived_at' => null
             ],
+
+            // Boodle Bundles
+            [
+                'name' => 'Package 1 (4-5 pax)',
+                'description' => 'Inihaw na Tilapia w/ sauce, halabos na hipon, inihaw na liempo, inihaw na talong, salted egg, steamed okra w/ bagoong, ensaladang mangga, and steamed rice',
+                'image' => 'boodle1.png',
+                'price' => 1665.00,
+                'category_id' => 5, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Package 2 (4-5 pax)',
+                'description' => 'Chicken bbq, crablets, inihaw na pusit, inihaw na talong, inihaw na bangus, halabos, na hipon, ensaladang labanos, and steamed rice',
+                'image' => 'boodle2.png',
+                'price' => 1990.00,
+                'category_id' => 5, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Package 3 (4-5 pax)',
+                'description' => 'Vegetable tempura, 10pcs pork bbq, buffalo wings, ensaladang ampalaya, calamares fritos, and steamed rice',
+                'image' => 'boodle3.png',
+                'price' => 2010.00,
+                'category_id' => 5, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Seafood Bundle (3-4 pax)',
+                'description' => 'w/ 3 rice and pineapple juice',
+                'image' => '',
+                'price' => 2375.00,
+                'category_id' => 5, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            
+            // Seafoods
+            [
+                'name' => 'Sinigang na ulo ng Salmon',
+                'description' => 'Salmon head in sinigang soup',
+                'image' => 'Sinigang-na-Salmon-sa-Miso-Recipe.jpg',
+                'price' => 365.00,
+                'category_id' => 6, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Sinigang na Tanigue',
+                'description' => 'Tanigue fish in your favorite sinigang soup',
+                'image' => 'sinigang na tanigue.jfif',
+                'price' => 365.00,
+                'category_id' => 6, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Sinigang na Bangus',
+                'description' => 'Milkfish cooked in sinigang soup',
+                'image' => 'sinigang na bangus.avif',
+                'price' => 335.00,
+                'category_id' => 6, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Pinaputok na Tilapia',
+                'description' => 'Steamed stuffed tilapia wrapped in foil cooked in its own sauce',
+                'image' => 'crispy tilapia strips.jpg',
+                'price' => 260.00,
+                'category_id' => 6, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Crispy Tilapia Strips',
+                'description' => 'Tilapia fillet deep fried w/ whole fish until crispy served w/ sweet chili sauce',
+                'image' => 'crispy tilapia strips.jpg',
+                'price' => 270.00,
+                'category_id' => 6, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Fried Tilapia/Bangus',
+                'description' => 'Tilapia or Bangis fish grilled and served w/ soy sauce dip',
+                'image' => 'Grilled tilapia bangus.jpg',
+                'price' => 245.00,
+                'category_id' => 6, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Fish Fillet with',
+                'description' => 'Sweet & sour sauce or White sauce',
+                'image' => 'Fish fillet.jpg',
+                'price' => 295.00,
+                'category_id' => 6, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Kinilaw na Tanigue',
+                'description' => 'Tanigue fillet cooked in vinegar with tomatoes, onion and ginger',
+                'image' => 'KINILAW-NA-TANIGUE-1.png',
+                'price' => 330.00,
+                'category_id' => 6, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Sweer & Sour Tilapia',
+                'description' => 'Fried Tilapia graciously coated w/ sweet and sour sauce',
+                'image' => 'sweet and sour tilapia.jpg',
+                'price' => 330.00,
+                'category_id' => 6, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Pampano (Ihaw or Sinigang)',
+                'description' => 'Per gram',
+                'image' => 'pampano.jpg',
+                'price' => 1.40,
+                'category_id' => 6, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+
             // Sizzling plates
             [
                 'name' => 'Sizzling Mushroom',
