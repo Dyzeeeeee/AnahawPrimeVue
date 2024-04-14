@@ -559,6 +559,62 @@ class MenuSeeder extends Seeder
                 'archived_at' => null
             ],
 
+            // Noodles
+            [
+                'name' => 'Pancit Sotanghon',
+                'description' => '',
+                'image' => 'pansit sotanghon.jpg',
+                'price' => 330.00,
+                'category_id' => 7, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Pancit Bihon',
+                'description' => 'Thin noodles w/ soy sauce sliced meat & chopped vegetables',
+                'image' => 'pancit bihon.jpg',
+                'price' => 255.00,
+                'category_id' => 7, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Pancit Canton',
+                'description' => 'Stir-fried egg noodles topped squid balls & sauteed cabbage, carrot strips & spring onions',
+                'image' => 'pancit canton.jpg',
+                'price' => 255.00,
+                'category_id' => 7, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Pancit Guisado',
+                'description' => 'Mixture of Pancit bihon & pancit canton',
+                'image' => 'pancit-guisado-main.avif',
+                'price' => 255.00,
+                'category_id' => 7, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Lomi',
+                'description' => 'Creamy soup w/ egg, mixed seafood, pork sisig',
+                'image' => 'lomi.jpg',
+                'price' => 280.00,
+                'category_id' => 7, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Sisig Pancit',
+                'description' => 'Pancit Guisado topped with your favorite pork sisig',
+                'image' => 'sisig pancit.jpg',
+                'price' => 320.00,
+                'category_id' => 7, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+
             // Sizzling plates
             [
                 'name' => 'Sizzling Mushroom',
