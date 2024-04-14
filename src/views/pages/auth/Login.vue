@@ -44,7 +44,7 @@ const fetchUserInfo = (accessToken) => {
       console.log("User Info:", data);
       console.log("Pic:", data.picture);
       // store.commit("setUser", data);
-      router.push("/admin/counter");
+      router.push("/admin/orders");
       newAccount.value = {
         firstname: data.given_name,
         lastname: data.family_name,
@@ -83,7 +83,7 @@ const fetchUserInfo = (accessToken) => {
 
 //   // Redirect the user to another page
 //   // console.log("fname", userData.family_name);
-//   router.push("/admin/counter");
+//   router.push("/admin/orders");
 //   newAccount.value = {
 //     firstname: userData.given_name,
 //     lastname: userData.family_name,
@@ -129,12 +129,12 @@ const login = async () => {
       email: email.value,
       password: password.value,
     });
-    console.log("loffff", newAccount.value.name)
-    store.commit("setUser", newAccount.value);
+    // console.log("loffff", newAccount.value.name)
+    // store.commit("setUser", newAccount.value);
 
     store.dispatch("setUser", response.session);
 
-    router.push("/admin/counter");
+    router.push("/admin/orders");
   } catch (error) {
     console.error("Error logging in:", error);
     toast.add({
@@ -294,7 +294,7 @@ const loginWithFacebook = () => {
             store.commit("setUser", userData);
 
             // Redirect the user to another page
-            router.push("/admin/counter");
+            router.push("/admin/orders");
             newAccount.value = {
               firstname: response.first_name,
               lastname: response.last_name,

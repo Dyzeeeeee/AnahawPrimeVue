@@ -1,42 +1,39 @@
+<template>
+  <div>
+    <button @click="generatePDF">Download PDF</button>
+    <div id="content-to-print"
+      style="background: white; padding: 20px; width: 500px; position: absolute; left: -10000px; top: -10000px;">
+      <h1 style="color: blue;">Test Print PDF</h1>
+      <p>This is a paragraph in the PDF, styled with simple CSS.</p>
+    </div>
+  </div>
+</template>
+
 <script setup>
-import { googleSdkLoaded } from "vue3-google-login";
+import { jsPDF } from "jspdf";
+import domtoimage from "dom-to-image-more";
+import { ref } from 'vue';
 
-const login = () => {
-  googleSdkLoaded((google) => {
-    const tokenClient = google.accounts.oauth2.initTokenClient({
-      client_id:
-        "215113898368-i535eo8dovjh4pdud4etlol95ss99hq0.apps.googleusercontent.com",
-      scope: "email profile openid",
-      callback: (response) => {
-        if (response.error !== undefined) {
-          console.error("Failed to get the token", response);
-          return;
-        }
-        console.log("Access Token:", response.access_token);
-        // Optionally, get user information using the access token
-        fetchUserInfo(response.access_token);
-      },
-    });
-    tokenClient.requestAccessToken();
-  });
-};
+const generatePDF = async () => {
+  const content = document.getElementById('content-to-print');
 
-const fetchUserInfo = (accessToken) => {
-  fetch("https://www.googleapis.com/oauth2/v2/userinfo", {
-    headers: new Headers({
-      Authorization: `Bearer ${accessToken}`,
-    }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("User Info:", data.name);
-    })
-    .catch((error) => {
-      console.error("Error fetching user information:", error);
+  try {
+    const imgData = await domtoimage.toPng(content);
+    const pdf = new jsPDF({
+      orientation: 'p',
+      unit: 'px',
+      format: 'a4'
     });
+
+    // Calculate the width and height to maintain aspect ratio
+    const imgProps = pdf.getImageProperties(imgData);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    pdf.save('test.pdf');
+  } catch (error) {
+    console.error('Error generating PDF', error);
+  }
 };
 </script>
-
-<template>
-  <Button @click="login">Login Using Google</Button>
-</template>

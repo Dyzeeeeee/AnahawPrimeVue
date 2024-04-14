@@ -3,14 +3,18 @@ import { onMounted, reactive, ref, watch, computed } from "vue";
 import MenuService from "@/service/MenuService";
 import CategoryService from "@/service/CategoryService";
 import { useToast } from "primevue/usetoast";
+import FoodStockService from "@/service/FoodStockService";
 
 const categories = ref([]);
+const foodStocks = ref([]);
 const toast = useToast();
 
 const searchQuery = ref("");
 
 
 const selectedCategory = ref(null);
+const selectedFoodStock = ref(null);
+
 const newMenuVisible = ref(false);
 const newMenuItem = ref({
   name: "",
@@ -60,6 +64,8 @@ const filteredMenuItems = computed(() => {
       return filteredItems;
   }
 });
+const recipeVisible = ref(false);
+const currentMenuItem = ref(null);
 
 const archiveButtonLabel = computed(() => {
   return selectedFilter.value.name === "Archived" ? "Unarchive" : "Archive";
@@ -82,23 +88,32 @@ const items = ref([
       {
         label: "Edit",
         icon: "pi pi-pencil",
+        command: () => {
+          // Assuming you have a method to edit
+          editMenuItem(currentMenuItem.value);
+        }
       },
-
       {
         label: "Archive",
         icon: "pi pi-box",
+        command: () => {
+          // Placeholder for archive functionality
+        }
       },
       {
         label: "Recipe",
         icon: "pi pi-book",
+        command: () => {
+          recipeVisible.value = true;
+        }
       },
     ],
   },
 ]);
 
-const toggle = (event) => {
-  menu.value.toggle(event);
-  console.log(selectedMenuItem.value); // Log selected menu items to the console
+const toggle = (menuItem, event) => {
+  currentMenuItem.value = menuItem; // Set the current menu item
+  menu.value.toggle(event); // Toggle the menu next to the clicked button
 };
 
 const addMenuItem = async () => {
@@ -220,6 +235,7 @@ const menuItems = ref([]);
 onMounted(async () => {
   try {
     menuItems.value = await MenuService.getAllMenuItems();
+    foodStocks.value = await FoodStockService.getAllFoodStocks();
     categories.value = await CategoryService.getAllCategories();
   } catch (error) {
     console.error("Error fetching menu items:", error);
@@ -268,7 +284,7 @@ onMounted(async () => {
     </Toolbar>
 
     <template v-if="viewMode === 'list'">
-      <div style="height: 65vh"
+      <div style="height: 75vh"
         class="border-2 border-dashed surface-border flex flex-wrap gap-3 overflow-y-scroll p-2">
         <DataTable :value="filteredMenuItems" dataKey="id" class="w-full" tableStyle="min-width: 60rem"
           selectionMode="multiple" v-model:selection="selectedMenuItem" stripedRows>
@@ -287,8 +303,9 @@ onMounted(async () => {
 
           <Column>
             <template #body="slotProps">
-              <Button icon="pi pi-ellipsis-v" text plain rounded @click="toggle" aria-haspopup="true"
+              <Button icon="pi pi-ellipsis-v" @click="toggle(slotProps.data, $event)" aria-haspopup="true"
                 aria-controls="overlay_menu"></Button>
+
               <Menu ref="menu" id="overlay_menu" :model="items" :popup="true" />
             </template>
           </Column>
@@ -307,7 +324,7 @@ onMounted(async () => {
       </div>
     </template>
     <template v-if="viewMode === 'grid'">
-      <div style="height: 65vh"
+      <div style="height: 75vh"
         class="border-2 border-dashed surface-border flex flex-wrap gap-3 overflow-y-scroll p-2">
         <div class="text-center align-items-center flex-1 flex justify-content-center text-6xl font-bold">
           Katamad saka na 'to hahaha 😘
@@ -362,4 +379,65 @@ onMounted(async () => {
       <Button type="button" label="Add" @click="addCategory"></Button>
     </div>
   </Dialog>
+
+  <Dialog v-model:visible="newMenuVisible" modal header="New Menu Item" :style="{ width: '40rem' }">
+    <div class="flex-row align-items-center gap-3 mb-3 mt-4 w-full">
+      <input type="file" @change="handleFileChange">
+
+      <FloatLabel>
+        <InputText v-model="newMenuItem.name" class="w-full" />
+        <label for="name">Name </label>
+      </FloatLabel>
+    </div>
+    <div class="flexr-row align-items-center gap-3 mb-3 mt-4 w-full">
+      <FloatLabel>
+        <Textarea v-model="newMenuItem.description" rows="2" style="width: 100%" autoResize />
+        <label>Description</label>
+      </FloatLabel>
+    </div>
+    <div class="flex align-items-center gap-3 mb-3 mt-4 w-full">
+      <FloatLabel class="w-full">
+        <InputText v-model="newMenuItem.price" class="w-full" />
+        <label for="price">Price </label>
+      </FloatLabel>
+      <InputGroup>
+        <FloatLabel class="w-full">
+          <Dropdown v-model="selectedCategory" :options="categories" optionLabel="name" class="w-full" />
+          <label for="dd-city">Category</label>
+        </FloatLabel>
+        <Button size="sm" icon="pi pi-plus" @click="newCategoryVisible = true"></Button>
+      </InputGroup>
+    </div>
+    <div class="flex justify-content-end gap-2">
+      <Button type="button" label="Cancel" severity="secondary" @click="newMenuVisible = false"></Button>
+      <Button type="button" label="Add" @click="addMenuItem"></Button>
+    </div>
+  </Dialog>
+
+
+  <Dialog v-model:visible="recipeVisible" modal header="Recipe Details" :style="{ width: '40rem' }">
+    <div class="flex align-items-center justify-content-between gap-3 mb-3 mt-4 w-full">
+      <div class="text-2xl font-bold">{{ currentMenuItem.name }}</div>
+      <Button type="button" icon="pi pi-plus" ></Button>
+      
+    
+    </div>
+    <div class="flex align-items-center gap-3 mb-3 mt-6 w-full">
+      <FloatLabel class="w-full">
+        <Dropdown v-model="selectedFoodStock" :options="foodStocks" optionLabel="ingredient_name" class="w-full" />
+        <label for="dd-city">Ingredient</label>
+      </FloatLabel>
+      <div style="width: 200px;">
+        <InputGroup>
+          <Button icon="pi pi-minus" severity="danger" outlined />
+          <InputText style="width: 50px" />
+          <Button icon="pi pi-plus" severity="success" outlined />
+        </InputGroup>
+      </div>
+    </div>
+    <div class="flex justify-content-end gap-2">
+      <Button type="button" label="Close" @click="recipeVisible = false"></Button>
+    </div>
+  </Dialog>
+
 </template>

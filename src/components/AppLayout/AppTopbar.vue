@@ -8,13 +8,13 @@ const isLoggedIn = computed(() => store.state.account.isLoggedIn); // Assuming '
 const store = useStore();
 
 const accountInfo = ref([]);
+
 watch(
   isLoggedIn,
   (newVal) => {
     if (newVal) {
       const user = store.state.account;
       accountInfo.value = {
-        user_id: user.user_id,
         email: user.email,
         phone: user.phone,
         name: user.name,

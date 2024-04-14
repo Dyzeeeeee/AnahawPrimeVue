@@ -24,6 +24,7 @@ const model = ref([
     items: [
       // { label: "Suppliers", icon: "pi pi-fw pi-shopping-cart", to: "/admin/suppliers" },
       { label: "Food Stocks", icon: "pi pi-fw pi-chart-line", to: "/admin/food-stocks" },
+      // { label: "Recipes", icon: "pi pi-fw pi-chart-line", to: "/admin/recipes" },
       // { label: "Resort Items", icon: "pi pi-fw pi-box", to: "/admin/resort-items" },
     ],
   },
