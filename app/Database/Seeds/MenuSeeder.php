@@ -263,6 +263,124 @@ class MenuSeeder extends Seeder
                 'orders' => 0,
                 'archived_at' => null
             ],
+            // Mixed Cocktails
+            [
+                'name' => 'Tequila Sunrise',
+                'description' => '',
+                'image' => 'tequila-sunrise-18167a1.jpg',
+                'price' => 105.00,
+                'category_id' => 3, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Margarita',
+                'description' => '',
+                'image' => 'margarita-google-1000x1000.jpg',
+                'price' => 105.00,
+                'category_id' => 3, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Dirty Shirley',
+                'description' => '',
+                'image' => 'DIRTY-SHIRLEY-3-1.jpg',
+                'price' => 105.00,
+                'category_id' => 3, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Pina Colada',
+                'description' => '',
+                'image' => 'pina-colada-c68aca7.jpg',
+                'price' => 105.00,
+                'category_id' => 3, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Tequila Pop',
+                'description' => '',
+                'image' => 'tequila pop.png',
+                'price' => 105.00,
+                'category_id' => 3, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Pink Margarita',
+                'description' => '',
+                'image' => 'pink margarita.jpg',
+                'price' => 105.00,
+                'category_id' => 3, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Daiquiri',
+                'description' => '',
+                'image' => 'Daiquiri_3000x3000_primary-206eb2330cb04852ab7d780dcf3d55ef.jpg',
+                'price' => 105.00,
+                'category_id' => 3, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Mindoro Sling Pitcher',
+                'description' => '',
+                'image' => 'mindoro-sling-pitcher.png',
+                'price' => 550.00,
+                'category_id' => 3, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Smirnoff-Mule',
+                'description' => '',
+                'image' => 'smirnoff.jpg',
+                'price' => 80.00,
+                'category_id' => 3, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Cuba Libre',
+                'description' => '',
+                'image' => 'cuba libre.jpg',
+                'price' => 105.00,
+                'category_id' => 3, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Gin Sour',
+                'description' => '',
+                'image' => 'gin sour.jpg',
+                'price' => 105.00,
+                'category_id' => 3, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Tequila Shot',
+                'description' => '',
+                'image' => 'tequila shot.jpg',
+                'price' => 85.00,
+                'category_id' => 3, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
+            [
+                'name' => 'Sangria Pitcher',
+                'description' => '',
+                'image' => 'sangria pitcher.jpg',
+                'price' => 800.00,
+                'category_id' => 3, // Assuming there is a category with ID 1
+                'orders' => 0,
+                'archived_at' => null
+            ],
             // Sizzling plates
             [
                 'name' => 'Sizzling Mushroom',
