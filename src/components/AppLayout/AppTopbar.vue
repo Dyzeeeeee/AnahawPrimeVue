@@ -18,6 +18,7 @@ watch(
         email: user.email,
         phone: user.phone,
         name: user.name,
+        picture: user.picture,
         isLoggedIn: user.isLoggedIn,
       };
     } else {
@@ -123,10 +124,7 @@ const toggle = (event) => {
     </div>
 
     <div>
-      <button
-        class="p-link layout-menu-button mr-7 layout-topbar-button"
-        @click="MenuToggle"
-      >
+      <button class="p-link layout-menu-button mr-7 layout-topbar-button" @click="MenuToggle">
         <i :class="menuIcon"></i>
       </button>
     </div>
@@ -147,25 +145,16 @@ const toggle = (event) => {
         <span>Calendar</span>
       </button>
 
-      <Avatar
-        class="layout-topbar-button"
-        style="width: 2.8rem; height: 2.8rem"
-        image="https://www.gravatar.com/avatar/05dfd4b41340d09cae045235eb0893c3?d=mp"
-        shape="circle"
-        @click="toggle"
-        aria-controls="overlay_menu"
-      />
+      <Avatar class="layout-topbar-button" style="width: 2.8rem; height: 2.8rem"
+        :image="accountInfo.picture || 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp'"
+        shape="circle" @click="toggle" aria-controls="overlay_menu" />
       <Menu ref="accountMenu" :popup="true" id="overlay_menu" style="width: 25rem">
         <template #start>
-          <button
-            v-ripple
-            class="relative overflow-hidden w-full p-link flex align-items-center p-2 pl-3 text-color hover:surface-200 border-noround"
-          >
+          <button v-ripple
+            class="relative overflow-hidden w-full p-link flex align-items-center p-2 pl-3 text-color hover:surface-200 border-noround">
             <Avatar
-              image="https://www.gravatar.com/avatar/05dfd4b41340d09cae045235eb0893c3?d=mp"
-              class="mr-2"
-              shape="circle"
-            />
+              :image="accountInfo.picture || 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp'"
+              class="mr-2" shape="circle" />
             <span class="inline-flex flex-column">
               <span class="font-bold">{{ accountInfo.name }}</span>
               <span class="text-sm">Admin</span>
@@ -174,11 +163,8 @@ const toggle = (event) => {
         </template>
 
         <template #end>
-          <button
-            @click="logout"
-            v-ripple
-            class="relative overflow-hidden w-full p-link flex align-items-center p-2 pl-3 text-color hover:surface-200 border-noround"
-          >
+          <button @click="logout" v-ripple
+            class="relative overflow-hidden w-full p-link flex align-items-center p-2 pl-3 text-color hover:surface-200 border-noround">
             <i class="pi pi-sign-out mr-4"></i>
             <span class="inline-flex flex-column">
               <span class="font-bold">Log out</span>

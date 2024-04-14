@@ -42,11 +42,13 @@ const fetchUserInfo = (accessToken) => {
     .then((response) => response.json())
     .then((data) => {
       console.log("User Info:", data);
-      store.commit("setUser", data);
+      console.log("Pic:", data.picture);
+      // store.commit("setUser", data);
       router.push("/admin/counter");
       newAccount.value = {
         firstname: data.given_name,
         lastname: data.family_name,
+        picture: data.picture,
         phone: "None provided",
         email: data.email,
         password: "default",
@@ -127,7 +129,11 @@ const login = async () => {
       email: email.value,
       password: password.value,
     });
+    console.log("loffff", newAccount.value.name)
+    store.commit("setUser", newAccount.value);
+
     store.dispatch("setUser", response.session);
+
     router.push("/admin/counter");
   } catch (error) {
     console.error("Error logging in:", error);
@@ -147,6 +153,7 @@ const newAccount = ref({
   lastname: "",
   email: "",
   phone: "",
+  picture: "",
   password: "",
   role: role.value,
 });
@@ -312,9 +319,7 @@ const loginWithFacebook = () => {
 
 <template>
 
-  <div
-    class="surface-ground flex align-items-center justify-content-evenly min-h-screen min-w-screen overflow-hidden"
-  >
+  <div class="surface-ground flex align-items-center justify-content-evenly min-h-screen min-w-screen overflow-hidden">
     <div class="flex flex-column align-items-center justify-content-end">
       <div class="galleria-container" v-if="responsiveOptions">
 
@@ -388,7 +393,7 @@ const loginWithFacebook = () => {
     </div>
   </div>
 
-  <Dialog v-model:visible="signUpVisible"  modal header="Create your account" :style="{ width: '40rem' }" :pt="{
+  <Dialog v-model:visible="signUpVisible" modal header="Create your account" :style="{ width: '40rem' }" :pt="{
         root: 'border-none',
         mask: {
           style: 'backdrop-filter: blur(10px)',

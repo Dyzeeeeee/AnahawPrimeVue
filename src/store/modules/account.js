@@ -5,6 +5,7 @@ const state = {
     email: userData ? userData.email : '',
     email: userData ? userData.phone : '',
     name: userData ? userData.name : '',
+    picture: userData ? userData.picture : '',
     isLoggedIn: userData ? true : false
 };
 
@@ -14,6 +15,7 @@ const mutations = {
         state.email = userData.email;
         state.phone = userData.phone;
         state.name = userData.name;
+        state.picture = userData.picture;
         state.isLoggedIn = true;
         localStorage.setItem('user', JSON.stringify(userData));
     },
@@ -22,6 +24,7 @@ const mutations = {
         state.email = '';
         state.phone = '';
         state.name = '';
+        state.picture = '';
         state.isLoggedIn = false;
         localStorage.removeItem('user');
     }
@@ -42,6 +45,7 @@ const getters = {
         email: state.email,
         phone: state.phone,
         name: state.name,
+        picture: state.picture,
         isLoggedIn: state.isLoggedIn
     })
 };

@@ -1,87 +1,91 @@
 <template>
-  <div class="container flex">
-    <Menu :model="menuItems" @item-click="scrollToContent" class="sidebar"></Menu>
-    <ScrollPanel class="content" ref="content">
-      <section v-for="section in sections" :id="section.id" :key="section.id">
-        <h2>{{ section.title }}</h2>
-        <template v-if="section.id !== 'contact'">
-          <p v-html="section.content"></p>
-          <ul v-if="section.items">
-            <li v-for="item in section.items" :key="item">{{ item }}</li>
-          </ul>
-        </template>
-        <p v-else v-html="section.content"></p>
-      </section>
+  <div class="layout-topbar flex justify-content-center">
 
+  </div>
+  <div class="flex pt-8" >
+    <div class="sidebar pt-8">
+      <ul>
+        <li><a href="#information">1. Information We Collect</a></li>
+        <li><a href="#usage">2. How We Use Information</a></li>
+        <li><a href="#shared">3. Will Your Information Be Shared With Anyone?</a></li>
+        <li><a href="#tracking">4. Cookies and Other Tracking Technologies</a></li>
+        <li><a href="#safe">5. How We Keep Your Information Safe</a></li>
+        <li><a href="#rights">6. What Are Your Privacy Rights?</a></li>
+        <li><a href="#updates">7. Updates to This Policy</a></li>
+        <li><a href="#contact">8. How to Contact Us</a></li>
+      </ul>
+    </div>
+    <ScrollPanel class="content" ref="content">
+      <section id="information">
+        <h2>1. Information We Collect</h2>
+        <p>We collect personal information that you provide to us, such as:</p>
+        <ul>
+          <li>Name</li>
+          <li>Address</li>
+          <li>Contact information (e.g., email address, phone number)</li>
+          <li>Passwords and security data</li>
+          <li>Payment information</li>
+          <li>Social media login data</li>
+        </ul>
+      </section>
+      <section id="usage">
+        <h2>2. How We Use Information</h2>
+        <p>We use the personal information collected via our services for the following purposes:</p>
+        <ul>
+          <li>To provide and maintain our services</li>
+          <li>To notify you about changes to our services</li>
+          <li>To allow you to participate in interactive features of our services</li>
+          <li>To provide customer support</li>
+          <li>To gather analysis or valuable information so that we can improve our services</li>
+          <li>To monitor the usage of our services</li>
+          <li>To detect, prevent and address technical issues</li>
+        </ul>
+      </section>
+      <section id="shared">
+        <h2>3. Will Your Information Be Shared With Anyone?</h2>
+        <p>We only share and disclose your information with the following third parties:</p>
+        <ul>
+          <li>Service providers who help us provide our services, such as hosting providers, payment processors, and
+            email service providers</li>
+          <li>Government agencies as required by law</li>
+          <li>Other third parties when you give your consent or direct us to do so</li>
+        </ul>
+      </section>
+      <section id="tracking">
+        <h2>4. Cookies and Other Tracking Technologies</h2>
+        <p>We may use cookies and similar tracking technologies to access or store information...</p>
+      </section>
+      <section id="safe">
+        <h2>5. How We Keep Your Information Safe</h2>
+        <p>We are committed to protecting the security of your personal information...</p>
+      </section>
+      <section id="rights">
+        <h2>6. What Are Your Privacy Rights?</h2>
+        <p>You have certain rights under applicable data protection laws, including the right to:</p>
+        <ul>
+          <li>Access, update or delete your personal information</li>
+          <li>Object to the processing of your personal information</li>
+          <li>Withdraw your consent at any time</li>
+          <li>Lodge a complaint with a supervisory authority</li>
+        </ul>
+      </section>
+      <section id="updates">
+        <h2>7. Updates to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new
+          Privacy Policy on this page.</p>
+      </section>
+      <section id="contact">
+        <h2>8. How to Contact Us</h2>
+        <p>If you have questions or comments about this Privacy Policy, you may email us at <a
+            href="mailto:anahawislandviewresort@gmail.com">anahawislandviewresort@gmail.com</a></p>
+      </section>
     </ScrollPanel>
   </div>
 </template>
 
+
 <script setup>
-import { ref } from 'vue';
 
-const sections = ref([
-  {
-    id: "information", title: "1. Information We Collect", content: "We collect personal information that you provide to us, such as:", items: [
-      "Name",
-      "Address",
-      "Contact information (e.g., email address, phone number)",
-      "Passwords and security data",
-      "Payment information",
-      "Social media login data"
-    ]
-  },
-  {
-    id: "usage", title: "2. How We Use Information", content: "We use the personal information collected via our services for the following purposes:", items: [
-      "To provide and maintain our services",
-      "To notify you about changes to our services",
-      "To allow you to participate in interactive features of our services",
-      "To provide customer support",
-      "To gather analysis or valuable information so that we can improve our services",
-      "To monitor the usage of our services",
-      "To detect, prevent and address technical issues"
-    ]
-  },
-  {
-    id: "shared", title: "3. Will Your Information Be Shared With Anyone?", content: "We only share and disclose your information with the following third parties:", items: [
-      "Service providers who help us provide our services, such as hosting providers, payment processors, and email service providers",
-      "Government agencies as required by law",
-      "Other third parties when you give your consent or direct us to do so"
-    ]
-  },
-  { id: "tracking", title: "4. Cookies and Other Tracking Technologies", content: "We may use cookies and similar tracking technologies to access or store information..." },
-  { id: "safe", title: "5. How We Keep Your Information Safe", content: "We are committed to protecting the security of your personal information..." },
-  {
-    id: "rights", title: "6. What Are Your Privacy Rights?", content: "You have certain rights under applicable data protection laws, including the right to:", items: [
-      "Access, update or delete your personal information",
-      "Object to the processing of your personal information",
-      "Withdraw your consent at any time",
-      "Lodge a complaint with a supervisory authority"
-    ]
-  },
-  { id: "updates", title: "7. Updates to This Policy", content: "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page." },
-  { id: "contact", title: "8. How to Contact Us", content: "If you have questions or comments about this Privacy Policy, you may email us at <a href='mailto:anahawislandviewresort@gmail.com'>anahawislandviewresort@gmail.com</a>" }
-]);
-
-const menuItems = ref([
-  { label: "1. Information We Collect", id: "information" },
-  { label: "2. How We Use Information", id: "usage" },
-  { label: "3. Will Your Information Be Shared With Anyone?", id: "shared" },
-  { label: "4. Cookies and Other Tracking Technologies", id: "tracking" },
-  { label: "5. How We Keep Your Information Safe", id: "safe" },
-  { label: "6. What Are Your Privacy Rights?", id: "rights" },
-  { label: "7. Updates to This Policy", id: "updates" },
-  { label: "8. How to Contact Us", id: "contact" },
-]);
-
-function scrollToContent(event) {
-  const sectionId = event.item.id;
-  const element = document.getElementById(sectionId);
-  if (element) {
-    const contentElement = this.$refs.content.$el;
-    contentElement.scrollTop = element.offsetTop - contentElement.offsetTop; // Adjust if there is any header or fixed elements
-  }
-}
 </script>
 
 <style scoped>

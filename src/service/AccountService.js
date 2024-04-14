@@ -27,6 +27,15 @@ const AccountService = {
             console.error('Error logging out:', error);
             throw error; // Rethrow the error to handle it in the component
         }
+    },
+     async getAccountData() {
+        try {
+            const response = await ApiService.get('getAccountData');
+            return response.data; // Assuming your API returns the user's account data
+        } catch (error) {
+            console.error('Error fetching account data:', error);
+            throw error; // Rethrow the error to handle it in the component
+        }
     }
 };
 
