@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 CRITICAL - 2024-04-14 06:08:13 --> ErrorException: Undefined property: stdClass::$picture
 in APPPATH\Controllers\AccountController.php on line 30.
  1 APPPATH\Controllers\AccountController.php(30): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$picture', 'C:\\laragon\\www\\Capstone\\AnahawBE\\app\\Controllers\\AccountController.php', 30)
@@ -234,6 +235,9 @@ in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
 12 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
 13 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
 ERROR - 2024-04-14 06:09:30 --> mysqli_sql_exception: Duplicate entry 'jdmalaluan2@gmail.com' for key 'customers.email' in C:\laragon\www\Capstone\AnahawBE\system\Database\MySQLi\Connection.php:306
+=======
+ERROR - 2024-04-14 09:07:08 --> mysqli_sql_exception: Duplicate entry 'mercadopatrickkristoffer@gmail.com' for key 'customers.email' in C:\laragon\www\Capstone\AnahawBE\system\Database\MySQLi\Connection.php:306
+>>>>>>> d3fcafc9981c252e4144324926b6916baa5f5316
 Stack trace:
 #0 C:\laragon\www\Capstone\AnahawBE\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `cu...', 0)
 #1 C:\laragon\www\Capstone\AnahawBE\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `cu...')
@@ -248,7 +252,11 @@ Stack trace:
 #10 C:\laragon\www\Capstone\AnahawBE\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #11 C:\laragon\www\Capstone\AnahawBE\public\index.php(89): CodeIgniter\CodeIgniter->run()
 #12 {main}
+<<<<<<< HEAD
 CRITICAL - 2024-04-14 06:09:30 --> CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry 'jdmalaluan2@gmail.com' for key 'customers.email'
+=======
+CRITICAL - 2024-04-14 09:07:08 --> CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry 'mercadopatrickkristoffer@gmail.com' for key 'customers.email'
+>>>>>>> d3fcafc9981c252e4144324926b6916baa5f5316
 in SYSTEMPATH\Database\BaseConnection.php on line 647.
  1 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `customers` (`firstname`, `lastname`, `email`, `phone`) VALUES (:firstname:, :lastname:, :email:, :phone:)', [...], false)
  2 SYSTEMPATH\Model.php(326): CodeIgniter\Database\BaseBuilder->insert()
@@ -259,6 +267,7 @@ in SYSTEMPATH\Database\BaseConnection.php on line 647.
  7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccountController))
  8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  9 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+<<<<<<< HEAD
 CRITICAL - 2024-04-14 06:09:30 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry 'jdmalaluan2@gmail.com' for key 'customers.email'
 in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
  1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `customers` (`firstname`, `lastname`, `email`, `phone`) VALUES (\'Jan Dyze\', \'Malaluan\', \'jdmalaluan2@gmail.com\', \'None provided\')')
@@ -651,6 +660,9 @@ in SYSTEMPATH\Database\BaseConnection.php on line 647.
  8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
  9 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
 CRITICAL - 2024-04-14 06:11:49 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry 'mercadopatrickkristoffer@gmail.com' for key 'customers.email'
+=======
+CRITICAL - 2024-04-14 09:07:08 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry 'mercadopatrickkristoffer@gmail.com' for key 'customers.email'
+>>>>>>> d3fcafc9981c252e4144324926b6916baa5f5316
 in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
  1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `customers` (`firstname`, `lastname`, `email`, `phone`) VALUES (\'Patrick Kristoffer C.\', \'Mercado\', \'mercadopatrickkristoffer@gmail.com\', \'None provided\')')
  2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `customers` (`firstname`, `lastname`, `email`, `phone`) VALUES (\'Patrick Kristoffer C.\', \'Mercado\', \'mercadopatrickkristoffer@gmail.com\', \'None provided\')')
@@ -663,7 +675,11 @@ in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
  9 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccountController))
 10 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
 11 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+<<<<<<< HEAD
 CRITICAL - 2024-04-14 06:11:49 --> [Caused by] mysqli_sql_exception: Duplicate entry 'mercadopatrickkristoffer@gmail.com' for key 'customers.email'
+=======
+CRITICAL - 2024-04-14 09:07:08 --> [Caused by] mysqli_sql_exception: Duplicate entry 'mercadopatrickkristoffer@gmail.com' for key 'customers.email'
+>>>>>>> d3fcafc9981c252e4144324926b6916baa5f5316
 in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
  1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `customers` (`firstname`, `lastname`, `email`, `phone`) VALUES (\'Patrick Kristoffer C.\', \'Mercado\', \'mercadopatrickkristoffer@gmail.com\', \'None provided\')', 0)
  2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `customers` (`firstname`, `lastname`, `email`, `phone`) VALUES (\'Patrick Kristoffer C.\', \'Mercado\', \'mercadopatrickkristoffer@gmail.com\', \'None provided\')')
@@ -677,6 +693,7 @@ in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
 10 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccountController))
 11 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
 12 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+<<<<<<< HEAD
 ERROR - 2024-04-14 06:11:52 --> mysqli_sql_exception: Column 'cashier_id' cannot be null in C:\laragon\www\Capstone\AnahawBE\system\Database\MySQLi\Connection.php:306
 Stack trace:
 #0 C:\laragon\www\Capstone\AnahawBE\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `se...', 0)
@@ -2587,3 +2604,19 @@ WHERE `orders`.`id` = :orders.id:', [...], false)
  9 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\OrderController))
 10 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
 11 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+=======
+CRITICAL - 2024-04-14 09:07:08 --> ErrorException: Undefined array key "picture"
+in APPPATH\Controllers\AccountController.php on line 85.
+ 1 APPPATH\Controllers\AccountController.php(85): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "picture"', 'C:\\laragon\\www\\Capstone\\AnahawBE\\app\\Controllers\\AccountController.php', 85)
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AccountController->login()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccountController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-14 09:07:08 --> ErrorException: Undefined array key "picture"
+in APPPATH\Controllers\AccountController.php on line 85.
+ 1 APPPATH\Controllers\AccountController.php(85): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "picture"', 'C:\\laragon\\www\\Capstone\\AnahawBE\\app\\Controllers\\AccountController.php', 85)
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AccountController->login()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccountController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
+>>>>>>> d3fcafc9981c252e4144324926b6916baa5f5316

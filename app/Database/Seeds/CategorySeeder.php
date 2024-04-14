@@ -9,11 +9,23 @@ class CategorySeeder extends Seeder
     public function run()
     {
         $data = [
-            ['name' => 'Burgers'],
-            ['name' => 'Pizzas'],
-            ['name' => 'Salads'],
-            ['name' => 'Desserts'],
-            ['name' => 'Beverages'] // You can add as many categories as needed
+            ['name' => 'Cold Drinks'],
+            ['name' => 'Alcoholic Drinks'],
+            ['name' => 'Mixed Cocktails'],
+            ['name' => 'Hot Drinks'],
+            ['name' => 'Boodle Bundles'],
+            ['name' => 'Seafoods'], 
+            ['name' => 'Noodles'],
+            ['name' => 'Shrimp Squid'],
+            ['name' => 'Sizzling Plates'],
+            ['name' => 'Pork'],
+            ['name' => 'Pork'],// You can add as many categories as needed
+            ['name' => 'Chicken'],
+            ['name' => 'Appetizers'],
+            ['name' => 'Breakfast'],
+            ['name' => 'Sandwiches'],
+            ['name' => 'Solo Plated'],
+            ['name' => 'Rice'],
         ];
 
         // Simple Query
