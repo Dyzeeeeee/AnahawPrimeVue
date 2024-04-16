@@ -192,7 +192,7 @@ const unarchiveSelected = async () => {
       </template>
     </Toolbar>
     <template v-if="viewMode === 'list'">
-      <div style="height: 65vh"
+      <div style="height: 74vh"
         class="border-2 border-dashed surface-border flex flex-wrap gap-3 overflow-y-scroll p-2">
         <DataTable :value="filteredCustomers" dataKey="id" class="w-full" tableStyle="min-width: 60rem" selectionMode="multiple"
           v-model:selection="selectedCustomer" stripedRows>

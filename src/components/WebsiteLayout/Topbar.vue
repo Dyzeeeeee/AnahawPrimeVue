@@ -19,7 +19,7 @@ const logout = async () => {
   }
 };
 const login = () => {
-  router.push('/auth/login');
+  router.push('/login');
 
 };
 </script>

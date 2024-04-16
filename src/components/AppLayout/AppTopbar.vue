@@ -31,7 +31,7 @@ const logout = async () => {
   try {
     await AccountService.logout();
     store.commit("logout");
-    router.push("/");
+    router.push("/login");
   } catch (error) {
     console.error("Error logging out:", error);
   }

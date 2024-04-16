@@ -20,9 +20,9 @@ const router = createRouter({
                     component: () => import('@/views/pages/admin/Session.vue'),
                     props: true // Enable passing route params as props
                 },
-                
+
                 {
-                    path: 'orders', 
+                    path: 'orders',
                     name: 'orders',
                     component: () => import('@/views/pages/admin/Orders.vue')
                 },
@@ -198,13 +198,18 @@ const router = createRouter({
             ]
         },
         {
-            path: '/website',
+            path: '/',
             component: WebsiteLayout,
             children: [
                 {
-                    path: 'landing',
+                    path: '',
                     name: 'landing',
                     component: () => import('@/views/pages/website/Landing.vue')
+                },
+                {
+                    path: '/2',
+                    name: 'landing2',
+                    component: () => import('@/views/pages/website/Landing2.vue')
                 }
             ]
         },
@@ -215,7 +220,7 @@ const router = createRouter({
         },
 
         {
-            path: '/',
+            path: '/login',
             name: 'login',
             component: () => import('@/views/pages/auth/Login.vue')
         },

@@ -134,7 +134,7 @@ const login = async () => {
 
     store.dispatch("setUser", response.session);
 
-    router.push("/admin/orders");
+    router.push("/login");
   } catch (error) {
     console.error("Error logging in:", error);
     toast.add({
@@ -349,7 +349,9 @@ const loginWithFacebook = () => {
       <div class="w-full surface-card pt-5 pb-5 px-5 sm:px-8"
         style="border-top-left-radius: 53px; border-top-right-radius: 53px">
         <div class="pb-4 justify-content-center flex">
-          <img src="@/assets/images/logo.png" alt="Anahaw logo" class="" style="height: 70px" />
+          <router-link to="/">
+            <img src="@/assets/images/logo.png" alt="Anahaw logo" class="" style="height: 70px" />
+          </router-link>
         </div>
         <div>
           <InputText id="email1" type="text" placeholder="Email or phone" class="w-full mb-4" style="padding: 1rem"
