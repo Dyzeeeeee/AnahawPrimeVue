@@ -601,7 +601,7 @@ class MenuSeeder extends Seeder
                 'name' => 'Sisig Pancit',
                 'description' => 'Pancit Guisado topped with your favorite pork sisig',
                 'image' => 'sisig pancit.jpg',
-                'price' => 320.00,
+                'price' => 320.00,      
                 'category_id' => 7, // Assuming there is a category with ID 1
                 'orders' => 0,
                 'archived_at' => null

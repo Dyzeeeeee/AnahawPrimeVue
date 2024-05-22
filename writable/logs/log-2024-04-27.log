@@ -1,0 +1,7 @@
+CRITICAL - 2024-04-27 10:53:41 --> ErrorException: Undefined property: stdClass::$picture
+in APPPATH\Controllers\AccountController.php on line 30.
+ 1 APPPATH\Controllers\AccountController.php(30): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$picture', 'C:\\laragon\\www\\Capstone\\AnahawBE\\app\\Controllers\\AccountController.php', 30)
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AccountController->createAccount()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AccountController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(89): CodeIgniter\CodeIgniter->run()
