@@ -134,7 +134,7 @@ const login = async () => {
 
     store.dispatch("setUser", response.session);
 
-    router.push("/login");
+    router.push("/admin");
   } catch (error) {
     console.error("Error logging in:", error);
     toast.add({

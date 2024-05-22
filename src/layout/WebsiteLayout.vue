@@ -11,7 +11,7 @@ import Helper from "@/components/WebsiteLayout/Helper.vue";
       <div class="layout-main">
         <router-view></router-view>
       </div>
-      <Helper></Helper>
+      <!-- <Helper></Helper> -->
     </div>
     <div class="layout-mask"></div>
   </div>
