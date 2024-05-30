@@ -31,11 +31,11 @@ const onChangeTheme = (theme, mode) => {
     layoutConfig.darkTheme.value = mode;
   });
   localStorage.setItem("theme", theme); // Save theme to localStorage
-  localStorage.setItem("darkMode", mode); // Save dark mode state to localStorage
+  localStorage.setItem("darkMode", mode); // Save dark mode state to localStorager
 };
 
 const onDarkModeChange = (value) => {
-  const newThemeName = value
+  const newThemeName = valuer
     ? layoutConfig.theme.value.replace("light", "dark")
     : layoutConfig.theme.value.replace("dark", "light");
   layoutConfig.darkTheme.value = value;

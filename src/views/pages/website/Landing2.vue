@@ -133,24 +133,90 @@
           <span class="font-medium text-xl font-semibold">Chat with<span class="text-bold"> <b> ANAHAW</b></span></span>
         </span>
         <button @click="menuVisible = false"
-          style="position: absolute; top: 0; right: 0; background: none; border: none; font-size: 2.5em; color: white;  cursor: pointer;">&times;</button>
+          style="position: absolute; top: 0; right: 0; background: none; border: none; font-size: 2.5em; color: white; cursor: pointer;">&times;</button>
       </div>
-      <div class="h-23rem pb-3 align-content-end">
-        <div class="justify-content-end flex p-2 align-items-end">
-          <Button rounded outlined label="Is there anyone to talk to?"></Button>
+      <div class="h-23rem pb-3 align-content-end" style="overflow-y: auto;">
+        <!-- Initial message -->
+        <div class="justify-content-start flex pl-2 pb-2 align-items-start">
+          <Avatar image="https://www.gravatar.com/avatar/05dfd4b41340d09cae045235eb0893c3?d=mp"
+            class="flex align-items-center justify-content-center mr-2" shape="circle" size="small" />
+          <Button severity="secondary" rounded label="Good day! How can we help you?"></Button>
         </div>
-        <div class="justify-content-end flex p-2 align-items-end">
-          <Button rounded outlined label="What are your available rooms?"></Button>
+        <!-- Initial message -->
+
+        <!-- Initial question -->
+        <div v-if="activeButtons.has('question1') || !activeButtons.size"
+          class="justify-content-end flex pr-2 pb-2 align-items-end">
+          <Button :class="{ 'p-button-outlined': !activeButtons.has('question1') }" rounded label="Ask a question ❔"
+            @click="toggleButton('question1')"></Button>
         </div>
-        <div class="justify-content-end flex p-2 align-items-end">
-          <Button rounded outlined label="Where are you located?"></Button>
+
+        <div v-if="activeButtons === 'question2' || !activeButtons"
+          class="justify-content-end flex pr-2 pb-2 align-items-end">
+          <Button :class="{ 'p-button-outlined': activeButtons !== 'question2' }" rounded label="Give a Feedback ⭐"
+            @click="toggleButton('question2')"></Button>
         </div>
-        <div class="px-2 pt-3">
+
+        <div v-if="activeButtons === 'question3' || !activeButtons"
+          class="justify-content-end flex pr-2 pb-2 align-items-end">
+          <Button :class="{ 'p-button-outlined': activeButtons !== 'question3' }" rounded label="Make a Complain 🤬"
+            @click="toggleButton('question3')"></Button>
+        </div>
+        <!-- Initial question -->
+        <div v-if="activeButtons === 'question1'" class="justify-content-start flex pl-2 pb-2 align-items-end">
+          <Avatar image="https://www.gravatar.com/avatar/05dfd4b41340d09cae045235eb0893c3?d=mp"
+            class="flex align-items-center justify-content-center mr-2" shape="circle" />
+          <Button severity="secondary" rounded label="Here is our u"></Button>
+        </div>
+        <div v-if="activeButtons === 'question2'" class="justify-content-start flex pl-2 pb-2 align-items-end">
+          <Avatar image="https://www.gravatar.com/avatar/05dfd4b41340d09cae045235eb0893c3?d=mp"
+            class="flex align-items-center justify-content-center mr-2" shape="circle" />
+          <Button severity="secondary" rounded label="Please rate our service:">
+          </Button>
+        </div>
+        <div v-if="activeButtons === 'question3'" class="justify-content-start flex pl-2 pb-2 align-items-end">
+          <Avatar image="https://www.gravatar.com/avatar/05dfd4b41340d09cae045235eb0893c3?d=mp"
+            class="flex align-items-center justify-content-center mr-2" shape="circle" />
+          <Button severity="secondary" rounded label="What is your inquiry?"></Button>
+        </div>
+        <div v-if="activeButtons === 'question3'" class="justify-content-end flex pr-2 pb-2 align-items-end">
+          <Button :class="{ 'p-button-outlined': activeButtons !== 'question3-1' }" rounded label="Can I see your menu?"
+            @click="toggleButton('question3-1')"></Button>
+        </div>
+        <div v-if="activeButtons === 'question3'" class="justify-content-end flex pr-2 pb-2 align-items-end">
+          <Button :class="{ 'p-button-outlined': activeButtons !== 'question3-2' }" rounded
+            label="What are your available rooms?" @click="toggleButton('question3-2')"></Button>
+        </div>
+        <div v-if="activeButtons === 'question3'" class="justify-content-end flex pr-2 pb-2 align-items-end">
+          <Button :class="{ 'p-button-outlined': activeButtons !== 'question3-3' }" rounded
+            label="Where are you located?" @click="toggleButton('question3-3')"></Button>
+        </div>
+        <div v-if="activeButtons === 'question3'" class="justify-content-end flex pr-2 pb-2 align-items-end">
+          <Button :class="{ 'p-button-outlined': activeButtons !== 'question3-4' }" rounded
+            label="How can I contact you?" @click="toggleButton('question3-4')"></Button>
+        </div>
+        <div v-if="activeButtons === 'question3'" class="justify-content-end flex pr-2 pb-2 align-items-end">
+          <Button :class="{ 'p-button-outlined': activeButtons !== 'question3-4' }" rounded label="Are you open now?"
+            @click="toggleButton('question3-4')"></Button>
+        </div>
+        <div v-if="activeButtons === 'question2'" class="justify-content-end flex pr-2 pb-2 align-items-end">
+          <Button rounded outlined>
+            <Rating v-model="rating" :cancel="false" severity="success" />
+          </Button>
+        </div>
+
+        <div v-if="rating" class="justify-content-start flex pl-2 pb-2 align-items-end">
+          <Avatar image="https://www.gravatar.com/avatar/05dfd4b41340d09cae045235eb0893c3?d=mp"
+            class="flex align-items-center justify-content-center mr-2" shape="circle" />
+          <Button severity="secondary" rounded label="Thank you for your feedback!">
+          </Button>
+        </div>
+        <!-- <div class="px-2 pt-3">
           <InputGroup>
             <InputText class="w-full" placeholder="Message us here"></InputText>
             <Button icon="pi pi-send" severity="primary" style="width: 100px;"></Button>
           </InputGroup>
-        </div>
+        </div> -->
       </div>
     </template>
   </Menu>
@@ -165,12 +231,30 @@ import { useRouter } from 'vue-router';
 
 
 const toast = useToast();
+const rating = ref(null);
+
 const router = useRouter();
-const menuVisible = ref(false);  // This controls the visibility of the Menu
+const menuVisible = ref(true);  // This controls the visibility of the Menu
 
 const toggleMenu = () => {
   menuVisible.value = !menuVisible.value;  // This toggles the visibility
 }
+
+const activeButtons = ref(new Set());
+
+const toggleButton = (button) => {
+  if (activeButtons.value.has(button)) {
+    activeButtons.value.delete(button);
+  } else {
+    activeButtons.value.add(button);
+  }
+  console.log("active button is:", activeButtons.value)
+}
+
+
+
+
+
 const items = ref([
   {
     label: 'Add',
